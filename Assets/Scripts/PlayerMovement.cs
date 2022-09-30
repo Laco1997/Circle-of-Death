@@ -5,8 +5,8 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     public CharacterController controller;
-    public float speed = 8f;
-
+    public float walkSpeed = 6f;
+    public float sprintSpeed = 8f;
     public float gravity = -9.81f;
     public float jumpHeight = 3f;
     public Transform groundCheck;
@@ -47,12 +47,18 @@ public class PlayerMovement : MonoBehaviour
     {
         move = transform.right * horizontal + transform.forward * vertical;
 
-        controller.Move(move * speed * Time.deltaTime);
+        controller.Move(move * walkSpeed * Time.deltaTime);
 
         // Jump
         if (Input.GetButtonDown("Jump") && onGround)
         {
             velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
+        }
+
+        // Sprint
+        if(Input.GetKey(KeyCode.LeftShift))
+        {
+            controller.Move(move * sprintSpeed * Time.deltaTime);
         }
 
         velocity.y += gravity * Time.deltaTime;
