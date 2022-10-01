@@ -1,23 +1,38 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class PlayerMovement : MonoBehaviour
 {
-    public CharacterController controller;
-    public float walkSpeed = 6f;
-    public float sprintSpeed = 8f;
-    public float gravity = -9.81f;
-    public float jumpHeight = 3f;
-    public Transform groundCheck;
-    public float groundDistance = 0.4f;
-    public LayerMask groundMask;
-    Vector3 velocity;
-    bool onGround;
+    [SerializeField] private CharacterController controller;
+    private float horizontal;
+    private float vertical;
 
-    float horizontal;
-    float vertical;
-    Vector3 move;
+    [Header("Walk")]
+    [SerializeField] private float walkSpeed = 5f;
+    private Vector3 move;
+
+    [Header("Jump")]
+    [SerializeField] private float gravity = -20f;
+    [SerializeField] private float jumpHeight = 3f;
+    [SerializeField] private Transform groundCheck;
+    [SerializeField] private float groundDistance = 0.4f;
+    [SerializeField] private LayerMask groundMask;
+    private Vector3 velocity;
+    private bool onGround;
+
+    [Header("Sprint")]
+    [SerializeField] private float sprintSpeed = 3.5f;
+
+    [Header("Dash")]
+    [SerializeField] private float dashSpeed = 4.5f;
+    [SerializeField] private float dashDistance = 4f;
+    [SerializeField] private float dashDuration = 7f;
+    [SerializeField] private float dashCurrentTime = 0f;
+    [SerializeField] private float dashCooldownTime = 1.5f;
+    private bool canDash = true;
 
     // Update is called once per frame
     void Update()
@@ -29,7 +44,6 @@ public class PlayerMovement : MonoBehaviour
         {
             velocity.y = -2f;
         }
-
 
         PlayerInput();
 
@@ -52,17 +66,42 @@ public class PlayerMovement : MonoBehaviour
         // Jump
         if (Input.GetButtonDown("Jump") && onGround)
         {
-            velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
+            velocity.y = Mathf.Sqrt(jumpHeight * -1 * gravity);
         }
 
         // Sprint
-        if(Input.GetKey(KeyCode.LeftShift))
+        if (Input.GetKey(KeyCode.LeftShift))
         {
             controller.Move(move * sprintSpeed * Time.deltaTime);
+        }
+
+        // Dash
+        if (Input.GetKeyDown(KeyCode.LeftControl) && canDash)
+        {
+            canDash = false;
+            Invoke(nameof(ResetDash), dashCooldownTime);
+            dashCurrentTime = 0f;
+        }
+
+        if (dashCurrentTime < dashDuration)
+        {
+            move *= dashDistance;
+            controller.Move(move * dashSpeed * Time.deltaTime);
+            dashCurrentTime += 0.1f;
+        }
+        else
+        {
+            move = Vector3.zero;
         }
 
         velocity.y += gravity * Time.deltaTime;
 
         controller.Move(velocity * Time.deltaTime);
     }
+
+    void ResetDash()
+    {
+        canDash = true;
+    }
+
 }

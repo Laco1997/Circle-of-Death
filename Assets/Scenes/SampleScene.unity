@@ -1172,15 +1172,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   controller: {fileID: 577532782}
-  walkSpeed: 6
-  sprintSpeed: 8
-  gravity: -9.81
-  jumpHeight: 2
+  walkSpeed: 5
+  gravity: -20
+  jumpHeight: 3
   groundCheck: {fileID: 2050889714}
   groundDistance: 0.4
   groundMask:
     serializedVersion: 2
     m_Bits: 64
+  sprintSpeed: 3.5
+  dashSpeed: 4.5
+  dashDistance: 4
+  dashDuration: 7
+  dashCurrentTime: 0
+  dashCooldownTime: 1.5
 --- !u!1 &579158828
 GameObject:
   m_ObjectHideFlags: 0
