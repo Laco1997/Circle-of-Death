@@ -6,12 +6,14 @@ using UnityEngine.EventSystems;
 
 public class PlayerMovement : MonoBehaviour
 {
+    private Animator animator;
+
     [SerializeField] private CharacterController controller;
     private float horizontal;
     private float vertical;
 
     [Header("Walk")]
-    [SerializeField] private float walkSpeed = 5f;
+    [SerializeField] private float walkSpeed = 3.2f;
     private Vector3 move;
 
     [Header("Jump")]
@@ -33,6 +35,11 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float dashCurrentTime = 0f;
     [SerializeField] private float dashCooldownTime = 1.5f;
     private bool canDash = true;
+
+    private void Start()
+    {
+        animator = GetComponentInChildren(typeof(Animator)) as Animator;
+    }
 
     // Update is called once per frame
     void Update()
@@ -60,6 +67,16 @@ public class PlayerMovement : MonoBehaviour
     private void MovePlayer()
     {
         move = transform.right * horizontal + transform.forward * vertical;
+
+        if(Mathf.Abs(horizontal) > 0 || Mathf.Abs(vertical) > 0)
+        {
+            animator.SetBool("Walk", true);
+        }
+
+        if ((Mathf.Abs(horizontal) == 0) && (Mathf.Abs(vertical) == 0))
+        {
+            animator.SetBool("Walk", false);
+        }
 
         controller.Move(move * walkSpeed * Time.deltaTime);
 
