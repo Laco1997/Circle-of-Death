@@ -68,14 +68,20 @@ public class PlayerMovement : MonoBehaviour
     {
         move = transform.right * horizontal + transform.forward * vertical;
 
-        if(Mathf.Abs(horizontal) > 0 || Mathf.Abs(vertical) > 0)
+        if (Mathf.Abs(horizontal) > 0 || Mathf.Abs(vertical) > 0)
         {
             animator.SetBool("Walk", true);
+
+            if (!Input.GetKey(KeyCode.LeftShift))
+            {
+                animator.SetBool("Sprint", false);
+            }
         }
 
         if ((Mathf.Abs(horizontal) == 0) && (Mathf.Abs(vertical) == 0))
         {
             animator.SetBool("Walk", false);
+            animator.SetBool("Sprint", false);
         }
 
         controller.Move(move * walkSpeed * Time.deltaTime);
@@ -83,12 +89,18 @@ public class PlayerMovement : MonoBehaviour
         // Jump
         if (Input.GetButtonDown("Jump") && onGround)
         {
+            animator.SetTrigger("Jump");
             velocity.y = Mathf.Sqrt(jumpHeight * -1 * gravity);
         }
 
         // Sprint
         if (Input.GetKey(KeyCode.LeftShift))
         {
+            if (Mathf.Abs(horizontal) > 0 || Mathf.Abs(vertical) > 0)
+            {
+                animator.SetBool("Sprint", true);
+            }
+
             controller.Move(move * sprintSpeed * Time.deltaTime);
         }
 
