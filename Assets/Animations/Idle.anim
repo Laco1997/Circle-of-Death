@@ -11159,7 +11159,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.z
-    path: Reference/FpsArms.2/RightShoulder/RightArm
+    path: Reference/FpsArms.2/LeftShoulder/LeftArm/LeftForeArm_/LeftForearmRoll/LeftHand/LeftHandThumb1/LeftHandThumb2/LeftHandThumb3
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -11169,7 +11169,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.y
-    path: Reference/FpsArms.2/RightShoulder/RightArm
+    path: Reference/FpsArms.2/LeftShoulder/LeftArm/LeftForeArm_/LeftForearmRoll/LeftHand/LeftHandThumb1/LeftHandThumb2/LeftHandThumb3
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -11179,7 +11179,37 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.x
-    path: Reference/FpsArms.2/RightShoulder/RightArm
+    path: Reference/FpsArms.2/LeftShoulder/LeftArm/LeftForeArm_/LeftForearmRoll/LeftHand/LeftHandThumb1/LeftHandThumb2/LeftHandThumb3
+    classID: 4
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_LocalEulerAngles.z
+    path: Steel_Dagger_4096
+    classID: 4
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_LocalEulerAngles.y
+    path: Steel_Dagger_4096
+    classID: 4
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_LocalEulerAngles.x
+    path: Steel_Dagger_4096
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -11219,7 +11249,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.z
-    path: Reference/FpsArms.2/LeftShoulder/LeftArm/LeftForeArm_
+    path: Reference/FpsArms.2/RightShoulder/RightArm
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -11229,7 +11259,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.y
-    path: Reference/FpsArms.2/LeftShoulder/LeftArm/LeftForeArm_
+    path: Reference/FpsArms.2/RightShoulder/RightArm
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -11239,27 +11269,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.x
-    path: Reference/FpsArms.2/LeftShoulder/LeftArm/LeftForeArm_
-    classID: 4
-    script: {fileID: 0}
-  - curve:
-      serializedVersion: 2
-      m_Curve: []
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    attribute: m_LocalEulerAngles.x
-    path: Reference/FpsArms.2/RightShoulder/RightArm/RightForeArm_
-    classID: 4
-    script: {fileID: 0}
-  - curve:
-      serializedVersion: 2
-      m_Curve: []
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    attribute: m_LocalEulerAngles.y
-    path: Reference/FpsArms.2/RightShoulder/RightArm/RightForeArm_
+    path: Reference/FpsArms.2/RightShoulder/RightArm
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -11269,7 +11279,27 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.z
-    path: Reference/FpsArms.2/RightShoulder/RightArm/RightForeArm_
+    path: Reference/FpsArms.2/RightShoulder/RightArm/RightForeArm_/RightForearmRoll/RightHand/RightHandRing1/RightHandRing2/RightHandRing3
+    classID: 4
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_LocalEulerAngles.y
+    path: Reference/FpsArms.2/RightShoulder/RightArm/RightForeArm_/RightForearmRoll/RightHand/RightHandRing1/RightHandRing2/RightHandRing3
+    classID: 4
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_LocalEulerAngles.x
+    path: Reference/FpsArms.2/RightShoulder/RightArm/RightForeArm_/RightForearmRoll/RightHand/RightHandRing1/RightHandRing2/RightHandRing3
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -11309,7 +11339,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.z
-    path: Reference/FpsArms.2/RightShoulder/RightArm/RightForeArm_/RightForearmRoll/RightHand/RightHandThumb1/RightHandThumb2
+    path: Reference/FpsArms.2/LeftShoulder/LeftArm/LeftForeArm_
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -11319,7 +11349,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.y
-    path: Reference/FpsArms.2/RightShoulder/RightArm/RightForeArm_/RightForearmRoll/RightHand/RightHandThumb1/RightHandThumb2
+    path: Reference/FpsArms.2/LeftShoulder/LeftArm/LeftForeArm_
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -11329,7 +11359,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.x
-    path: Reference/FpsArms.2/RightShoulder/RightArm/RightForeArm_/RightForearmRoll/RightHand/RightHandThumb1/RightHandThumb2
+    path: Reference/FpsArms.2/LeftShoulder/LeftArm/LeftForeArm_
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -11789,7 +11819,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.z
-    path: Reference/FpsArms.2/LeftShoulder/LeftArm/LeftForeArm_/LeftForearmRoll/LeftHand/LeftHandThumb1/LeftHandThumb2/LeftHandThumb3
+    path: Reference/FpsArms.2/RightShoulder/RightArm/RightForeArm_
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -11799,7 +11829,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.y
-    path: Reference/FpsArms.2/LeftShoulder/LeftArm/LeftForeArm_/LeftForearmRoll/LeftHand/LeftHandThumb1/LeftHandThumb2/LeftHandThumb3
+    path: Reference/FpsArms.2/RightShoulder/RightArm/RightForeArm_
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -11809,7 +11839,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.x
-    path: Reference/FpsArms.2/LeftShoulder/LeftArm/LeftForeArm_/LeftForearmRoll/LeftHand/LeftHandThumb1/LeftHandThumb2/LeftHandThumb3
+    path: Reference/FpsArms.2/RightShoulder/RightArm/RightForeArm_
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -12179,7 +12209,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.z
-    path: Reference/FpsArms.2/RightShoulder/RightArm/RightForeArm_/RightForearmRoll/RightHand/RightHandRing1/RightHandRing2/RightHandRing3
+    path: Reference/FpsArms.2/RightShoulder/RightArm/RightForeArm_/RightForearmRoll/RightHand/RightHandThumb1/RightHandThumb2
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -12189,7 +12219,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.y
-    path: Reference/FpsArms.2/RightShoulder/RightArm/RightForeArm_/RightForearmRoll/RightHand/RightHandRing1/RightHandRing2/RightHandRing3
+    path: Reference/FpsArms.2/RightShoulder/RightArm/RightForeArm_/RightForearmRoll/RightHand/RightHandThumb1/RightHandThumb2
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -12199,7 +12229,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.x
-    path: Reference/FpsArms.2/RightShoulder/RightArm/RightForeArm_/RightForearmRoll/RightHand/RightHandRing1/RightHandRing2/RightHandRing3
+    path: Reference/FpsArms.2/RightShoulder/RightArm/RightForeArm_/RightForearmRoll/RightHand/RightHandThumb1/RightHandThumb2
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -12230,36 +12260,6 @@ AnimationClip:
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.z
     path: Reference/FpsArms.2/RightShoulder/RightArm/RightForeArm_/RightForearmRoll/RightHand/RightHandThumb1/RightHandThumb2/RightHandThumb3
-    classID: 4
-    script: {fileID: 0}
-  - curve:
-      serializedVersion: 2
-      m_Curve: []
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    attribute: m_LocalEulerAngles.x
-    path: Steel_Dagger_4096
-    classID: 4
-    script: {fileID: 0}
-  - curve:
-      serializedVersion: 2
-      m_Curve: []
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    attribute: m_LocalEulerAngles.y
-    path: Steel_Dagger_4096
-    classID: 4
-    script: {fileID: 0}
-  - curve:
-      serializedVersion: 2
-      m_Curve: []
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    attribute: m_LocalEulerAngles.z
-    path: Steel_Dagger_4096
     classID: 4
     script: {fileID: 0}
   m_HasGenericRootTransform: 0

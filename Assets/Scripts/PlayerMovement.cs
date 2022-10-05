@@ -124,6 +124,12 @@ public class PlayerMovement : MonoBehaviour
             }
         }
 
+        // Attack
+        if (Input.GetMouseButtonDown(0))
+        {
+            animator.SetTrigger("Attack");
+        }
+
         // Dash
         if (Input.GetKeyDown(KeyCode.LeftControl) && canDash)
         {
