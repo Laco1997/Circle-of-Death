@@ -89,7 +89,10 @@ public class PlayerMovement : MonoBehaviour
         // Jump
         if (Input.GetButtonDown("Jump") && onGround)
         {
-            animator.SetTrigger("Jump");
+            if (animator.GetBool("Equipped") == false)
+            {
+                animator.SetTrigger("Jump");
+            }
             velocity.y = Mathf.Sqrt(jumpHeight * -1 * gravity);
         }
 
@@ -102,6 +105,29 @@ public class PlayerMovement : MonoBehaviour
             }
 
             controller.Move(move * sprintSpeed * Time.deltaTime);
+        }
+
+        // Weapon
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            // Equip
+            if (animator.GetBool("Equipped") == false)
+            {
+                animator.SetTrigger("Equip");
+                animator.SetBool("Equipped", true);
+            }
+            // Unequip
+            else
+            {
+                animator.SetTrigger("Unequip");
+                animator.SetBool("Equipped", false);
+            }
+        }
+
+        // Attack
+        if (Input.GetMouseButtonDown(0))
+        {
+            animator.SetTrigger("Attack");
         }
 
         // Dash
