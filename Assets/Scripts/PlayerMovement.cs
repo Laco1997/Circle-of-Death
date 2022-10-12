@@ -7,6 +7,10 @@ using UnityEngine.EventSystems;
 public class PlayerMovement : MonoBehaviour
 {
     private Animator animator;
+    [SerializeField] private GameObject sword;
+    private bool equipped = false;
+    private bool canAttack = true;
+    [SerializeField] private float attackCooldownTime = 0.45f;
 
     [SerializeField] private CharacterController controller;
     private float horizontal;
@@ -39,6 +43,7 @@ public class PlayerMovement : MonoBehaviour
     private void Start()
     {
         animator = GetComponentInChildren(typeof(Animator)) as Animator;
+        sword.SetActive(false);
     }
 
     // Update is called once per frame
@@ -115,19 +120,23 @@ public class PlayerMovement : MonoBehaviour
             {
                 animator.SetTrigger("Equip");
                 animator.SetBool("Equipped", true);
+                equipped = true;
             }
             // Unequip
             else
             {
                 animator.SetTrigger("Unequip");
                 animator.SetBool("Equipped", false);
+                equipped = false;
             }
         }
 
         // Attack
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0) && equipped && canAttack)
         {
+            canAttack = false;
             animator.SetTrigger("Attack");
+            Invoke(nameof(ResetAttack), attackCooldownTime);
         }
 
         // Dash
@@ -157,6 +166,11 @@ public class PlayerMovement : MonoBehaviour
     void ResetDash()
     {
         canDash = true;
+    }
+
+    void ResetAttack()
+    {
+        canAttack = true;
     }
 
 }
