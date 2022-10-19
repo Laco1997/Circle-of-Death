@@ -41,4 +41,14 @@ public class WeaponInteraction : MonoBehaviour
         bow.SetActive(false);
         arrow.SetActive(false);
     }
+
+    public void AttachArrow()
+    {
+        arrow.SetActive(true);
+    }
+
+    public void DeattachArrow()
+    {
+        arrow.SetActive(false);
+    }
 }
