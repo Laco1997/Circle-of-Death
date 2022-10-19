@@ -6,9 +6,14 @@ using UnityEngine.EventSystems;
 
 public class PlayerMovement : MonoBehaviour
 {
+    [SerializeField] private GameObject arms;
+
     private Animator animator;
     [SerializeField] private GameObject sword;
-    private bool equipped = false;
+    [SerializeField] private GameObject bow;
+    [SerializeField] private GameObject arrow;
+    private bool equippedSword = false;
+    private bool equippedBow = false;
     private bool canAttack = true;
     [SerializeField] private float attackCooldownTime = 0.45f;
 
@@ -44,6 +49,8 @@ public class PlayerMovement : MonoBehaviour
     {
         animator = GetComponentInChildren(typeof(Animator)) as Animator;
         sword.SetActive(false);
+        bow.SetActive(false);
+        arrow.SetActive(false);
     }
 
     // Update is called once per frame
@@ -94,7 +101,7 @@ public class PlayerMovement : MonoBehaviour
         // Jump
         if (Input.GetButtonDown("Jump") && onGround)
         {
-            if (animator.GetBool("Equipped") == false)
+            if (animator.GetBool("Equipped Sword") == false && animator.GetBool("Equipped Bow") == false)
             {
                 animator.SetTrigger("Jump");
             }
@@ -115,27 +122,87 @@ public class PlayerMovement : MonoBehaviour
         // Weapon
         if (Input.GetKeyDown(KeyCode.E))
         {
-            // Equip
-            if (animator.GetBool("Equipped") == false)
-            {
-                animator.SetTrigger("Equip");
-                animator.SetBool("Equipped", true);
-                equipped = true;
-            }
+            //// Equip
+            //if (animator.GetBool("Equipped") == false)
+            //{
+            //    animator.SetTrigger("Equip");
+            //    animator.SetBool("Equipped", true);
+            //    equipped = true;
+            //}
+            //// Unequip
+            //else
+            //{
+            //    animator.SetTrigger("Unequip");
+            //    animator.SetBool("Equipped", false);
+            //    equipped = false;
+            //}
+
             // Unequip
-            else
+            if (animator.GetBool("Equipped Sword") == true)
             {
                 animator.SetTrigger("Unequip");
-                animator.SetBool("Equipped", false);
-                equipped = false;
+                animator.SetBool("Equipped Sword", false);
+                equippedSword = false;
+            }
+
+            // Unequip
+            if (animator.GetBool("Equipped Bow") == true)
+            {
+                animator.SetTrigger("Unequip");
+                animator.SetBool("Equipped Bow", false);
+                equippedBow = false;
+            }
+        }
+
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            // Equip
+            if (animator.GetBool("Equipped Sword") == false)
+            {
+                if(animator.GetBool("Equipped Bow") == true)
+                {
+                    arms.GetComponent<WeaponInteraction>().DeattachBow();
+                    animator.SetBool("Equipped Bow", false);
+                    equippedBow = false;
+                }
+
+                animator.SetTrigger("Equip Sword");
+                animator.SetBool("Equipped Sword", true);
+                equippedSword = true;
+            }
+        }
+
+        if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            // Equip
+            if (animator.GetBool("Equipped Bow") == false)
+            {
+                if (animator.GetBool("Equipped Sword") == true)
+                {
+                    arms.GetComponent<WeaponInteraction>().DeattachSword();
+                    animator.SetBool("Equipped Sword", false);
+                    equippedSword = false;
+                }
+
+                animator.SetTrigger("Equip Bow");
+                animator.SetBool("Equipped Bow", true);
+                equippedBow = true;
             }
         }
 
         // Attack
-        if (Input.GetMouseButtonDown(0) && equipped && canAttack)
+        if (Input.GetMouseButtonDown(0) && equippedSword && canAttack)
         {
             canAttack = false;
             animator.SetTrigger("Attack");
+            Invoke(nameof(ResetAttack), attackCooldownTime);
+        }
+
+        // Attack
+        if (Input.GetMouseButtonDown(1) && equippedSword && canAttack)
+        {
+            canAttack = false;
+            animator.SetTrigger("Strong Attack");
             Invoke(nameof(ResetAttack), attackCooldownTime);
         }
 

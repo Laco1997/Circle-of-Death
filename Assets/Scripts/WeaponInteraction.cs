@@ -5,6 +5,8 @@ using UnityEngine;
 public class WeaponInteraction : MonoBehaviour
 {
     [SerializeField] private GameObject sword;
+    [SerializeField] private GameObject bow;
+    [SerializeField] private GameObject arrow;
 
     // Start is called before the first frame update
     void Start()
@@ -18,13 +20,25 @@ public class WeaponInteraction : MonoBehaviour
         
     }
 
-    void AttachSword()
+    public void AttachSword()
     {
         sword.SetActive(true);
     }
 
-    void DeattachSword()
+    public void DeattachSword()
     {
         sword.SetActive(false);
+    }
+
+    public void AttachBow()
+    {
+        bow.SetActive(true);
+        arrow.SetActive(true);
+    }
+
+    public void DeattachBow()
+    {
+        bow.SetActive(false);
+        arrow.SetActive(false);
     }
 }
