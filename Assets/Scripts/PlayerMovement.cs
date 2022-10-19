@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.XR;
+using static Cinemachine.CinemachineOrbitalTransposer;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -56,6 +57,8 @@ public class PlayerMovement : MonoBehaviour
     //GameObject currentArrow;
 
     //[SerializeField] private GameObject rightHand;
+
+    bool holding = false;
 
     private void Start()
     {
@@ -219,8 +222,31 @@ public class PlayerMovement : MonoBehaviour
             Invoke(nameof(ResetAttack), attackCooldownTime);
         }
 
+        // Long Shot
+        if (Input.GetMouseButton(1) && equippedBow && canShoot)
+        {
+            canShoot = false;
+
+            animator.SetTrigger("Long Shoot");
+
+            holding = true;
+        }
+
+        if (Input.GetMouseButtonDown(0) && holding)
+        {
+            holding = false;
+            LongShotAnimation();
+        }
+
+        if (Input.GetMouseButtonUp(1) && holding)
+        {
+            holding = false;
+            animator.SetTrigger("Release");
+            canShoot = true;
+        }
+
         // Shoot
-        if (Input.GetMouseButtonDown(0) && equippedBow && canShoot)
+        if (Input.GetMouseButtonDown(0) && equippedBow && canShoot && !holding)
         {
             //Vector3 targetPoint;
             //Ray ray = cam.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0));
@@ -290,13 +316,47 @@ public class PlayerMovement : MonoBehaviour
         //currentArrow = Instantiate(arrow, attackPoint.position, Quaternion.identity);
         //currentArrow.transform.parent = rightHand.transform;
         canShoot = true;
+
+        Debug.Log(canShoot);
+        Debug.Log(holding);
     }
 
     IEnumerator ShootAnimation()
     {
         animator.SetTrigger("Quick Shoot");
+
         yield return new WaitForSeconds(0.4f);
 
+        arms.GetComponent<WeaponInteraction>().DeattachArrow();
+
+        Vector3 targetPoint;
+        Ray ray = cam.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0));
+        canShoot = false;
+        RaycastHit hit;
+        if (Physics.Raycast(cam.transform.position, cam.transform.forward, out hit))
+        {
+            targetPoint = hit.point;
+        }
+        else
+        {
+            targetPoint = ray.GetPoint(75);
+        }
+
+        Vector3 directionWithoutSpread = targetPoint - attackPoint.position;
+
+        GameObject currentArrow = Instantiate(arrow, attackPoint.position, Quaternion.identity);
+        currentArrow.SetActive(true);
+        currentArrow.transform.forward = directionWithoutSpread.normalized;
+        currentArrow.transform.Rotate(-90f, 0, 0);
+        currentArrow.GetComponent<Rigidbody>().AddForce(directionWithoutSpread.normalized * shootForce, ForceMode.Impulse);
+        currentArrow.GetComponent<Rigidbody>().AddForce(cam.transform.up * upwardForce, ForceMode.Impulse);
+        Destroy(currentArrow, 5f);
+
+        Invoke(nameof(ResetShoot), shootCooldownTime);
+    }
+
+    void LongShotAnimation()
+    {
         arms.GetComponent<WeaponInteraction>().DeattachArrow();
 
         Vector3 targetPoint;
