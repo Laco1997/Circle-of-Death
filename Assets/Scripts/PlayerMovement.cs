@@ -17,6 +17,7 @@ public class PlayerMovement : MonoBehaviour
     private bool equippedSword = false;
     private bool equippedBow = false;
     private bool canAttack = true;
+    public bool isAttacking = false;
     [SerializeField] private float attackCooldownTime = 0.45f;
 
     [SerializeField] private CharacterController controller;
@@ -210,6 +211,7 @@ public class PlayerMovement : MonoBehaviour
         if (Input.GetMouseButtonDown(0) && equippedSword && canAttack)
         {
             canAttack = false;
+            isAttacking = true;
             animator.SetTrigger("Attack");
             Invoke(nameof(ResetAttack), attackCooldownTime);
         }
@@ -218,6 +220,7 @@ public class PlayerMovement : MonoBehaviour
         if (Input.GetMouseButtonDown(1) && equippedSword && canAttack)
         {
             canAttack = false;
+            isAttacking = true;
             animator.SetTrigger("Strong Attack");
             Invoke(nameof(ResetAttack), attackCooldownTime);
         }
@@ -307,6 +310,7 @@ public class PlayerMovement : MonoBehaviour
 
     void ResetAttack()
     {
+        isAttacking = false;
         canAttack = true;
     }
 
@@ -317,8 +321,8 @@ public class PlayerMovement : MonoBehaviour
         //currentArrow.transform.parent = rightHand.transform;
         canShoot = true;
 
-        Debug.Log(canShoot);
-        Debug.Log(holding);
+        //Debug.Log(canShoot);
+        //Debug.Log(holding);
     }
 
     IEnumerator ShootAnimation()
@@ -346,6 +350,7 @@ public class PlayerMovement : MonoBehaviour
 
         GameObject currentArrow = Instantiate(arrow, attackPoint.position, Quaternion.identity);
         currentArrow.SetActive(true);
+        currentArrow.name = "Shot Arrow";
         currentArrow.transform.forward = directionWithoutSpread.normalized;
         currentArrow.transform.Rotate(-90f, 0, 0);
         currentArrow.GetComponent<Rigidbody>().AddForce(directionWithoutSpread.normalized * shootForce, ForceMode.Impulse);
@@ -376,6 +381,7 @@ public class PlayerMovement : MonoBehaviour
 
         GameObject currentArrow = Instantiate(arrow, attackPoint.position, Quaternion.identity);
         currentArrow.SetActive(true);
+        currentArrow.name = "Shot Arrow";
         currentArrow.transform.forward = directionWithoutSpread.normalized;
         currentArrow.transform.Rotate(-90f, 0, 0);
         currentArrow.GetComponent<Rigidbody>().AddForce(directionWithoutSpread.normalized * shootForce, ForceMode.Impulse);
