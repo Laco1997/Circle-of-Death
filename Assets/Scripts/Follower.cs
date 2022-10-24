@@ -8,7 +8,7 @@ public class Follower : MonoBehaviour
     public Transform player;
     Animator animator;
     NavMeshAgent npc;
-    Transform transform;
+    Transform playerTransform;
     private float attackCooldown = 0;
     private float attackTimer = 0;
 
@@ -17,7 +17,7 @@ public class Follower : MonoBehaviour
     {
         animator = GetComponent<Animator>();
         npc = GetComponent<NavMeshAgent>();
-        transform = GetComponent<Transform>();
+        playerTransform = GetComponent<Transform>();
     }
 
     // Update is called once per frame
