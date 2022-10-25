@@ -92,9 +92,9 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _AmbientTranslucency: 2
+    - _AmbientTranslucency: 0
     - _AnimateNormal: 1
-    - _BackFaceSmoothness: 1
+    - _BackFaceSmoothness: 0
     - _BranchWind: 0
     - _BumpScale: 1
     - _ColorContrast: 1
@@ -132,13 +132,13 @@ Material:
     - _SwapUVS: 0
     - _Tangents: 0
     - _TimeOffset: 0.25
-    - _TranslucencyStrength: 1
+    - _TranslucencyStrength: 0.33
     - _TumbleFrequency: 0.6
     - _TumbleStrength: 0.012
     - _UVSec: 0
     - _UseArrays: 0
     - _UseDetails: 0
-    - _ViewDependency: 0.7
+    - _ViewDependency: 0
     - _ZWrite: 0
     m_Colors:
     - _AdvancedEdgeBending: {r: 0.6, g: 1.3, b: 0, a: 0}
