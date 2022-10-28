@@ -21,6 +21,7 @@ public class Follower : MonoBehaviour
     public float beamCastTime = 5f;
     private float beamCast = -1;
     private Vector3 beamTargetPosition = Vector3.zero;
+    public GameObject beamParticles;
 
     public int stage = 1;
 
@@ -30,6 +31,7 @@ public class Follower : MonoBehaviour
         npc = GetComponent<NavMeshAgent>();
         playerTransform = GetComponent<Transform>();
         this.beamCooldown = this.beamCooldownDefault;
+        //this.beamParticles = GameObject.FindWithTag("Beam");
     }
 
     void stage1()
@@ -59,14 +61,15 @@ public class Follower : MonoBehaviour
                 else
                 {
                     // beam casting animation
-                    Debug.DrawLine(new Vector3(transform.position.x, 5, transform.position.z), this.beamTargetPosition, Color.red);
+                    //Debug.DrawLine(new Vector3(transform.position.x, 5, transform.position.z), this.beamTargetPosition, Color.red);
+                    this.beamParticles.SetActive(true);
                 }
             }
             else
             {
                 if (this.goingToMiddle)
                 {
-                    if(npc.remainingDistance < 0.5)
+                    if(npc.remainingDistance < 2f) // todo fix
                     {
                         npc.enabled = false;
                         npc.transform.position = new Vector3(middlePoint.position.x, npc.transform.position.y, middlePoint.position.z);
