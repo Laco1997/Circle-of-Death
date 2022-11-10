@@ -143,6 +143,7 @@ public class Follower : MonoBehaviour
                 }
                 else
                 {
+                    npc.enabled = true;
                     npc.SetDestination(middlePoint.position);
                     //Debug.Log("goingToMiddle = true");
                     this.goingToMiddle = true;
