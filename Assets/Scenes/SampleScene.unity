@@ -7288,13 +7288,25 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 577532783}
     - target: {fileID: 2226425834464354562, guid: bd0a7aceaeb974da381c6296affce1be, type: 3}
+      propertyPath: HPParticle
+      value: 
+      objectReference: {fileID: 5383594632231660674, guid: 2b5c851db8eda4f75a64390e31281ad7, type: 3}
+    - target: {fileID: 2226425834464354562, guid: bd0a7aceaeb974da381c6296affce1be, type: 3}
       propertyPath: bossHealth
       value: 
       objectReference: {fileID: 265899727}
     - target: {fileID: 2226425834464354562, guid: bd0a7aceaeb974da381c6296affce1be, type: 3}
+      propertyPath: DefaultForce.y
+      value: 255
+      objectReference: {fileID: 0}
+    - target: {fileID: 2226425834464354562, guid: bd0a7aceaeb974da381c6296affce1be, type: 3}
       propertyPath: currentHealthText
       value: 
       objectReference: {fileID: 1786870354}
+    - target: {fileID: 2226425834464354562, guid: bd0a7aceaeb974da381c6296affce1be, type: 3}
+      propertyPath: DefaultForceScatter
+      value: 50
+      objectReference: {fileID: 0}
     - target: {fileID: 2226486607313500313, guid: bd0a7aceaeb974da381c6296affce1be, type: 3}
       propertyPath: m_Name
       value: PBR_Golem
