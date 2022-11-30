@@ -55,9 +55,11 @@ public class PlayerMovement : MonoBehaviour
     public Transform attackPoint;
     private bool canShoot = true;
     [SerializeField] private float shootCooldownTime = 2f;
-    //GameObject currentArrow;
 
-    //[SerializeField] private GameObject rightHand;
+    [Header("Weapons")]
+    [SerializeField] private GameObject swordIcon;
+    [SerializeField] private GameObject bowIcon;
+    [SerializeField] private GameObject handsIcon;
 
     bool holding = false;
 
@@ -67,6 +69,10 @@ public class PlayerMovement : MonoBehaviour
         sword.SetActive(false);
         bow.SetActive(false);
         arrow.SetActive(false);
+
+        handsIcon.SetActive(true);
+        swordIcon.SetActive(false);
+        bowIcon.SetActive(false);
     }
 
     // Update is called once per frame
@@ -135,30 +141,16 @@ public class PlayerMovement : MonoBehaviour
             controller.Move(move * sprintSpeed * Time.deltaTime);
         }
 
-        // Weapon
+        // Weapon equip
         if (Input.GetKeyDown(KeyCode.E))
         {
-            //// Equip
-            //if (animator.GetBool("Equipped") == false)
-            //{
-            //    animator.SetTrigger("Equip");
-            //    animator.SetBool("Equipped", true);
-            //    equipped = true;
-            //}
-            //// Unequip
-            //else
-            //{
-            //    animator.SetTrigger("Unequip");
-            //    animator.SetBool("Equipped", false);
-            //    equipped = false;
-            //}
-
             // Unequip
             if (animator.GetBool("Equipped Sword") == true)
             {
                 animator.SetTrigger("Unequip");
                 animator.SetBool("Equipped Sword", false);
                 equippedSword = false;
+                swordIcon.SetActive(false);
             }
 
             // Unequip
@@ -167,12 +159,23 @@ public class PlayerMovement : MonoBehaviour
                 animator.SetTrigger("Unequip");
                 animator.SetBool("Equipped Bow", false);
                 equippedBow = false;
+                bowIcon.SetActive(false);
+
+            }
+
+            if(animator.GetBool("Equipped Sword") == false && animator.GetBool("Equipped Bow") == false)
+            {
+                handsIcon.SetActive(true);
+            }
+            else
+            {
+                handsIcon.SetActive(false);
             }
         }
 
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
-            // Equip
+            // Equip sword
             if (animator.GetBool("Equipped Sword") == false)
             {
                 if(animator.GetBool("Equipped Bow") == true)
@@ -180,11 +183,14 @@ public class PlayerMovement : MonoBehaviour
                     arms.GetComponent<WeaponInteraction>().DeattachBow();
                     animator.SetBool("Equipped Bow", false);
                     equippedBow = false;
+                    bowIcon.SetActive(false);
                 }
 
+                handsIcon.SetActive(false);
                 animator.SetTrigger("Equip Sword");
                 animator.SetBool("Equipped Sword", true);
                 equippedSword = true;
+                swordIcon.SetActive(true);
             }
         }
 
@@ -198,12 +204,14 @@ public class PlayerMovement : MonoBehaviour
                     arms.GetComponent<WeaponInteraction>().DeattachSword();
                     animator.SetBool("Equipped Sword", false);
                     equippedSword = false;
+                    swordIcon.SetActive(false);
                 }
 
+                handsIcon.SetActive(false);
                 animator.SetTrigger("Equip Bow");
                 animator.SetBool("Equipped Bow", true);
                 equippedBow = true;
-                //currentArrow = Instantiate(arrow, attackPoint.position, Quaternion.identity);
+                bowIcon.SetActive(true);
             }
         }
 
@@ -251,32 +259,9 @@ public class PlayerMovement : MonoBehaviour
         // Shoot
         if (Input.GetMouseButtonDown(0) && equippedBow && canShoot && !holding)
         {
-            //Vector3 targetPoint;
-            //Ray ray = cam.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0));
             canShoot = false;
-            //RaycastHit hit;
-            //if (Physics.Raycast(cam.transform.position, cam.transform.forward, out hit))
-            //{
-            //    targetPoint = hit.point;
-            //}
-            //else
-            //{
-            //    targetPoint = ray.GetPoint(75);
-            //}
 
             StartCoroutine(ShootAnimation());
-
-            //Vector3 directionWithoutSpread = targetPoint - attackPoint.position;
-
-            //GameObject currentArrow = Instantiate(arrow, attackPoint.position, Quaternion.identity);
-            //currentArrow.transform.forward = directionWithoutSpread.normalized;
-            //currentArrow.transform.Rotate(-90f, 0, 0);
-            //currentArrow.GetComponent<Rigidbody>().AddForce(directionWithoutSpread.normalized * shootForce, ForceMode.Impulse);
-            //currentArrow.GetComponent<Rigidbody>().AddForce(cam.transform.up * upwardForce, ForceMode.Impulse);
-            //Destroy(currentArrow, 5f);
-
-
-            //Invoke(nameof(ResetShoot), shootCooldownTime);
         }
 
         // Dash
@@ -317,12 +302,7 @@ public class PlayerMovement : MonoBehaviour
     void ResetShoot()
     {
         arms.GetComponent<WeaponInteraction>().AttachArrow();
-        //currentArrow = Instantiate(arrow, attackPoint.position, Quaternion.identity);
-        //currentArrow.transform.parent = rightHand.transform;
         canShoot = true;
-
-        //Debug.Log(canShoot);
-        //Debug.Log(holding);
     }
 
     IEnumerator ShootAnimation()

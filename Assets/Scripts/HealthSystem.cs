@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -9,6 +10,7 @@ public class HealthSystem : MonoBehaviour
     private int currentHealth;
     public Slider bossHealth;
     Animator animator;
+    public TMP_Text currentHealthText;
 
     void Start()
     {
@@ -26,11 +28,15 @@ public class HealthSystem : MonoBehaviour
             animator.SetBool("isDead", true);
         }
         this.bossHealth.value = this.getPercentage();
+
+        currentHealthText.text = this.currentHealth.ToString();
+
+        Debug.Log(this.currentHealth);
     }
 
     public float getPercentage()
     {
-        return (float)this.currentHealth / (float)this.maxHealth * 100;
+        return (float)this.currentHealth / (float)this.maxHealth * 500;
 
     }
 
