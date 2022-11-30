@@ -29,4 +29,5 @@ public class SwordController : MonoBehaviour
             bossHealth.damage(5);
         }
     }
+
 }

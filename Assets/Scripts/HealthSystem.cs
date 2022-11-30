@@ -48,7 +48,11 @@ public class HealthSystem : MonoBehaviour
 
         currentHealthText.text = this.currentHealth.ToString();
 
-        CreateHPEffect(amount, this.gameObject.transform.position);
+        int x = Screen.width / 2;
+        int y = Screen.width / 2;
+
+        Vector3 indicatorPosition = this.gameObject.transform.position;
+        DamageIndicator(amount, indicatorPosition);
 
         Debug.Log(this.currentHealth);
     }
@@ -65,7 +69,7 @@ public class HealthSystem : MonoBehaviour
     }
 
     //Change the HP and Instantiates an HP Particle with a Custom Force and Color
-    public void CreateHPEffect(float Delta, Vector3 Position)
+    public void DamageIndicator(float Delta, Vector3 Position)
     {
         Position.y += 12;
         GameObject NewHPP = Instantiate(HPParticle, Position, gameObject.transform.rotation) as GameObject;
