@@ -10,7 +10,7 @@ public class HealthSystem : MonoBehaviour
 {
     public int maxHealth;
     private int currentHealth;
-    public Slider bossHealth;
+    public Slider health;
     Animator animator;
     public TMP_Text currentHealthText;
 
@@ -24,7 +24,7 @@ public class HealthSystem : MonoBehaviour
     void Start()
     {
         currentHealth = maxHealth;
-        bossHealth.value = getPercentage();
+        health.value = getPercentage();
         animator = GetComponent<Animator>();
     }
 
@@ -36,7 +36,7 @@ public class HealthSystem : MonoBehaviour
             currentHealth = 0;
             animator.SetBool("isDead", true);
         }
-        bossHealth.value = getPercentage();
+        health.value = getPercentage();
 
         currentHealthText.text = currentHealth.ToString();
 
@@ -46,7 +46,21 @@ public class HealthSystem : MonoBehaviour
         Vector3 indicatorPosition = gameObject.transform.position;
         DamageIndicator(amount, indicatorPosition);
 
-        Debug.Log(currentHealth);
+        //Debug.Log(currentHealth);
+    }
+
+    public void healthGained(int amount)
+    {
+        currentHealth += amount;
+        if (currentHealth >= maxHealth)
+        {
+            currentHealth = maxHealth;
+        }
+        health.value = getPercentage();
+
+        currentHealthText.text = currentHealth.ToString();
+
+        //Debug.Log(currentHealth);
     }
 
     public float getPercentage()

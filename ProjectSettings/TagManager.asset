@@ -8,6 +8,8 @@ TagManager:
   - Beam
   - Pole
   - BossPole
+  - Effect
+  - PotionSpawner
   layers:
   - Default
   - TransparentFX

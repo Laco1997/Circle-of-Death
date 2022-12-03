@@ -23,7 +23,7 @@ public class EnergySystem : MonoBehaviour
         if(currentEnergy != maxEnergy && !energyGaining)
         {
             energyGaining = true;
-            StartCoroutine(energyGained(5));
+            StartCoroutine(energyGainer(5));
         }
     }
 
@@ -44,10 +44,10 @@ public class EnergySystem : MonoBehaviour
 
         currentEnergyText.text = currentEnergy.ToString();
 
-        Debug.Log(currentEnergy);
+        //Debug.Log(currentEnergy);
     }
 
-    IEnumerator energyGained(int amount)
+    public void energyGained(int amount)
     {
         currentEnergy += amount;
         if (currentEnergy >= maxEnergy)
@@ -56,9 +56,14 @@ public class EnergySystem : MonoBehaviour
         }
         playerEnergy.value = getPercentage();
 
-        Debug.Log(currentEnergy);
+        //Debug.Log(currentEnergy);
 
         currentEnergyText.text = currentEnergy.ToString();
+    }
+
+    IEnumerator energyGainer(int amount)
+    {
+        energyGained(amount);
 
         yield return new WaitForSeconds(1f);
 
