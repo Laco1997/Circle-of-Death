@@ -853,7 +853,7 @@ MonoBehaviour:
   beamCooldownDefault: 10
   beamCastTime: 5
   beamDuration: 5
-  beamParticles: {fileID: 5962997238291072080
+  beamParticles: {fileID: 5962997238291072080}
   boss_pole: {fileID: 5907412741452295943}
   poles: []
   stage: 1

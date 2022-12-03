@@ -102,6 +102,7 @@ public class Follower : MonoBehaviour
                         GameObject poleWithMax = null;
                         foreach (GameObject pole in this.poles.Where(p => p.activeSelf))
                         {
+                            Debug.Log(pole.GetComponent<PoleHit>());
                             int hits = pole.GetComponent<PoleHit>().hits;
                             if (hits > 0 && hits > max) // todo if hits > const
                             {
