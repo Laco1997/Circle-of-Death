@@ -6,10 +6,13 @@ using UnityEngine;
 public class SwordController : MonoBehaviour
 {
     [SerializeField] private GameObject player;
+    [SerializeField] private GameObject boss;
+    HealthSystem bossHealth;
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        bossHealth = boss.GetComponent<HealthSystem>();
     }
 
     // Update is called once per frame
@@ -23,6 +26,8 @@ public class SwordController : MonoBehaviour
         if (col.gameObject.tag == "Enemy" && player.GetComponent<PlayerMovement>().isAttacking)
         {
             Debug.Log("Sword hit");
+            bossHealth.damage(5);
         }
     }
+
 }

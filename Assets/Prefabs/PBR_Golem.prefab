@@ -843,7 +843,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2226486607313500313}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 388643a2b7f30df4aba027bf40df7e33, type: 3}
   m_Name: 
@@ -853,7 +853,7 @@ MonoBehaviour:
   beamCooldownDefault: 10
   beamCastTime: 5
   beamDuration: 5
-  beamParticles: {fileID: 5962997238291072080}
+  beamParticles: {fileID: 5962997238291072080
   boss_pole: {fileID: 5907412741452295943}
   poles: []
   stage: 1
@@ -864,7 +864,7 @@ NavMeshAgent:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2226486607313500313}
-  m_Enabled: 1
+  m_Enabled: 0
   m_AgentTypeID: 0
   m_Radius: 0.5
   m_Speed: 8
@@ -886,13 +886,14 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2226486607313500313}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9a85090ce93a4814faeb2897c2212ec2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 100
+  maxHealth: 500
   bossHealth: {fileID: 0}
+  currentHealthText: {fileID: 0}
 --- !u!1 &2226506994475285019
 GameObject:
   m_ObjectHideFlags: 0
