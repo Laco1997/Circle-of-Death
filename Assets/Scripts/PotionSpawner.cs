@@ -31,8 +31,6 @@ public class PotionSpawner : MonoBehaviour
     {
         time += Time.deltaTime;
 
-        Debug.Log(time);
-
         if (time >= spawnTime)
         {
             if (healthPotionPickedUp)

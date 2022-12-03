@@ -26,11 +26,6 @@ public class PotionController : MonoBehaviour
 
     void OnTriggerEnter(Collider col)
     {
-        Debug.Log(col.gameObject.tag);
-        Debug.Log(gameObject.name);
-
-        Debug.Log("------");
-
         if (col.gameObject.tag == "Player" && gameObject.name == "Bottle_Health(Clone)")
         {
             Debug.Log("Health picked up");

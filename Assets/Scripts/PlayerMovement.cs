@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.XR;
@@ -56,6 +57,9 @@ public class PlayerMovement : MonoBehaviour
     private bool canShoot = true;
     [SerializeField] private float shootCooldownTime = 2f;
     bool holding = false;
+    bool hasArrows = true;
+    ArrowSystem arrowSys;
+    private int currentArrowCount;
 
     [Header("Weapons")]
     [SerializeField] private GameObject swordIcon;
@@ -81,6 +85,9 @@ public class PlayerMovement : MonoBehaviour
 
         playerEnergy = gameObject.GetComponent<EnergySystem>();
         currentEnergy = playerEnergy.CurrentEnergy;
+
+        arrowSys = gameObject.GetComponent<ArrowSystem>();
+        currentArrowCount = arrowSys.CurrentArrows;
     }
 
     // Update is called once per frame
@@ -93,6 +100,8 @@ public class PlayerMovement : MonoBehaviour
         {
             velocity.y = -2f;
         }
+
+        CheckArrows();
 
         CheckEnergy();
 
@@ -205,7 +214,7 @@ public class PlayerMovement : MonoBehaviour
             }
         }
 
-        if (Input.GetKeyDown(KeyCode.Alpha2))
+        if (Input.GetKeyDown(KeyCode.Alpha2) && hasArrows)
         {
             // Equip Bow
             if (animator.GetBool("Equipped Bow") == false)
@@ -323,6 +332,20 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
+    void CheckArrows()
+    {
+        currentArrowCount = arrowSys.CurrentArrows;
+        if(currentArrowCount <= 0)
+        {
+            hasArrows = false;
+            unequipBowWithNoArrows();
+        }
+        else
+        {
+            hasArrows = true;
+        }
+    }
+
     void ResetDash()
     {
         canDash = true;
@@ -340,9 +363,31 @@ public class PlayerMovement : MonoBehaviour
         canShoot = true;
     }
 
+    void unequipBowWithNoArrows()
+    {
+        // Equip sword
+        if (animator.GetBool("Equipped Sword") == false)
+        {
+            if (animator.GetBool("Equipped Bow") == true)
+            {
+                arms.GetComponent<WeaponInteraction>().DeattachBow();
+                animator.SetBool("Equipped Bow", false);
+                equippedBow = false;
+                bowIcon.SetActive(false);
+            }
+
+            handsIcon.SetActive(false);
+            animator.SetTrigger("Equip Sword");
+            animator.SetBool("Equipped Sword", true);
+            equippedSword = true;
+            swordIcon.SetActive(true);
+        }
+    }
+
     IEnumerator ShootAnimation()
     {
         animator.SetTrigger("Quick Shoot");
+        arrowSys.arrowsUsed(1);
 
         yield return new WaitForSeconds(0.4f);
 
@@ -377,6 +422,7 @@ public class PlayerMovement : MonoBehaviour
 
     void LongShotAnimation()
     {
+        arrowSys.arrowsUsed(1);
         arms.GetComponent<WeaponInteraction>().DeattachArrow();
 
         Vector3 targetPoint;
