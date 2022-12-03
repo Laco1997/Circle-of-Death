@@ -13,12 +13,6 @@ public class ArrowController : MonoBehaviour
         bossHealth = boss.GetComponent<HealthSystem>();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-
     void OnTriggerEnter(Collider col)
     {
         if (col.gameObject.tag == "Enemy" && gameObject.name == "Shot Arrow")

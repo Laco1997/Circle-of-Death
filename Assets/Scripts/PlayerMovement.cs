@@ -55,13 +55,18 @@ public class PlayerMovement : MonoBehaviour
     public Transform attackPoint;
     private bool canShoot = true;
     [SerializeField] private float shootCooldownTime = 2f;
+    bool holding = false;
 
     [Header("Weapons")]
     [SerializeField] private GameObject swordIcon;
     [SerializeField] private GameObject bowIcon;
     [SerializeField] private GameObject handsIcon;
 
-    bool holding = false;
+    [Header("Energy")]
+    EnergySystem playerEnergy;
+    private int currentEnergy;
+    private bool canDashWithEnergy = true;
+    private bool canSprintWithEnergy = true;
 
     private void Start()
     {
@@ -73,6 +78,9 @@ public class PlayerMovement : MonoBehaviour
         handsIcon.SetActive(true);
         swordIcon.SetActive(false);
         bowIcon.SetActive(false);
+
+        playerEnergy = gameObject.GetComponent<EnergySystem>();
+        currentEnergy = playerEnergy.CurrentEnergy;
     }
 
     // Update is called once per frame
@@ -85,6 +93,8 @@ public class PlayerMovement : MonoBehaviour
         {
             velocity.y = -2f;
         }
+
+        CheckEnergy();
 
         PlayerInput();
 
@@ -131,10 +141,11 @@ public class PlayerMovement : MonoBehaviour
         }
 
         // Sprint
-        if (Input.GetKey(KeyCode.LeftShift))
+        if (Input.GetKey(KeyCode.LeftShift) && canSprintWithEnergy)
         {
             if (Mathf.Abs(horizontal) > 0 || Mathf.Abs(vertical) > 0)
             {
+                //playerEnergy.energyUsed(1);
                 animator.SetBool("Sprint", true);
             }
 
@@ -265,9 +276,12 @@ public class PlayerMovement : MonoBehaviour
         }
 
         // Dash
-        if (Input.GetKeyDown(KeyCode.LeftControl) && canDash)
+        if (Input.GetKeyDown(KeyCode.LeftControl) && canDash && canDashWithEnergy)
         {
             canDash = false;
+
+            playerEnergy.energyUsed(100);
+
             Invoke(nameof(ResetDash), dashCooldownTime);
             dashCurrentTime = 0f;
         }
@@ -286,6 +300,27 @@ public class PlayerMovement : MonoBehaviour
         velocity.y += gravity * Time.deltaTime;
 
         controller.Move(velocity * Time.deltaTime);
+    }
+
+    void CheckEnergy()
+    {
+        currentEnergy = playerEnergy.CurrentEnergy;
+        if(currentEnergy > 0)
+        {
+            canSprintWithEnergy = true;
+            if (currentEnergy >= 100)
+            {
+                canDashWithEnergy = true;
+            }
+            else
+            {
+                canDashWithEnergy = false;
+            }
+        }
+        else
+        {
+            canSprintWithEnergy = false;
+        }
     }
 
     void ResetDash()
