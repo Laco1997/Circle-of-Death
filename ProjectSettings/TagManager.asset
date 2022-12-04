@@ -8,6 +8,8 @@ TagManager:
   - Beam
   - Pole
   - BossPole
+  - Effect
+  - GroundPart
   layers:
   - Default
   - TransparentFX

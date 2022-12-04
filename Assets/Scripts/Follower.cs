@@ -324,7 +324,27 @@ public class Follower : MonoBehaviour
 
     void stage3()
     {
+        npc.stoppingDistance = 7f;
+        npc.SetDestination(player.position);
+        npc.isStopped = false;
+        List<GameObject> groundParts = GameObject.FindGameObjectsWithTag("GroundPart").ToList();
 
+        foreach (var groundPart in groundParts)
+        {
+            if (Vector3.Distance(transform.position, groundPart.transform.position) < 5f)
+            {
+                Destroy(groundPart);
+            }
+        }
+
+        if (npc.velocity.magnitude > 0.95)
+        {
+            animator.SetBool("isFollowing", true);
+        }
+        else
+        {
+            animator.SetBool("isFollowing", false);
+        }
     }
 
     void Update()
