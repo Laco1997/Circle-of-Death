@@ -28,6 +28,8 @@ public class PlayerMovement : MonoBehaviour
     [Header("Walk")]
     [SerializeField] private float walkSpeed = 3.2f;
     private Vector3 move;
+    bool walking = false;
+    bool walkAudioPlaying = false;
 
     [Header("Jump")]
     [SerializeField] private float gravity = -20f;
@@ -40,6 +42,8 @@ public class PlayerMovement : MonoBehaviour
 
     [Header("Sprint")]
     [SerializeField] private float sprintSpeed = 3.5f;
+    bool sprinting = false;
+    bool sprintAudioPlaying = false;
 
     [Header("Dash")]
     [SerializeField] private float dashSpeed = 4.5f;
@@ -109,12 +113,47 @@ public class PlayerMovement : MonoBehaviour
 
         MovePlayer();
 
+        WalkAudio();
+
+        SprintAudio();
+
     }
 
     private void PlayerInput()
     {
         horizontal = Input.GetAxis("Horizontal");
         vertical = Input.GetAxis("Vertical");
+    }
+
+    void WalkAudio()
+    {
+        if (walking && !walkAudioPlaying)
+        {
+            FindObjectOfType<AudioManager>().Play("Walk");
+            walkAudioPlaying = true;
+        }
+        else if(!walking && walkAudioPlaying)
+        {
+            FindObjectOfType<AudioManager>().Stop("Walk");
+            walkAudioPlaying = false;
+        }
+    }
+
+    void SprintAudio()
+    {
+        if (sprinting && !sprintAudioPlaying)
+        {
+            FindObjectOfType<AudioManager>().Play("Sprint");
+            FindObjectOfType<AudioManager>().PlayDelayed("SprintVoice", 1f);
+            sprintAudioPlaying = true;
+        }
+        else if (!sprinting && sprintAudioPlaying)
+        {
+            FindObjectOfType<AudioManager>().Stop("Sprint");
+            FindObjectOfType<AudioManager>().Stop("SprintVoice");
+            FindObjectOfType<AudioManager>().Play("AfterSprintVoice");
+            sprintAudioPlaying = false;
+        }
     }
 
     private void MovePlayer()
@@ -125,14 +164,20 @@ public class PlayerMovement : MonoBehaviour
         {
             animator.SetBool("Walk", true);
 
+            walking = true;
+
             if (!Input.GetKey(KeyCode.LeftShift))
             {
+                sprinting = false;
                 animator.SetBool("Sprint", false);
             }
         }
 
         if ((Mathf.Abs(horizontal) == 0) && (Mathf.Abs(vertical) == 0))
         {
+            walking = false;
+            sprinting = false;
+
             animator.SetBool("Walk", false);
             animator.SetBool("Sprint", false);
         }
@@ -144,6 +189,10 @@ public class PlayerMovement : MonoBehaviour
         {
             if (animator.GetBool("Equipped Sword") == false && animator.GetBool("Equipped Bow") == false)
             {
+                walking = false;
+                sprinting = false;
+                FindObjectOfType<AudioManager>().Play("Jump");
+
                 animator.SetTrigger("Jump");
             }
             velocity.y = Mathf.Sqrt(jumpHeight * -1 * gravity);
@@ -154,6 +203,8 @@ public class PlayerMovement : MonoBehaviour
         {
             if (Mathf.Abs(horizontal) > 0 || Mathf.Abs(vertical) > 0)
             {
+                walking = false;
+                sprinting = true;
                 //playerEnergy.energyUsed(1);
                 animator.SetBool("Sprint", true);
             }
@@ -209,6 +260,9 @@ public class PlayerMovement : MonoBehaviour
                 handsIcon.SetActive(false);
                 animator.SetTrigger("Equip Sword");
                 animator.SetBool("Equipped Sword", true);
+
+                FindObjectOfType<AudioManager>().PlayDelayed("SwordEquip", 0.6f);
+
                 equippedSword = true;
                 swordIcon.SetActive(true);
             }
@@ -241,6 +295,10 @@ public class PlayerMovement : MonoBehaviour
             canAttack = false;
             isAttacking = true;
             animator.SetTrigger("Attack");
+
+            FindObjectOfType<AudioManager>().PlayDelayed("SwordHit", 0.4f);
+            FindObjectOfType<AudioManager>().PlayDelayed("QuickAttackVoice", 0.4f);
+
             Invoke(nameof(ResetAttack), attackCooldownTime);
         }
 
@@ -250,6 +308,10 @@ public class PlayerMovement : MonoBehaviour
             canAttack = false;
             isAttacking = true;
             animator.SetTrigger("Strong Attack");
+
+            FindObjectOfType<AudioManager>().PlayDelayed("SwordHit", 0.9f);
+            FindObjectOfType<AudioManager>().PlayDelayed("StrongAttackVoice", 0.4f);
+
             Invoke(nameof(ResetAttack), attackCooldownTime);
         }
 
@@ -257,6 +319,8 @@ public class PlayerMovement : MonoBehaviour
         if (Input.GetMouseButton(1) && equippedBow && canShoot)
         {
             canShoot = false;
+
+            FindObjectOfType<AudioManager>().Play("BowStringLong");
 
             animator.SetTrigger("Long Shoot");
 
@@ -266,6 +330,9 @@ public class PlayerMovement : MonoBehaviour
         if (Input.GetMouseButtonDown(0) && holding)
         {
             holding = false;
+
+            FindObjectOfType<AudioManager>().Play("BowShot");
+
             LongShotAnimation();
         }
 
@@ -280,6 +347,9 @@ public class PlayerMovement : MonoBehaviour
         if (Input.GetMouseButtonDown(0) && equippedBow && canShoot && !holding)
         {
             canShoot = false;
+
+            FindObjectOfType<AudioManager>().Play("BowStringShort");
+            FindObjectOfType<AudioManager>().PlayDelayed("BowShot", 0.4f);
 
             StartCoroutine(ShootAnimation());
         }

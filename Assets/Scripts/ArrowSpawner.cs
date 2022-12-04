@@ -23,7 +23,7 @@ public class ArrowSpawner : MonoBehaviour
     {
         time += Time.deltaTime;
 
-        Debug.Log(time);
+        //Debug.Log(time);
 
         if (time >= spawnTime)
         {
