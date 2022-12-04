@@ -27,6 +27,7 @@ public class SpawnGround : MonoBehaviour
                 pos.y = y;
                 var instance = Instantiate(groundPart, pos, Quaternion.identity);
                 instance.tag = "GroundPart";
+                instance.layer = LayerMask.NameToLayer("GroundPart");
             }
         }
         /*

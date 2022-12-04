@@ -46,14 +46,27 @@ public class Follower : MonoBehaviour
     public float groundHitDuration = 2f;
     [SerializeField] private bool groundHitPhase = false;
     public int groundHitCounter = 0;
+    public float groundHitRange = 20f;
 
     [Header("Stage 2 base attack")]
     public float bigAttackCooldownDefault = 7f;
 
+    [Header("Stage 3")]
+    public float groundBreakCooldownDefault = 10f;
+    [SerializeField] private float groundBreakCooldown;
+    public float groundBreakEffectTime = .2f;
+    public float groundBreakCastTime = 5f;
+    public float groundBreakCast = -1f;
+    public float groundBreakDuration = 2f;
+    [SerializeField] private bool groundBreakPhase = false;
+    public float groundBreakRange = 20f;
+
+    [Header("Stage 3 base attack")]
+    public float baseAttackCooldownP3Default = 7f;
+
     [Header("Base attack")]
     [SerializeField] private bool attackReady = false;
     [SerializeField] private float attackCooldown = 0;
-
 
 
 
@@ -253,6 +266,9 @@ public class Follower : MonoBehaviour
                 if (groundHitCast - groundHitCastTime >= groundHitDuration)
                 {
                     groundHitParticles.SetActive(true);
+                    var sh = groundHitParticles.GetComponent<ParticleSystem>().shape;
+                    sh.radius = groundHitRange;
+
                     if (groundHitCast - groundHitCastTime - groundHitEffectTime >= groundHitDuration)
                     {
                         Debug.Log("ground hit damage");
@@ -260,7 +276,7 @@ public class Follower : MonoBehaviour
                         groundHitCooldown = groundHitCooldownDefault;
                         groundHitPhase = false;
                         groundHitParticles.SetActive(false);
-                        if(Vector3.Distance(player.position, transform.position) < 20f)
+                        if(Vector3.Distance(player.position, transform.position) < groundHitRange)
                         {
                             Debug.Log("Player hit");
                         }
@@ -327,13 +343,73 @@ public class Follower : MonoBehaviour
         npc.stoppingDistance = 7f;
         npc.SetDestination(player.position);
         npc.isStopped = false;
-        List<GameObject> groundParts = GameObject.FindGameObjectsWithTag("GroundPart").ToList();
-
-        foreach (var groundPart in groundParts)
+        if (groundBreakPhase)
         {
-            if (Vector3.Distance(transform.position, groundPart.transform.position) < 5f)
+            npc.stoppingDistance = 9999f;
+            groundBreakCast += Time.deltaTime;
+            if (groundBreakCast > groundBreakCastTime)
             {
-                Destroy(groundPart);
+                if (groundBreakCast - groundBreakCastTime >= groundBreakDuration)
+                {
+                    groundHitParticles.SetActive(true);
+                    var sh = groundHitParticles.GetComponent<ParticleSystem>().shape;
+                    sh.radius = groundBreakRange;
+                    if (groundBreakCast - groundBreakCastTime - groundBreakEffectTime >= groundBreakDuration)
+                    {
+                        Debug.Log("ground hit damage");
+                        Debug.Log("ground hit stop");
+                        Collider[] hitColliders = Physics.OverlapSphere(transform.position, groundBreakRange, LayerMask.GetMask("GroundPart"));
+                        foreach (var hitCollider in hitColliders)
+                        {
+                            Destroy(hitCollider.gameObject);
+                        }
+                        groundBreakCooldown = groundBreakCooldownDefault;
+                        groundBreakPhase = false;
+                        groundHitParticles.SetActive(false);
+                        if (Vector3.Distance(player.position, transform.position) < groundBreakRange)
+                        {
+                            Debug.Log("Player hit");
+                        }
+                    }
+                }
+                else
+                {
+                    Debug.Log("ground hit animation");
+                    groundHitParticles.SetActive(true);
+                }
+            }
+        }
+        else
+        {
+            npc.stoppingDistance = 7f;
+            if (groundBreakCooldown <= 0)
+            {
+                groundBreakPhase = true;
+                groundBreakCast = 0f;
+            }
+            else
+            {
+                groundBreakCooldown -= Time.deltaTime;
+                if (attackReady)
+                {
+                    if (npc.remainingDistance <= 8f)
+                    {
+                        animator.SetTrigger("attack");
+                        attackReady = false;
+                        attackCooldown = baseAttackCooldownP3Default;
+                    }
+                }
+                else
+                {
+                    if (attackCooldown <= 0)
+                    {
+                        attackReady = true;
+                    }
+                    else
+                    {
+                        attackCooldown -= Time.deltaTime;
+                    }
+                }
             }
         }
 

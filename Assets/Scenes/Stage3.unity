@@ -2871,6 +2871,10 @@ PrefabInstance:
       propertyPath: middlePoint
       value: 
       objectReference: {fileID: 313994822}
+    - target: {fileID: 2226425834464354560, guid: bd0a7aceaeb974da381c6296affce1be, type: 3}
+      propertyPath: myLayerMask.m_Bits
+      value: 128
+      objectReference: {fileID: 0}
     - target: {fileID: 2226425834464354562, guid: bd0a7aceaeb974da381c6296affce1be, type: 3}
       propertyPath: bossHealth
       value: 
