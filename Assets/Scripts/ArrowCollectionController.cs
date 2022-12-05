@@ -10,7 +10,6 @@ public class ArrowCollectionController : MonoBehaviour
     private GameObject arrowSpawner;
     ArrowSpawner arrows;
 
-    // Start is called before the first frame update
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
