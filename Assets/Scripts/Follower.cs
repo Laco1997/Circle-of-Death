@@ -5,6 +5,7 @@ using UnityEditor.PackageManager;
 using UnityEditor.SearchService;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.SceneManagement;
 
 public class Follower : MonoBehaviour
 {
@@ -281,9 +282,15 @@ public class Follower : MonoBehaviour
                             Debug.Log("Player hit");
                         }
                         groundHitCounter++;
-                        if (groundHitCounter > 4) {
+                        if (groundHitCounter >= 2)
+                        {
+                            groundHitPhase = false;
+                            groundBreakCooldown = groundBreakCooldownDefault;
+                            attackCooldown = baseAttackCooldownP3Default;
                             stage = 3;
-                            // TODO change scene to cave
+                            groundBreakPhase = false;
+                            groundHitParticles.SetActive(false);
+                            SceneManager.LoadScene("Stage3");
                         }
                     }
                 }
