@@ -1007,13 +1007,13 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: bec1cfb465efc7a41bd5ccbac5b6f2a2, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0.4
+  m_Volume: 0.3
   m_Pitch: 0.8
   Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
-  Priority: 128
+  Priority: 100
   DopplerLevel: 1
   MinDistance: 1
   MaxDistance: 500
@@ -1103,7 +1103,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 660790bb19a97eb4581a05d90c81f369, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0.5
+  m_Volume: 1
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -1199,13 +1199,13 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 0643908ea2a90c341a1f488fb302af76, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0.3
+  m_Volume: 0.2
   m_Pitch: 0.8
   Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
-  Priority: 128
+  Priority: 100
   DopplerLevel: 1
   MinDistance: 1
   MaxDistance: 500
@@ -1502,7 +1502,7 @@ MonoBehaviour:
   sounds:
   - name: BowStringLong
     clip: {fileID: 8300000, guid: 470d35b1638f4234e895ca3e65fb00dc, type: 3}
-    volume: 0.3
+    volume: 0.15
     pitch: 0.9
     loop: 0
     spatialBlend: 1
@@ -1516,7 +1516,7 @@ MonoBehaviour:
     source: {fileID: 0}
   - name: BowShot
     clip: {fileID: 8300000, guid: 6b50bafaa2ac38c43a8bd2a002b7cfe0, type: 3}
-    volume: 0.2
+    volume: 0.1
     pitch: 1
     loop: 0
     spatialBlend: 1
@@ -1537,7 +1537,7 @@ MonoBehaviour:
     source: {fileID: 0}
   - name: SprintVoice
     clip: {fileID: 8300000, guid: 42f6f9ac46b16bc4fad48f9c4a3c7b14, type: 3}
-    volume: 0.7
+    volume: 0.6
     pitch: 1
     loop: 1
     spatialBlend: 0.5
@@ -1565,21 +1565,21 @@ MonoBehaviour:
     source: {fileID: 0}
   - name: SwordHit
     clip: {fileID: 8300000, guid: 80151380c0f818243b66a78ef69c9fcd, type: 3}
-    volume: 0.7
+    volume: 0.5
     pitch: 1
     loop: 0
     spatialBlend: 1
     source: {fileID: 0}
   - name: QuickAttackVoice
     clip: {fileID: 8300000, guid: b1b0134244e36784b9a6d58c192d76c9, type: 3}
-    volume: 0.9
+    volume: 0.7
     pitch: 1
     loop: 0
     spatialBlend: 0.5
     source: {fileID: 0}
   - name: StrongAttackVoice
     clip: {fileID: 8300000, guid: ac07e279d999df94395b45f535ad851f, type: 3}
-    volume: 0.9
+    volume: 0.7
     pitch: 1
     loop: 0
     spatialBlend: 0.5
