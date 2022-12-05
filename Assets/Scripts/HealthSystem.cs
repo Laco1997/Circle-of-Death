@@ -10,7 +10,7 @@ public class HealthSystem : MonoBehaviour
 {
     public int maxHealth;
     private int currentHealth;
-    public Slider health;
+    public Slider bossHealth;
     Animator animator;
     public TMP_Text currentHealthText;
 
@@ -23,55 +23,49 @@ public class HealthSystem : MonoBehaviour
 
     void Start()
     {
-        currentHealth = maxHealth;
-        health.value = getPercentage();
+        this.currentHealth = maxHealth;
+        this.bossHealth.value = this.getPercentage();
         animator = GetComponent<Animator>();
+    }
+
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.F))
+        {
+            this.damage(10);
+        }
     }
 
     public void damage(int amount)
     {
-        currentHealth -= amount;
-        if (currentHealth <= 0)
+        this.currentHealth -= amount;
+        if (this.currentHealth <= 0)
         {
-            currentHealth = 0;
+            this.currentHealth = 0;
             animator.SetBool("isDead", true);
         }
-        health.value = getPercentage();
+        this.bossHealth.value = this.getPercentage();
 
-        currentHealthText.text = currentHealth.ToString();
+        currentHealthText.text = this.currentHealth.ToString();
 
         int x = Screen.width / 2;
         int y = Screen.width / 2;
 
-        Vector3 indicatorPosition = gameObject.transform.position;
+        Vector3 indicatorPosition = this.gameObject.transform.position;
         DamageIndicator(amount, indicatorPosition);
 
-        //Debug.Log(currentHealth);
-    }
-
-    public void healthGained(int amount)
-    {
-        currentHealth += amount;
-        if (currentHealth >= maxHealth)
-        {
-            currentHealth = maxHealth;
-        }
-        health.value = getPercentage();
-
-        currentHealthText.text = currentHealth.ToString();
-
-        //Debug.Log(currentHealth);
+        Debug.Log(this.currentHealth);
     }
 
     public float getPercentage()
     {
-        return (float)currentHealth / (float)maxHealth * 4000;
+        return (float)this.currentHealth / (float)this.maxHealth * 500;
 
     }
 
     public bool isDead()
     {
-        return currentHealth == 0;
+        return this.currentHealth == 0;
     }
 
     //Change the HP and Instantiates an HP Particle with a Custom Force and Color
