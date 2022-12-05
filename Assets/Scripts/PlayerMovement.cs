@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.XR;
@@ -27,6 +28,8 @@ public class PlayerMovement : MonoBehaviour
     [Header("Walk")]
     [SerializeField] private float walkSpeed = 3.2f;
     private Vector3 move;
+    bool walking = false;
+    bool walkAudioPlaying = false;
 
     [Header("Jump")]
     [SerializeField] private float gravity = -20f;
@@ -39,6 +42,8 @@ public class PlayerMovement : MonoBehaviour
 
     [Header("Sprint")]
     [SerializeField] private float sprintSpeed = 3.5f;
+    bool sprinting = false;
+    bool sprintAudioPlaying = false;
 
     [Header("Dash")]
     [SerializeField] private float dashSpeed = 4.5f;
@@ -55,13 +60,21 @@ public class PlayerMovement : MonoBehaviour
     public Transform attackPoint;
     private bool canShoot = true;
     [SerializeField] private float shootCooldownTime = 2f;
+    bool holding = false;
+    bool hasArrows = true;
+    ArrowSystem arrowSys;
+    private int currentArrowCount;
 
     [Header("Weapons")]
     [SerializeField] private GameObject swordIcon;
     [SerializeField] private GameObject bowIcon;
     [SerializeField] private GameObject handsIcon;
 
-    bool holding = false;
+    [Header("Energy")]
+    EnergySystem playerEnergy;
+    private int currentEnergy;
+    private bool canDashWithEnergy = true;
+    private bool canSprintWithEnergy = true;
 
     private void Start()
     {
@@ -73,6 +86,12 @@ public class PlayerMovement : MonoBehaviour
         handsIcon.SetActive(true);
         swordIcon.SetActive(false);
         bowIcon.SetActive(false);
+
+        playerEnergy = gameObject.GetComponent<EnergySystem>();
+        currentEnergy = playerEnergy.CurrentEnergy;
+
+        arrowSys = gameObject.GetComponent<ArrowSystem>();
+        currentArrowCount = arrowSys.CurrentArrows;
     }
 
     // Update is called once per frame
@@ -86,9 +105,17 @@ public class PlayerMovement : MonoBehaviour
             velocity.y = -2f;
         }
 
+        CheckArrows();
+
+        CheckEnergy();
+
         PlayerInput();
 
         MovePlayer();
+
+        WalkAudio();
+
+        SprintAudio();
 
     }
 
@@ -96,6 +123,37 @@ public class PlayerMovement : MonoBehaviour
     {
         horizontal = Input.GetAxis("Horizontal");
         vertical = Input.GetAxis("Vertical");
+    }
+
+    void WalkAudio()
+    {
+        if (walking && !walkAudioPlaying)
+        {
+            FindObjectOfType<AudioManager>().Play("Walk");
+            walkAudioPlaying = true;
+        }
+        else if(!walking && walkAudioPlaying)
+        {
+            FindObjectOfType<AudioManager>().Stop("Walk");
+            walkAudioPlaying = false;
+        }
+    }
+
+    void SprintAudio()
+    {
+        if (sprinting && !sprintAudioPlaying)
+        {
+            FindObjectOfType<AudioManager>().Play("Sprint");
+            FindObjectOfType<AudioManager>().PlayDelayed("SprintVoice", 1f);
+            sprintAudioPlaying = true;
+        }
+        else if (!sprinting && sprintAudioPlaying)
+        {
+            FindObjectOfType<AudioManager>().Stop("Sprint");
+            FindObjectOfType<AudioManager>().Stop("SprintVoice");
+            FindObjectOfType<AudioManager>().Play("AfterSprintVoice");
+            sprintAudioPlaying = false;
+        }
     }
 
     private void MovePlayer()
@@ -106,14 +164,20 @@ public class PlayerMovement : MonoBehaviour
         {
             animator.SetBool("Walk", true);
 
+            walking = true;
+
             if (!Input.GetKey(KeyCode.LeftShift))
             {
+                sprinting = false;
                 animator.SetBool("Sprint", false);
             }
         }
 
         if ((Mathf.Abs(horizontal) == 0) && (Mathf.Abs(vertical) == 0))
         {
+            walking = false;
+            sprinting = false;
+
             animator.SetBool("Walk", false);
             animator.SetBool("Sprint", false);
         }
@@ -125,16 +189,23 @@ public class PlayerMovement : MonoBehaviour
         {
             if (animator.GetBool("Equipped Sword") == false && animator.GetBool("Equipped Bow") == false)
             {
+                walking = false;
+                sprinting = false;
+                FindObjectOfType<AudioManager>().Play("Jump");
+
                 animator.SetTrigger("Jump");
             }
             velocity.y = Mathf.Sqrt(jumpHeight * -1 * gravity);
         }
 
         // Sprint
-        if (Input.GetKey(KeyCode.LeftShift))
+        if (Input.GetKey(KeyCode.LeftShift) && canSprintWithEnergy)
         {
             if (Mathf.Abs(horizontal) > 0 || Mathf.Abs(vertical) > 0)
             {
+                walking = false;
+                sprinting = true;
+                //playerEnergy.energyUsed(1);
                 animator.SetBool("Sprint", true);
             }
 
@@ -189,12 +260,15 @@ public class PlayerMovement : MonoBehaviour
                 handsIcon.SetActive(false);
                 animator.SetTrigger("Equip Sword");
                 animator.SetBool("Equipped Sword", true);
+
+                FindObjectOfType<AudioManager>().PlayDelayed("SwordEquip", 0.6f);
+
                 equippedSword = true;
                 swordIcon.SetActive(true);
             }
         }
 
-        if (Input.GetKeyDown(KeyCode.Alpha2))
+        if (Input.GetKeyDown(KeyCode.Alpha2) && hasArrows)
         {
             // Equip Bow
             if (animator.GetBool("Equipped Bow") == false)
@@ -221,6 +295,10 @@ public class PlayerMovement : MonoBehaviour
             canAttack = false;
             isAttacking = true;
             animator.SetTrigger("Attack");
+
+            FindObjectOfType<AudioManager>().PlayDelayed("SwordHit", 0.4f);
+            FindObjectOfType<AudioManager>().PlayDelayed("QuickAttackVoice", 0.4f);
+
             Invoke(nameof(ResetAttack), attackCooldownTime);
         }
 
@@ -230,6 +308,10 @@ public class PlayerMovement : MonoBehaviour
             canAttack = false;
             isAttacking = true;
             animator.SetTrigger("Strong Attack");
+
+            FindObjectOfType<AudioManager>().PlayDelayed("SwordHit", 0.9f);
+            FindObjectOfType<AudioManager>().PlayDelayed("StrongAttackVoice", 0.4f);
+
             Invoke(nameof(ResetAttack), attackCooldownTime);
         }
 
@@ -237,6 +319,8 @@ public class PlayerMovement : MonoBehaviour
         if (Input.GetMouseButton(1) && equippedBow && canShoot)
         {
             canShoot = false;
+
+            FindObjectOfType<AudioManager>().Play("BowStringLong");
 
             animator.SetTrigger("Long Shoot");
 
@@ -246,6 +330,9 @@ public class PlayerMovement : MonoBehaviour
         if (Input.GetMouseButtonDown(0) && holding)
         {
             holding = false;
+
+            FindObjectOfType<AudioManager>().Play("BowShot");
+
             LongShotAnimation();
         }
 
@@ -261,13 +348,19 @@ public class PlayerMovement : MonoBehaviour
         {
             canShoot = false;
 
+            FindObjectOfType<AudioManager>().Play("BowStringShort");
+            FindObjectOfType<AudioManager>().PlayDelayed("BowShot", 0.4f);
+
             StartCoroutine(ShootAnimation());
         }
 
         // Dash
-        if (Input.GetKeyDown(KeyCode.LeftControl) && canDash)
+        if (Input.GetKeyDown(KeyCode.LeftControl) && canDash && canDashWithEnergy)
         {
             canDash = false;
+
+            playerEnergy.energyUsed(100);
+
             Invoke(nameof(ResetDash), dashCooldownTime);
             dashCurrentTime = 0f;
         }
@@ -288,6 +381,41 @@ public class PlayerMovement : MonoBehaviour
         controller.Move(velocity * Time.deltaTime);
     }
 
+    void CheckEnergy()
+    {
+        currentEnergy = playerEnergy.CurrentEnergy;
+        if(currentEnergy > 0)
+        {
+            canSprintWithEnergy = true;
+            if (currentEnergy >= 100)
+            {
+                canDashWithEnergy = true;
+            }
+            else
+            {
+                canDashWithEnergy = false;
+            }
+        }
+        else
+        {
+            canSprintWithEnergy = false;
+        }
+    }
+
+    void CheckArrows()
+    {
+        currentArrowCount = arrowSys.CurrentArrows;
+        if(currentArrowCount <= 0)
+        {
+            hasArrows = false;
+            unequipBowWithNoArrows();
+        }
+        else
+        {
+            hasArrows = true;
+        }
+    }
+
     void ResetDash()
     {
         canDash = true;
@@ -305,9 +433,31 @@ public class PlayerMovement : MonoBehaviour
         canShoot = true;
     }
 
+    void unequipBowWithNoArrows()
+    {
+        // Equip sword
+        if (animator.GetBool("Equipped Sword") == false)
+        {
+            if (animator.GetBool("Equipped Bow") == true)
+            {
+                arms.GetComponent<WeaponInteraction>().DeattachBow();
+                animator.SetBool("Equipped Bow", false);
+                equippedBow = false;
+                bowIcon.SetActive(false);
+            }
+
+            handsIcon.SetActive(false);
+            animator.SetTrigger("Equip Sword");
+            animator.SetBool("Equipped Sword", true);
+            equippedSword = true;
+            swordIcon.SetActive(true);
+        }
+    }
+
     IEnumerator ShootAnimation()
     {
         animator.SetTrigger("Quick Shoot");
+        arrowSys.arrowsUsed(1);
 
         yield return new WaitForSeconds(0.4f);
 
@@ -342,6 +492,7 @@ public class PlayerMovement : MonoBehaviour
 
     void LongShotAnimation()
     {
+        arrowSys.arrowsUsed(1);
         arms.GetComponent<WeaponInteraction>().DeattachArrow();
 
         Vector3 targetPoint;

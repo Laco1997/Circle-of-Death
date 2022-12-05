@@ -9,6 +9,8 @@ TagManager:
   - Pole
   - BossPole
   - Effect
+  - PotionSpawner
+  - ArrowSpawner
   - GroundPart
   layers:
   - Default
