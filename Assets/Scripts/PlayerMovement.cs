@@ -493,6 +493,7 @@ public class PlayerMovement : MonoBehaviour
     void LongShotAnimation()
     {
         arrowSys.arrowsUsed(1);
+        animator.SetTrigger("Arrow Shot");
         arms.GetComponent<WeaponInteraction>().DeattachArrow();
 
         Vector3 targetPoint;

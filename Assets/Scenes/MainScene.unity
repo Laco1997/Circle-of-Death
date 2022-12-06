@@ -2924,6 +2924,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: PlayerEnergy
       objectReference: {fileID: 0}
+    - target: {fileID: 6417825468213076607, guid: c168eaef689f4467ca96ddccb807ebcd, type: 3}
+      propertyPath: m_Value
+      value: 500
+      objectReference: {fileID: 0}
     - target: {fileID: 6417825468223145860, guid: c168eaef689f4467ca96ddccb807ebcd, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
