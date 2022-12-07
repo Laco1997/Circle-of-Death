@@ -5,22 +5,9 @@ using UnityEngine;
 public class PoleHit : MonoBehaviour
 {
     public int hits = 0;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
 
     void OnParticleCollision(GameObject other)
     {
         hits++;
-        //Debug.Log(hits);
     }
 }

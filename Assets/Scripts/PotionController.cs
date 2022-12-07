@@ -13,7 +13,6 @@ public class PotionController : MonoBehaviour
     private GameObject potionSpawner;
     PotionSpawner potions;
 
-    // Start is called before the first frame update
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");

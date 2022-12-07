@@ -52,7 +52,6 @@ public class PotionSpawner : MonoBehaviour
 
     void SpawnEnergyPotion()
     {
-        Debug.Log("ENERGY");
         energyPotionPickedUp = false;
         Vector3 energyRandPos = new Vector3(Random.Range(160, 240), 0.5f, Random.Range(150, 230));
         Instantiate(energyPotion, energyRandPos, Quaternion.identity);

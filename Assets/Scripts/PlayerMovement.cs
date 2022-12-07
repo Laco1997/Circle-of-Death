@@ -94,7 +94,6 @@ public class PlayerMovement : MonoBehaviour
         currentArrowCount = arrowSys.CurrentArrows;
     }
 
-    // Update is called once per frame
     void Update()
     {
         // Ground check

@@ -7,6 +7,8 @@ public class ArrowController : MonoBehaviour
     [SerializeField] private GameObject boss;
     HealthSystem bossHealth;
 
+    int arrowDamage = 5;
+
     void Start()
     {
         bossHealth = boss.GetComponent<HealthSystem>();
@@ -16,8 +18,7 @@ public class ArrowController : MonoBehaviour
     {
         if (col.gameObject.tag == "Enemy" && gameObject.name == "Shot Arrow")
         {
-            Debug.Log("Arrow hit");
-            bossHealth.damage(5);
+            bossHealth.damage(arrowDamage);
 
             Destroy(gameObject);
         }

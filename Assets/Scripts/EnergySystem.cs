@@ -11,6 +11,7 @@ public class EnergySystem : MonoBehaviour
     private int currentEnergy;
     private bool energyGaining = false;
     public TMP_Text currentEnergyText;
+    int energy = 5;
 
     void Start()
     {
@@ -23,13 +24,13 @@ public class EnergySystem : MonoBehaviour
         if(currentEnergy != maxEnergy && !energyGaining)
         {
             energyGaining = true;
-            StartCoroutine(energyGainer(5));
+            StartCoroutine(energyGainer(energy));
         }
     }
 
     public float getPercentage()
     {
-        return (float)currentEnergy / (float)maxEnergy * 500;
+        return (float)currentEnergy / (float)maxEnergy * maxEnergy;
 
     }
 
@@ -43,8 +44,6 @@ public class EnergySystem : MonoBehaviour
         playerEnergy.value = getPercentage();
 
         currentEnergyText.text = currentEnergy.ToString();
-
-        //Debug.Log(currentEnergy);
     }
 
     public void energyGained(int amount)
@@ -55,8 +54,6 @@ public class EnergySystem : MonoBehaviour
             currentEnergy = maxEnergy;
         }
         playerEnergy.value = getPercentage();
-
-        //Debug.Log(currentEnergy);
 
         currentEnergyText.text = currentEnergy.ToString();
     }

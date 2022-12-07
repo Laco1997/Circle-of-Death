@@ -13,8 +13,10 @@ public class Follower : MonoBehaviour
     Animator animator;
     NavMeshAgent npc;
     Transform playerTransform;
+
     [Header("General")]
     public int stage = 1;
+
     [Header("Stage 1")]
     [SerializeField] private bool beamPhase = false;
     [SerializeField] private bool goingToMiddle = false;
@@ -29,12 +31,11 @@ public class Follower : MonoBehaviour
     private Vector3 beamTargetPosition = Vector3.zero;
     public GameObject beamParticles;
     public GameObject bossPole;
-
     private GameObject[] poles;
     private GameObject lastPole = null;
+
     [Header("Stage 1 base attack")]
     public float attackCooldownDefault = 7f;
-
 
 
     [Header("Stage 2")]
@@ -69,8 +70,6 @@ public class Follower : MonoBehaviour
     [SerializeField] private bool attackReady = false;
     [SerializeField] private float attackCooldown = 0;
 
-
-
     void Start()
     {
         animator = GetComponent<Animator>();
@@ -79,7 +78,6 @@ public class Follower : MonoBehaviour
         beamCooldown = beamCooldownDefault;
         attackCooldown = bigAttackCooldownDefault;
         groundHitCooldown = groundHitCooldownDefault;
-        //beamParticles = GameObject.FindWithTag("Beam");
         poles = GameObject.FindGameObjectsWithTag("Pole");
     }
 
@@ -91,7 +89,6 @@ public class Follower : MonoBehaviour
             if (npc.remainingDistance < 5f) // todo fix
             {
                 // todo dust particles
-                //GameObject.FindGameObjectWithTag("BossPole")
                 bossPole.SetActive(true);
                 lastPole.SetActive(false);
                 stage = 2;
@@ -100,7 +97,9 @@ public class Follower : MonoBehaviour
             {
                 npc.SetDestination(lastPole.transform.position);
             }
-        }else if (beamPhase){
+        }
+        else if (beamPhase)
+        {
             if (inMiddle)
             {
                 npc.transform.LookAt(player.transform);
@@ -123,24 +122,15 @@ public class Follower : MonoBehaviour
                 else
                 {
                     // beam casting animation
-                    //Debug.DrawLine(new Vector3(transform.position.x, 5, transform.position.z), beamTargetPosition, Color.red);
                     beamParticles.SetActive(true);
                     beamCast += Time.deltaTime;
                     if (beamCast - beamCastTime >= beamDuration)
                     {
-                        /*
-                        if (Physics.Linecast(transform.position, player.position, out RaycastHit hitInfo))
-                        {
-                            Debug.Log("blocked");
-                            Debug.Log(hitInfo);
-                            hitInfo.collider.gameObject.SetActive(false);
-                        }
-                        */
                         int max = -1;
                         GameObject poleWithMax = null;
                         foreach (GameObject pole in poles.Where(p => p.activeSelf))
                         {
-                            Debug.Log(pole.GetComponent<PoleHit>());
+                            //Debug.Log(pole.GetComponent<PoleHit>());
                             int hits = pole.GetComponent<PoleHit>().hits;
                             if (hits > 0 && hits > max) // todo if hits > const
                             {
@@ -153,7 +143,7 @@ public class Follower : MonoBehaviour
                             poleWithMax.SetActive(false);
                         }
                         beamParticles.SetActive(false);
-                            // stop cast
+                        // stop cast
                         // destroy pole if targetted
 
                         //continue normally
@@ -163,7 +153,7 @@ public class Follower : MonoBehaviour
                         beamCooldown = beamCooldownDefault;
                         beamCast = 0;
                         beamTargetPosition = Vector3.zero;
-}
+                    }
                 }
             }
             else
@@ -177,15 +167,13 @@ public class Follower : MonoBehaviour
                         npc.transform.position = new Vector3(middlePoint.position.x, npc.transform.position.y, middlePoint.position.z);
                         inMiddle = true;
                         animator.SetBool("isFollowing", false);
-                        //Debug.Log("inMiddle = true");
                     }
-                    Debug.Log(npc.remainingDistance);
+                    //Debug.Log(npc.remainingDistance);
                 }
                 else
                 {
                     //npc.enabled = true;
                     npc.SetDestination(middlePoint.position);
-                    //Debug.Log("goingToMiddle = true");
                     goingToMiddle = true;
                 }
             }
@@ -204,8 +192,7 @@ public class Follower : MonoBehaviour
                 else
                 {
                     beamPhase = true;
-                    //animator.SetBool("isFollowing", true);
-                    Debug.Log("Going to middle");
+                    //Debug.Log("Going to middle");
                 }
             }
             else
@@ -272,8 +259,8 @@ public class Follower : MonoBehaviour
 
                     if (groundHitCast - groundHitCastTime - groundHitEffectTime >= groundHitDuration)
                     {
-                        Debug.Log("ground hit damage");
-                        Debug.Log("ground hit stop");
+                        //Debug.Log("ground hit damage");
+                        //Debug.Log("ground hit stop");
                         groundHitCooldown = groundHitCooldownDefault;
                         groundHitPhase = false;
                         groundHitParticles.SetActive(false);
@@ -296,7 +283,7 @@ public class Follower : MonoBehaviour
                 }
                 else
                 {
-                    Debug.Log("ground hit animation");
+                    //Debug.Log("ground hit animation");
                     groundHitParticles.SetActive(true);
                 }
             }
@@ -363,8 +350,8 @@ public class Follower : MonoBehaviour
                     sh.radius = groundBreakRange;
                     if (groundBreakCast - groundBreakCastTime - groundBreakEffectTime >= groundBreakDuration)
                     {
-                        Debug.Log("ground hit damage");
-                        Debug.Log("ground hit stop");
+                        //Debug.Log("ground hit damage");
+                        //Debug.Log("ground hit stop");
                         Collider[] hitColliders = Physics.OverlapSphere(transform.position, groundBreakRange, LayerMask.GetMask("GroundPart"));
                         foreach (var hitCollider in hitColliders)
                         {
@@ -381,7 +368,7 @@ public class Follower : MonoBehaviour
                 }
                 else
                 {
-                    Debug.Log("ground hit animation");
+                    //Debug.Log("ground hit animation");
                     groundHitParticles.SetActive(true);
                 }
             }

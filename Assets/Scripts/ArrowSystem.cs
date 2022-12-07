@@ -17,7 +17,7 @@ public class ArrowSystem : MonoBehaviour
 
     public float getPercentage()
     {
-        return (float)currentArrowCount / (float)maxArrowCount * 20;
+        return (float)currentArrowCount / (float)maxArrowCount * maxArrowCount;
 
     }
 
@@ -30,8 +30,6 @@ public class ArrowSystem : MonoBehaviour
         }
 
         currentArrowCountText.text = currentArrowCount.ToString();
-
-        //Debug.Log(currentEnergy);
     }
 
     public void arrowsCollected(int amount)
@@ -41,8 +39,6 @@ public class ArrowSystem : MonoBehaviour
         {
             currentArrowCount = maxArrowCount;
         }
-
-        //Debug.Log(currentEnergy);
 
         currentArrowCountText.text = currentArrowCount.ToString();
     }

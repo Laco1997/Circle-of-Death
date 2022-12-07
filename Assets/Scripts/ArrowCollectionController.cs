@@ -10,6 +10,8 @@ public class ArrowCollectionController : MonoBehaviour
     private GameObject arrowSpawner;
     ArrowSpawner arrows;
 
+    int arrowsCount = 10;
+
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
@@ -23,8 +25,7 @@ public class ArrowCollectionController : MonoBehaviour
     {
         if (col.gameObject.tag == "Player" && gameObject.name == "ArrowCollection(Clone)")
         {
-            Debug.Log("Arrows picked up");
-            arrowSys.arrowsCollected(10);
+            arrowSys.arrowsCollected(arrowsCount);
 
             arrows.arrowsPicked();
             arrows.resetTime();

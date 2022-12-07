@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-//using UnityEngine.UIElements;
 using static UnityEngine.ParticleSystem;
 
 public class HealthSystem : MonoBehaviour
@@ -14,10 +13,8 @@ public class HealthSystem : MonoBehaviour
     Animator animator;
     public TMP_Text currentHealthText;
 
-    //the HP Particle
+    // HP Particle
     public GameObject HPParticle;
-
-    //Default Forces
     public Vector3 DefaultForce = new Vector3(0f, 1f, 0f);
     public float DefaultForceScatter = 0.5f;
 
@@ -45,8 +42,6 @@ public class HealthSystem : MonoBehaviour
 
         Vector3 indicatorPosition = gameObject.transform.position;
         DamageIndicator(amount, indicatorPosition);
-
-        //Debug.Log(currentHealth);
     }
 
     public void healthGained(int amount)
@@ -59,8 +54,6 @@ public class HealthSystem : MonoBehaviour
         health.value = getPercentage();
 
         currentHealthText.text = currentHealth.ToString();
-
-        //Debug.Log(currentHealth);
     }
 
     public float getPercentage()
@@ -74,7 +67,6 @@ public class HealthSystem : MonoBehaviour
         return currentHealth == 0;
     }
 
-    //Change the HP and Instantiates an HP Particle with a Custom Force and Color
     public void DamageIndicator(float Delta, Vector3 Position)
     {
         Position.y += 12;

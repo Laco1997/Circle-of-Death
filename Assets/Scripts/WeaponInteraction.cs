@@ -8,18 +8,6 @@ public class WeaponInteraction : MonoBehaviour
     [SerializeField] private GameObject bow;
     [SerializeField] private GameObject arrow;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     public void AttachSword()
     {
         sword.SetActive(true);

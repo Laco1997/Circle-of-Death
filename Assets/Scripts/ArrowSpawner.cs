@@ -9,6 +9,12 @@ public class ArrowSpawner : MonoBehaviour
     float time = 0f;
     bool arrowsPickedUp = true;
 
+    int minX = 160;
+    int maxX = 240;
+    float y = 3f;
+    int minZ = 150;
+    int maxZ = 230;
+
     public void resetTime()
     {
         time = 0f;
@@ -23,8 +29,6 @@ public class ArrowSpawner : MonoBehaviour
     {
         time += Time.deltaTime;
 
-        //Debug.Log(time);
-
         if (time >= spawnTime)
         {
             if (arrowsPickedUp)
@@ -37,7 +41,7 @@ public class ArrowSpawner : MonoBehaviour
     void SpawnArrows()
     {
         arrowsPickedUp = false;
-        Vector3 arrowsRandPos = new Vector3(Random.Range(160, 240), 3f, Random.Range(150, 230));
+        Vector3 arrowsRandPos = new Vector3(Random.Range(minX, maxX), y, Random.Range(minZ, maxZ));
         Instantiate(arrows, arrowsRandPos, Quaternion.identity);
     }
 
