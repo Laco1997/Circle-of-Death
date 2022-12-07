@@ -25,10 +25,17 @@ public class SpawnGround : MonoBehaviour
                 var horizontal = MathF.Cos(radians);
 
                 var pos = new Vector3(horizontal, 0, vertical) * r/2;
-                pos.y = y;
+                float randomSize = UnityEngine.Random.Range(0.1f, 1f);
+                pos.x += 104;
+                pos.y = y * randomSize;
+                pos.z += 91;
                 var instance = Instantiate(groundPart, pos, Quaternion.identity);
                 instance.tag = "GroundPart";
                 instance.layer = LayerMask.NameToLayer("GroundPart");
+
+                BoxCollider collider = instance.AddComponent<BoxCollider>();
+                collider.center = new Vector3(0f, (y - randomSize), 0f);
+                collider.size = new Vector3(1f, 2.5f, 1f);
             }
         }
     }
