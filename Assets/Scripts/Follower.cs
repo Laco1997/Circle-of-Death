@@ -283,10 +283,10 @@ public class Follower : MonoBehaviour
                             groundHitPhase = false;
                             groundBreakCooldown = groundBreakCooldownDefault;
                             attackCooldown = baseAttackCooldownP3Default;
-                            stage = 3;
+                            //stage = 3;
                             groundBreakPhase = false;
                             groundHitParticles.SetActive(false);
-                            SceneManager.LoadScene("LavaScene");
+                            SceneManager.LoadScene("Cutscene");
                         }
                     }
                 }
@@ -477,15 +477,16 @@ public class Follower : MonoBehaviour
             stage3MusicPlaying = true;
             FindObjectOfType<AudioManager>().Stop("PreFightMusic");
             FindObjectOfType<AudioManager>().Stop("Stage1and2Music");
-            StartCoroutine(playFinalMusic());
+            FindObjectOfType<AudioManager>().Play("Stage3Music");
+            //StartCoroutine(playFinalMusic());
         }
     }
 
-    IEnumerator playFinalMusic()
-    {
-        Sound s = FindObjectOfType<AudioManager>().GetAudioClip("PreStage3Music");
-        FindObjectOfType<AudioManager>().Play("PreStage3Music");
-        yield return new WaitForSeconds(s.clip.length);
-        FindObjectOfType<AudioManager>().Play("Stage3Music");
-    }
+    //IEnumerator playFinalMusic()
+    //{
+    //    Sound s = FindObjectOfType<AudioManager>().GetAudioClip("PreStage3Music");
+    //    FindObjectOfType<AudioManager>().Play("PreStage3Music");
+    //    yield return new WaitForSeconds(s.clip.length);
+    //    FindObjectOfType<AudioManager>().Play("Stage3Music");
+    //}
 }

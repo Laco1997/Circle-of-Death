@@ -3367,6 +3367,11 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 10.758956, y: 1.3385655, z: 3.8799472}
   m_Center: {x: -0.009283543, y: -0.15193415, z: 1.9399738}
+--- !u!1 &1583477009 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2226506994475285019, guid: bd0a7aceaeb974da381c6296affce1be, type: 3}
+  m_PrefabInstance: {fileID: 2226425835860482972}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1651237465
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4099,6 +4104,14 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 577532783}
     - target: {fileID: 2226425834464354560, guid: bd0a7aceaeb974da381c6296affce1be, type: 3}
+      propertyPath: npcMesh
+      value: 
+      objectReference: {fileID: 1583477009}
+    - target: {fileID: 2226425834464354560, guid: bd0a7aceaeb974da381c6296affce1be, type: 3}
+      propertyPath: npcSkin
+      value: 
+      objectReference: {fileID: 2800000, guid: 8e14ac0e081c92e419d772a166b7ebd3, type: 3}
+    - target: {fileID: 2226425834464354560, guid: bd0a7aceaeb974da381c6296affce1be, type: 3}
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
@@ -4108,7 +4121,7 @@ PrefabInstance:
       objectReference: {fileID: 1568186327}
     - target: {fileID: 2226425834464354560, guid: bd0a7aceaeb974da381c6296affce1be, type: 3}
       propertyPath: beamCooldownDefault
-      value: 60
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2226425834464354561, guid: bd0a7aceaeb974da381c6296affce1be, type: 3}
       propertyPath: m_Speed
