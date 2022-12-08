@@ -97,7 +97,7 @@ LightmapSettings:
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
-  m_LightingDataAsset: {fileID: 0}
+  m_LightingDataAsset: {fileID: 112000000, guid: 12d4a61625542411183ef7879dd95718, type: 2}
   m_LightingSettings: {fileID: 0}
 --- !u!196 &4
 NavMeshSettings:
@@ -6131,7 +6131,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 1314185087, guid: 22a7a6794f04d4433bcb0880ce098d33, type: 3}
+    - {fileID: 1314185088, guid: 22a7a6794f04d4433bcb0880ce098d33, type: 3}
+    - {fileID: 1314185089, guid: 22a7a6794f04d4433bcb0880ce098d33, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 22a7a6794f04d4433bcb0880ce098d33, type: 3}
 --- !u!4 &1314185083 stripped
 Transform:
@@ -7680,6 +7683,177 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &1687738071
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1687738072}
+  - component: {fileID: 1687738073}
+  m_Layer: 0
+  m_Name: AudioManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1687738072
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1687738071}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1314185083}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1687738073
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1687738071}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4295830e0d4044bf48ee07cddae44988, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sounds:
+  - name: BowStringLong
+    clip: {fileID: 8300000, guid: 470d35b1638f4234e895ca3e65fb00dc, type: 3}
+    volume: 0.15
+    pitch: 0.9
+    loop: 0
+    spatialBlend: 1
+    source: {fileID: 0}
+  - name: BowStringShort
+    clip: {fileID: 8300000, guid: 470d35b1638f4234e895ca3e65fb00dc, type: 3}
+    volume: 0.5
+    pitch: 1.5
+    loop: 0
+    spatialBlend: 0.5
+    source: {fileID: 0}
+  - name: BowShot
+    clip: {fileID: 8300000, guid: 6b50bafaa2ac38c43a8bd2a002b7cfe0, type: 3}
+    volume: 0.1
+    pitch: 1
+    loop: 0
+    spatialBlend: 1
+    source: {fileID: 0}
+  - name: Walk
+    clip: {fileID: 8300000, guid: 9ea11a2d13d536e4e8441a0f5895995c, type: 3}
+    volume: 0.2
+    pitch: 0.6
+    loop: 1
+    spatialBlend: 1
+    source: {fileID: 0}
+  - name: Sprint
+    clip: {fileID: 8300000, guid: 9e68ea1ebd76aa44c8cfa5beb9850830, type: 3}
+    volume: 0.3
+    pitch: 0.7
+    loop: 1
+    spatialBlend: 1
+    source: {fileID: 0}
+  - name: SprintVoice
+    clip: {fileID: 8300000, guid: 42f6f9ac46b16bc4fad48f9c4a3c7b14, type: 3}
+    volume: 0.6
+    pitch: 1
+    loop: 1
+    spatialBlend: 0.5
+    source: {fileID: 0}
+  - name: AfterSprintVoice
+    clip: {fileID: 8300000, guid: 42f6f9ac46b16bc4fad48f9c4a3c7b14, type: 3}
+    volume: 0.5
+    pitch: 1
+    loop: 0
+    spatialBlend: 0.5
+    source: {fileID: 0}
+  - name: Jump
+    clip: {fileID: 8300000, guid: 65d9836027675574b8d070c5718f99c7, type: 3}
+    volume: 0.3
+    pitch: 0.7
+    loop: 0
+    spatialBlend: 1
+    source: {fileID: 0}
+  - name: SwordEquip
+    clip: {fileID: 8300000, guid: e32e3bde5559afb4cad3ef963cc96446, type: 3}
+    volume: 0.2
+    pitch: 0.5
+    loop: 0
+    spatialBlend: 0.15
+    source: {fileID: 0}
+  - name: SwordHit
+    clip: {fileID: 8300000, guid: 80151380c0f818243b66a78ef69c9fcd, type: 3}
+    volume: 0.5
+    pitch: 1
+    loop: 0
+    spatialBlend: 1
+    source: {fileID: 0}
+  - name: QuickAttackVoice
+    clip: {fileID: 8300000, guid: b1b0134244e36784b9a6d58c192d76c9, type: 3}
+    volume: 0.7
+    pitch: 1
+    loop: 0
+    spatialBlend: 0.5
+    source: {fileID: 0}
+  - name: StrongAttackVoice
+    clip: {fileID: 8300000, guid: ac07e279d999df94395b45f535ad851f, type: 3}
+    volume: 0.7
+    pitch: 1
+    loop: 0
+    spatialBlend: 0.5
+    source: {fileID: 0}
+  - name: PreFightMusic
+    clip: {fileID: 8300000, guid: 0643908ea2a90c341a1f488fb302af76, type: 3}
+    volume: 0.3
+    pitch: 0.8
+    loop: 1
+    spatialBlend: 0.5
+    source: {fileID: 0}
+  - name: Stage1and2Music
+    clip: {fileID: 8300000, guid: 68db71da3f965874fbf8c6646524d4e9, type: 3}
+    volume: 0.4
+    pitch: 1
+    loop: 1
+    spatialBlend: 0.5
+    source: {fileID: 0}
+  - name: PreStage3Music
+    clip: {fileID: 8300000, guid: a93ce8dd966882c4389385f52048895d, type: 3}
+    volume: 0.7
+    pitch: 1
+    loop: 0
+    spatialBlend: 0.5
+    source: {fileID: 0}
+  - name: Stage3Music
+    clip: {fileID: 8300000, guid: 14a1cf915de1c2448b200ab123c01445, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 1
+    spatialBlend: 0.5
+    source: {fileID: 0}
+  - name: BattleWon
+    clip: {fileID: 8300000, guid: f4d7e6f7a9a5dc94cae95f025ffc81e1, type: 3}
+    volume: 0.7
+    pitch: 1
+    loop: 0
+    spatialBlend: 0.5
+    source: {fileID: 0}
+  - name: BattleLost
+    clip: {fileID: 8300000, guid: f5df88227c97c1a40b82c54b711f4f86, type: 3}
+    volume: 0.7
+    pitch: 1
+    loop: 0
+    spatialBlend: 0.5
+    source: {fileID: 0}
 --- !u!114 &1692737551 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6417825468213076607, guid: c168eaef689f4467ca96ddccb807ebcd, type: 3}
@@ -8884,6 +9058,14 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1314185083}
     - target: {fileID: 2226425834464354560, guid: bd0a7aceaeb974da381c6296affce1be, type: 3}
+      propertyPath: npcMesh
+      value: 
+      objectReference: {fileID: 2099781888}
+    - target: {fileID: 2226425834464354560, guid: bd0a7aceaeb974da381c6296affce1be, type: 3}
+      propertyPath: npcSkin
+      value: 
+      objectReference: {fileID: 2800000, guid: bedf3b70e5ce1485a9d204105cd8e11c, type: 3}
+    - target: {fileID: 2226425834464354560, guid: bd0a7aceaeb974da381c6296affce1be, type: 3}
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
@@ -8988,5 +9170,10 @@ PrefabInstance:
 --- !u!4 &2099781887 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2227720314750534011, guid: bd0a7aceaeb974da381c6296affce1be, type: 3}
+  m_PrefabInstance: {fileID: 2099781886}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &2099781888 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2226506994475285019, guid: bd0a7aceaeb974da381c6296affce1be, type: 3}
   m_PrefabInstance: {fileID: 2099781886}
   m_PrefabAsset: {fileID: 0}

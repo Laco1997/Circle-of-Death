@@ -1,6 +1,8 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Unity.VisualScripting;
 using UnityEditor.PackageManager;
 using UnityEditor.SearchService;
 using UnityEngine;
@@ -13,6 +15,13 @@ public class Follower : MonoBehaviour
     Animator animator;
     NavMeshAgent npc;
     Transform playerTransform;
+    bool playerInDistance = false;
+    bool stage3MusicPlaying = false;
+
+    [Header("Boss skin")]
+    public GameObject npcMesh;
+    public Texture npcSkin;
+    bool npcSkinChanged = false;
 
     [Header("General")]
     public int stage = 1;
@@ -277,7 +286,7 @@ public class Follower : MonoBehaviour
                             stage = 3;
                             groundBreakPhase = false;
                             groundHitParticles.SetActive(false);
-                            SceneManager.LoadScene("Stage3");
+                            SceneManager.LoadScene("LavaScene");
                         }
                     }
                 }
@@ -417,6 +426,11 @@ public class Follower : MonoBehaviour
         }
     }
 
+    public void checkPlayerEnter(bool playerEntered)
+    {
+        playerInDistance = playerEntered;
+    }
+
     void Update()
     {
         switch (stage)
@@ -428,8 +442,50 @@ public class Follower : MonoBehaviour
                 stage2();
                 break;
             case 3:
+                playerInDistance = true;
+                changeSkin();
                 stage3();
+                playStage3Music();
                 break;
         }
+
+        if (playerInDistance)
+        {
+            npc.isStopped = false;
+        }
+        else
+        {
+            npc.isStopped = true;
+        }
+    }
+
+    void changeSkin()
+    {
+        if(!npcSkinChanged)
+        {
+            npcSkinChanged = true;
+            npcMesh.GetComponent<Renderer>().material.EnableKeyword("_DETAIL_MULX2");
+            npcMesh.GetComponent<Renderer>().material.SetTexture("_DetailAlbedoMap", npcSkin);
+            npcMesh.GetComponent<Renderer>().material.SetColor("_EmissionColor", Color.red);
+        }
+    }
+
+    void playStage3Music()
+    {
+        if (!stage3MusicPlaying)
+        {
+            stage3MusicPlaying = true;
+            FindObjectOfType<AudioManager>().Stop("PreFightMusic");
+            FindObjectOfType<AudioManager>().Stop("Stage1and2Music");
+            StartCoroutine(playFinalMusic());
+        }
+    }
+
+    IEnumerator playFinalMusic()
+    {
+        Sound s = FindObjectOfType<AudioManager>().GetAudioClip("PreStage3Music");
+        FindObjectOfType<AudioManager>().Play("PreStage3Music");
+        yield return new WaitForSeconds(s.clip.length);
+        FindObjectOfType<AudioManager>().Play("Stage3Music");
     }
 }

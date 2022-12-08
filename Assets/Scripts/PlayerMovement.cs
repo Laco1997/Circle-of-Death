@@ -78,6 +78,8 @@ public class PlayerMovement : MonoBehaviour
 
     private void Start()
     {
+        FindObjectOfType<AudioManager>().Play("PreFightMusic");
+
         animator = GetComponentInChildren(typeof(Animator)) as Animator;
         sword.SetActive(false);
         bow.SetActive(false);
