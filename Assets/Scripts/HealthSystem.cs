@@ -65,7 +65,7 @@ public class HealthSystem : MonoBehaviour
 
     public float getPercentage()
     {
-        return (float)currentHealth / (float)maxHealth * 4000;
+        return (float)currentHealth / (float)maxHealth * maxHealth;
 
     }
 

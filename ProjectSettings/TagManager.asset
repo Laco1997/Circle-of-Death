@@ -12,6 +12,7 @@ TagManager:
   - PotionSpawner
   - ArrowSpawner
   - GroundPart
+  - SwordRadius
   layers:
   - Default
   - TransparentFX
