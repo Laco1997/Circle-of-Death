@@ -7,6 +7,6 @@ public class Controls : MonoBehaviour
 {
     public void ReturnHome()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 2);
+        SceneManager.LoadScene("Main Menu");
     }
 }

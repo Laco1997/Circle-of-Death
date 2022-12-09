@@ -6,6 +6,6 @@ public class PlayerCollision : MonoBehaviour
 {
     void OnParticleCollision(GameObject other)
     {
-        Debug.Log(other);
+        // empty
     }
 }

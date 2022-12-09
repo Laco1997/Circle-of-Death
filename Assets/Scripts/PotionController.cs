@@ -26,7 +26,6 @@ public class PotionController : MonoBehaviour
     {
         if (col.gameObject.tag == "Player" && gameObject.name == "Bottle_Health(Clone)")
         {
-            Debug.Log("Health picked up");
             health.healthGained(500);
 
             potions.healthPicked();
@@ -37,7 +36,6 @@ public class PotionController : MonoBehaviour
 
         if (col.gameObject.tag == "Player" && gameObject.name == "Bottle_Mana(Clone)")
         {
-            Debug.Log("Energy picked up");
             energy.energyGained(500);
 
             potions.energyPicked();

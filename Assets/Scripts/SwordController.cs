@@ -21,7 +21,6 @@ public class SwordController : MonoBehaviour
     {
         if (col.gameObject.tag == "SwordRadius" && player.GetComponent<PlayerMovement>().isAttacking)
         {
-            Debug.Log("Sword hit");
             swordDamage = Random.Range(minSwordDamage, maxSwordDamage);
             bossHealth.damage(swordDamage);
         }
