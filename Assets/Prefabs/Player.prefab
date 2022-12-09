@@ -1,5 +1,176 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1396704632
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1396704633}
+  - component: {fileID: 1396704634}
+  m_Layer: 0
+  m_Name: AudioManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1396704633
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1396704632}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1430856068075272904}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1396704634
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1396704632}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4295830e0d4044bf48ee07cddae44988, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sounds:
+  - name: BowStringLong
+    clip: {fileID: 8300000, guid: 470d35b1638f4234e895ca3e65fb00dc, type: 3}
+    volume: 0.15
+    pitch: 0.9
+    loop: 0
+    spatialBlend: 1
+    source: {fileID: 0}
+  - name: BowStringShort
+    clip: {fileID: 8300000, guid: 470d35b1638f4234e895ca3e65fb00dc, type: 3}
+    volume: 0.5
+    pitch: 1.5
+    loop: 0
+    spatialBlend: 0.5
+    source: {fileID: 0}
+  - name: BowShot
+    clip: {fileID: 8300000, guid: 6b50bafaa2ac38c43a8bd2a002b7cfe0, type: 3}
+    volume: 0.1
+    pitch: 1
+    loop: 0
+    spatialBlend: 1
+    source: {fileID: 0}
+  - name: Walk
+    clip: {fileID: 8300000, guid: 9ea11a2d13d536e4e8441a0f5895995c, type: 3}
+    volume: 0.2
+    pitch: 0.6
+    loop: 1
+    spatialBlend: 1
+    source: {fileID: 0}
+  - name: Sprint
+    clip: {fileID: 8300000, guid: 9e68ea1ebd76aa44c8cfa5beb9850830, type: 3}
+    volume: 0.3
+    pitch: 0.7
+    loop: 1
+    spatialBlend: 1
+    source: {fileID: 0}
+  - name: SprintVoice
+    clip: {fileID: 8300000, guid: 42f6f9ac46b16bc4fad48f9c4a3c7b14, type: 3}
+    volume: 0.6
+    pitch: 1
+    loop: 1
+    spatialBlend: 0.5
+    source: {fileID: 0}
+  - name: AfterSprintVoice
+    clip: {fileID: 8300000, guid: 42f6f9ac46b16bc4fad48f9c4a3c7b14, type: 3}
+    volume: 0.5
+    pitch: 1
+    loop: 0
+    spatialBlend: 0.5
+    source: {fileID: 0}
+  - name: Jump
+    clip: {fileID: 8300000, guid: 65d9836027675574b8d070c5718f99c7, type: 3}
+    volume: 0.3
+    pitch: 0.7
+    loop: 0
+    spatialBlend: 1
+    source: {fileID: 0}
+  - name: SwordEquip
+    clip: {fileID: 8300000, guid: e32e3bde5559afb4cad3ef963cc96446, type: 3}
+    volume: 0.2
+    pitch: 0.5
+    loop: 0
+    spatialBlend: 0.15
+    source: {fileID: 0}
+  - name: SwordHit
+    clip: {fileID: 8300000, guid: 80151380c0f818243b66a78ef69c9fcd, type: 3}
+    volume: 0.5
+    pitch: 1
+    loop: 0
+    spatialBlend: 1
+    source: {fileID: 0}
+  - name: QuickAttackVoice
+    clip: {fileID: 8300000, guid: b1b0134244e36784b9a6d58c192d76c9, type: 3}
+    volume: 0.7
+    pitch: 1
+    loop: 0
+    spatialBlend: 0.5
+    source: {fileID: 0}
+  - name: StrongAttackVoice
+    clip: {fileID: 8300000, guid: ac07e279d999df94395b45f535ad851f, type: 3}
+    volume: 0.7
+    pitch: 1
+    loop: 0
+    spatialBlend: 0.5
+    source: {fileID: 0}
+  - name: PreFightMusic
+    clip: {fileID: 8300000, guid: 0643908ea2a90c341a1f488fb302af76, type: 3}
+    volume: 0.3
+    pitch: 0.8
+    loop: 1
+    spatialBlend: 0.5
+    source: {fileID: 0}
+  - name: Stage1and2Music
+    clip: {fileID: 8300000, guid: 68db71da3f965874fbf8c6646524d4e9, type: 3}
+    volume: 0.4
+    pitch: 1
+    loop: 1
+    spatialBlend: 0.5
+    source: {fileID: 0}
+  - name: PreStage3Music
+    clip: {fileID: 8300000, guid: a93ce8dd966882c4389385f52048895d, type: 3}
+    volume: 0.7
+    pitch: 1
+    loop: 0
+    spatialBlend: 0.5
+    source: {fileID: 0}
+  - name: Stage3Music
+    clip: {fileID: 8300000, guid: 14a1cf915de1c2448b200ab123c01445, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 1
+    spatialBlend: 0.5
+    source: {fileID: 0}
+  - name: BattleWon
+    clip: {fileID: 8300000, guid: f4d7e6f7a9a5dc94cae95f025ffc81e1, type: 3}
+    volume: 0.7
+    pitch: 1
+    loop: 0
+    spatialBlend: 0.5
+    source: {fileID: 0}
+  - name: BattleLost
+    clip: {fileID: 8300000, guid: f5df88227c97c1a40b82c54b711f4f86, type: 3}
+    volume: 0.7
+    pitch: 1
+    loop: 0
+    spatialBlend: 0.5
+    source: {fileID: 0}
 --- !u!1 &1430856066766148194
 GameObject:
   m_ObjectHideFlags: 0
@@ -3019,7 +3190,7 @@ AudioSource:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1430856068598315601}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 0643908ea2a90c341a1f488fb302af76, type: 3}
@@ -4031,6 +4202,7 @@ Transform:
   - {fileID: 1430856068863651275}
   - {fileID: 1430856068598315600}
   - {fileID: 1430856068493977264}
+  - {fileID: 1396704633}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: -121.066, z: 0}
@@ -4090,9 +4262,9 @@ MonoBehaviour:
   cam: {fileID: 1430856068598315615}
   attackPoint: {fileID: 1430856068121751556}
   shootCooldownTime: 1
-  swordIcon: {fileID: 0}
-  bowIcon: {fileID: 0}
-  handsIcon: {fileID: 0}
+  swordIcon: {fileID: 626191534172189377, guid: 4bc29c5c74bbc4d83a942c66201e31c3, type: 3}
+  bowIcon: {fileID: 6974424398752502592, guid: c511684a3396c4f5a9f0ea67f201ee87, type: 3}
+  handsIcon: {fileID: 7220014110388356567, guid: ba27190621e764ab5a7467a410064af2, type: 3}
 --- !u!136 &2158829808209365828
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -4135,9 +4307,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7290002450c414544a39274d3267b505, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerEnergy: {fileID: 0}
+  playerEnergy: {fileID: 6417825468213076607, guid: c168eaef689f4467ca96ddccb807ebcd, type: 3}
   maxEnergy: 500
-  currentEnergyText: {fileID: 0}
+  currentEnergyText: {fileID: 2617593570220563656, guid: abc6e2b0e488a476cb0855a5175fa5b7, type: 3}
 --- !u!114 &2158829808209365825
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4151,9 +4323,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 500
-  health: {fileID: 0}
-  currentHealthText: {fileID: 0}
-  HPParticle: {fileID: 0}
+  health: {fileID: 7848319215811480384, guid: d1ffe6a3307fd47488b369c68cc01ce2, type: 3}
+  currentHealthText: {fileID: 5466809177044850211, guid: 69dfaa2f907014ee3a21dcdda0ffc43f, type: 3}
+  HPParticle: {fileID: 5383594632231660674, guid: 2b5c851db8eda4f75a64390e31281ad7, type: 3}
   DefaultForce: {x: 0, y: 1, z: 0}
   DefaultForceScatter: 0.5
 --- !u!114 &1865315509
@@ -4169,4 +4341,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxArrowCount: 40
-  currentArrowCountText: {fileID: 0}
+  currentArrowCountText: {fileID: 4718099094309199067, guid: 380cba08915f048ffbaa6d251b0d76e2, type: 3}

@@ -46,3 +46,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   healthPotion: {fileID: 4308302174166714670, guid: f9fe7a4ab162742669f2f3ab418e9e17, type: 3}
   energyPotion: {fileID: 977447180812321159, guid: 732c1661cbf1040d6a35216902248a83, type: 3}
+  boss: {fileID: 2226486607313500313, guid: bd0a7aceaeb974da381c6296affce1be, type: 3}
