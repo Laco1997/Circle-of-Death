@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 public class CutsceneController : MonoBehaviour
 {
     float delayTime = 9.4f;
+
     void Start()
     {
         StartCoroutine(LoadLevelAfterDelay(delayTime));

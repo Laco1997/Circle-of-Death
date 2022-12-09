@@ -7,7 +7,7 @@ using UnityEngine.UI;
 public class ArrowSystem : MonoBehaviour
 {
     public int maxArrowCount;
-    private int currentArrowCount;
+    int currentArrowCount;
     public TMP_Text currentArrowCountText;
 
     void Start()

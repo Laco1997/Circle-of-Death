@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class ArrowCollectionController : MonoBehaviour
 {
-    private GameObject player;
+    GameObject player;
     ArrowSystem arrowSys;
 
-    private GameObject arrowSpawner;
+    GameObject arrowSpawner;
     ArrowSpawner arrows;
 
     int arrowsCount = 10;

@@ -9,25 +9,24 @@ using static Cinemachine.CinemachineOrbitalTransposer;
 
 public class PlayerMovement : MonoBehaviour
 {
+    [Header("General")]
     [SerializeField] private GameObject arms;
-
-    private Animator animator;
     [SerializeField] private GameObject sword;
     [SerializeField] private GameObject bow;
     [SerializeField] private GameObject arrow;
-    private bool equippedSword = false;
-    private bool equippedBow = false;
-    private bool canAttack = true;
+    Animator animator;
+    bool equippedSword = false;
+    bool equippedBow = false;
+    bool canAttack = true;
     public bool isAttacking = false;
     [SerializeField] private float attackCooldownTime = 0.45f;
-
     [SerializeField] private CharacterController controller;
-    private float horizontal;
-    private float vertical;
+    float horizontal;
+    float vertical;
 
     [Header("Walk")]
     [SerializeField] private float walkSpeed = 3.2f;
-    private Vector3 move;
+    Vector3 move;
     bool walking = false;
     bool walkAudioPlaying = false;
 
@@ -37,8 +36,8 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private Transform groundCheck;
     [SerializeField] private float groundDistance = 0.4f;
     [SerializeField] private LayerMask groundMask;
-    private Vector3 velocity;
-    private bool onGround;
+    Vector3 velocity;
+    bool onGround;
 
     [Header("Sprint")]
     [SerializeField] private float sprintSpeed = 3.5f;
@@ -51,19 +50,19 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float dashDuration = 7f;
     [SerializeField] private float dashCurrentTime = 0f;
     [SerializeField] private float dashCooldownTime = 1.5f;
-    private bool canDash = true;
+    bool canDash = true;
 
     [Header("Shoot")]
     public float shootForce;
     public float upwardForce;
     public Camera cam;
     public Transform attackPoint;
-    private bool canShoot = true;
+    bool canShoot = true;
     [SerializeField] private float shootCooldownTime = 2f;
     bool holding = false;
     bool hasArrows = true;
     ArrowSystem arrowSys;
-    private int currentArrowCount;
+    int currentArrowCount;
 
     [Header("Weapons")]
     [SerializeField] private GameObject swordIcon;
@@ -72,11 +71,11 @@ public class PlayerMovement : MonoBehaviour
 
     [Header("Energy")]
     EnergySystem playerEnergy;
-    private int currentEnergy;
-    private bool canDashWithEnergy = true;
-    private bool canSprintWithEnergy = true;
+    int currentEnergy;
+    bool canDashWithEnergy = true;
+    bool canSprintWithEnergy = true;
 
-    private void Start()
+    void Start()
     {
         FindObjectOfType<AudioManager>().Play("PreFightMusic");
 
@@ -120,7 +119,7 @@ public class PlayerMovement : MonoBehaviour
 
     }
 
-    private void PlayerInput()
+    void PlayerInput()
     {
         horizontal = Input.GetAxis("Horizontal");
         vertical = Input.GetAxis("Vertical");
@@ -157,7 +156,7 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    private void MovePlayer()
+    void MovePlayer()
     {
         move = transform.right * horizontal + transform.forward * vertical;
 
@@ -206,7 +205,6 @@ public class PlayerMovement : MonoBehaviour
             {
                 walking = false;
                 sprinting = true;
-                //playerEnergy.energyUsed(1);
                 animator.SetBool("Sprint", true);
             }
 

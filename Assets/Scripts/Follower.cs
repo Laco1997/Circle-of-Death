@@ -11,20 +11,22 @@ using UnityEngine.SceneManagement;
 
 public class Follower : MonoBehaviour
 {
-    public Transform player;
-    Animator animator;
-    NavMeshAgent npc;
-    Transform playerTransform;
-    bool playerInDistance = false;
-    bool stage3MusicPlaying = false;
-
     [Header("Boss skin")]
     public GameObject npcMesh;
     public Texture npcSkin;
     bool npcSkinChanged = false;
 
     [Header("General")]
+    public Transform player;
+    Animator animator;
+    NavMeshAgent npc;
+    Transform playerTransform;
+    bool playerInDistance = false;
+    bool stage3MusicPlaying = false;
     public int stage = 1;
+    GameObject playerObject;
+    HealthSystem health;
+    public bool bossIsAttacking;
 
     [Header("Stage 1")]
     [SerializeField] private bool beamPhase = false;
@@ -37,11 +39,11 @@ public class Follower : MonoBehaviour
     public float beamCastTime = 5f;
     public float beamDuration = 5f;
     [SerializeField] private float beamCast = -1;
-    private Vector3 beamTargetPosition = Vector3.zero;
+    Vector3 beamTargetPosition = Vector3.zero;
     public GameObject beamParticles;
     public GameObject bossPole;
-    private GameObject[] poles;
-    private GameObject lastPole = null;
+    GameObject[] poles;
+    GameObject lastPole = null;
 
     [Header("Stage 1 base attack")]
     public float attackCooldownDefault = 7f;
@@ -88,6 +90,9 @@ public class Follower : MonoBehaviour
         attackCooldown = bigAttackCooldownDefault;
         groundHitCooldown = groundHitCooldownDefault;
         poles = GameObject.FindGameObjectsWithTag("Pole");
+        playerObject = GameObject.FindGameObjectWithTag("Player");
+        health = player.GetComponent<HealthSystem>();
+        bossIsAttacking = false;
     }
 
     void stage1()
@@ -139,7 +144,6 @@ public class Follower : MonoBehaviour
                         GameObject poleWithMax = null;
                         foreach (GameObject pole in poles.Where(p => p.activeSelf))
                         {
-                            //Debug.Log(pole.GetComponent<PoleHit>());
                             int hits = pole.GetComponent<PoleHit>().hits;
                             if (hits > 0 && hits > max) // todo if hits > const
                             {
@@ -172,16 +176,13 @@ public class Follower : MonoBehaviour
                     npc.stoppingDistance = 0;
                     if (npc.remainingDistance <= 2f) // todo fix
                     {
-                        //npc.enabled = false;
                         npc.transform.position = new Vector3(middlePoint.position.x, npc.transform.position.y, middlePoint.position.z);
                         inMiddle = true;
                         animator.SetBool("isFollowing", false);
                     }
-                    //Debug.Log(npc.remainingDistance);
                 }
                 else
                 {
-                    //npc.enabled = true;
                     npc.SetDestination(middlePoint.position);
                     goingToMiddle = true;
                 }
@@ -201,7 +202,6 @@ public class Follower : MonoBehaviour
                 else
                 {
                     beamPhase = true;
-                    //Debug.Log("Going to middle");
                 }
             }
             else
@@ -211,6 +211,7 @@ public class Follower : MonoBehaviour
                 {
                     if (npc.remainingDistance <= 8f)
                     {
+                        bossIsAttacking = true;
                         animator.SetTrigger("attack");
                         attackReady = false;
                         attackCooldown = attackCooldownDefault;
@@ -268,14 +269,13 @@ public class Follower : MonoBehaviour
 
                     if (groundHitCast - groundHitCastTime - groundHitEffectTime >= groundHitDuration)
                     {
-                        //Debug.Log("ground hit damage");
-                        //Debug.Log("ground hit stop");
                         groundHitCooldown = groundHitCooldownDefault;
                         groundHitPhase = false;
                         groundHitParticles.SetActive(false);
                         if(Vector3.Distance(player.position, transform.position) < groundHitRange)
                         {
-                            Debug.Log("Player hit");
+                            Debug.Log("Player hit with ground");
+                            health.damage(400);
                         }
                         groundHitCounter++;
                         if (groundHitCounter >= 2)
@@ -283,7 +283,6 @@ public class Follower : MonoBehaviour
                             groundHitPhase = false;
                             groundBreakCooldown = groundBreakCooldownDefault;
                             attackCooldown = baseAttackCooldownP3Default;
-                            //stage = 3;
                             groundBreakPhase = false;
                             groundHitParticles.SetActive(false);
                             SceneManager.LoadScene("Cutscene");
@@ -292,7 +291,6 @@ public class Follower : MonoBehaviour
                 }
                 else
                 {
-                    //Debug.Log("ground hit animation");
                     groundHitParticles.SetActive(true);
                 }
             }
@@ -312,6 +310,7 @@ public class Follower : MonoBehaviour
                 {
                     if (npc.remainingDistance <= 8f)
                     {
+                        bossIsAttacking = true;
                         animator.SetTrigger("attack");
                         attackReady = false;
                         attackCooldown = bigAttackCooldownDefault;
@@ -359,8 +358,6 @@ public class Follower : MonoBehaviour
                     sh.radius = groundBreakRange;
                     if (groundBreakCast - groundBreakCastTime - groundBreakEffectTime >= groundBreakDuration)
                     {
-                        //Debug.Log("ground hit damage");
-                        //Debug.Log("ground hit stop");
                         Collider[] hitColliders = Physics.OverlapSphere(transform.position, groundBreakRange, LayerMask.GetMask("GroundPart"));
                         foreach (var hitCollider in hitColliders)
                         {
@@ -371,13 +368,13 @@ public class Follower : MonoBehaviour
                         groundHitParticles.SetActive(false);
                         if (Vector3.Distance(player.position, transform.position) < groundBreakRange)
                         {
-                            Debug.Log("Player hit");
+                            Debug.Log("Player hit ground break");
+                            health.damage(200);
                         }
                     }
                 }
                 else
                 {
-                    //Debug.Log("ground hit animation");
                     groundHitParticles.SetActive(true);
                 }
             }
@@ -397,6 +394,7 @@ public class Follower : MonoBehaviour
                 {
                     if (npc.remainingDistance <= 8f)
                     {
+                        bossIsAttacking = true;
                         animator.SetTrigger("attack");
                         attackReady = false;
                         attackCooldown = baseAttackCooldownP3Default;
@@ -478,15 +476,6 @@ public class Follower : MonoBehaviour
             FindObjectOfType<AudioManager>().Stop("PreFightMusic");
             FindObjectOfType<AudioManager>().Stop("Stage1and2Music");
             FindObjectOfType<AudioManager>().Play("Stage3Music");
-            //StartCoroutine(playFinalMusic());
         }
     }
-
-    //IEnumerator playFinalMusic()
-    //{
-    //    Sound s = FindObjectOfType<AudioManager>().GetAudioClip("PreStage3Music");
-    //    FindObjectOfType<AudioManager>().Play("PreStage3Music");
-    //    yield return new WaitForSeconds(s.clip.length);
-    //    FindObjectOfType<AudioManager>().Play("Stage3Music");
-    //}
 }

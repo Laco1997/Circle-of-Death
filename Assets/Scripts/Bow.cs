@@ -6,8 +6,8 @@ public class Bow : MonoBehaviour
 {
     public float damage = 5f;
 
-    private bool equippedBow = true;
-    private bool canShoot = true;
+    bool equippedBow = true;
+    bool canShoot = true;
     [SerializeField] private float shootCooldownTime = 0.45f;
 
     public float shootForce, upwardForce;
@@ -20,7 +20,7 @@ public class Bow : MonoBehaviour
     float middleY = 0.5f;
     int middleZ = 0;
 
-    private void Update()
+    void Update()
     {
         // Shoot
         if (Input.GetMouseButtonDown(0) && equippedBow && canShoot)

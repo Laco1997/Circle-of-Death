@@ -7,7 +7,9 @@ public class ArrowController : MonoBehaviour
     [SerializeField] private GameObject boss;
     HealthSystem bossHealth;
 
-    int arrowDamage = 5;
+    int arrowDamage;
+    int minArrowDamage = 20;
+    int maxArrowDamage = 25;
 
     void Start()
     {
@@ -18,6 +20,7 @@ public class ArrowController : MonoBehaviour
     {
         if (col.gameObject.tag == "Enemy" && gameObject.name == "Shot Arrow")
         {
+            arrowDamage = Random.Range(minArrowDamage, maxArrowDamage);
             bossHealth.damage(arrowDamage);
 
             Destroy(gameObject);

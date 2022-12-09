@@ -8,8 +8,8 @@ public class EnergySystem : MonoBehaviour
 {
     public Slider playerEnergy;
     public int maxEnergy;
-    private int currentEnergy;
-    private bool energyGaining = false;
+    int currentEnergy;
+    bool energyGaining = false;
     public TMP_Text currentEnergyText;
     int energy = 5;
 

@@ -21,12 +21,4 @@ public class FollowerRadius : MonoBehaviour
             FindObjectOfType<AudioManager>().Play("Stage1and2Music");
         }
     }
-
-    //void OnTriggerExit(Collider col)
-    //{
-    //    if (col.gameObject.tag == "Player")
-    //    {
-    //        bossFollower.checkPlayerEnter(false);
-    //    }
-    //}
 }

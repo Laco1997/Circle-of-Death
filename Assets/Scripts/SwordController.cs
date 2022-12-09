@@ -8,7 +8,9 @@ public class SwordController : MonoBehaviour
     [SerializeField] private GameObject player;
     [SerializeField] private GameObject boss;
     HealthSystem bossHealth;
-    int swordDamage = 5;
+    int swordDamage;
+    int minSwordDamage = 90;
+    int maxSwordDamage = 110;
 
     void Start()
     {
@@ -19,6 +21,7 @@ public class SwordController : MonoBehaviour
     {
         if (col.gameObject.tag == "Enemy" && player.GetComponent<PlayerMovement>().isAttacking)
         {
+            swordDamage = Random.Range(minSwordDamage, maxSwordDamage);
             bossHealth.damage(swordDamage);
         }
     }

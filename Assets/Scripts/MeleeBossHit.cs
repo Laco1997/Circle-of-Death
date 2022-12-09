@@ -4,8 +4,30 @@ using UnityEngine;
 
 public class MeleeBossHit : MonoBehaviour
 {
-    private void OnTriggerEnter(Collider other)
+    [SerializeField] private GameObject boss;
+    GameObject player;
+    HealthSystem health;
+    bool isTriggered;
+
+    void Start()
     {
-        Debug.Log("HIT");
+        player = GameObject.FindGameObjectWithTag("Player");
+        health = player.GetComponent<HealthSystem>();
+        isTriggered = false;
+    }
+
+    void OnTriggerEnter(Collider col)
+    {
+        if (col.gameObject.tag == "Player" && !isTriggered && boss.GetComponent<Follower>().bossIsAttacking)
+        {
+            isTriggered = true;
+            health.damage(200);
+            boss.GetComponent<Follower>().bossIsAttacking = false;
+        }
+    }
+
+    void OnTriggerExit(Collider col)
+    {
+        isTriggered = false;
     }
 }

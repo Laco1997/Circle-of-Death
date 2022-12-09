@@ -6,11 +6,11 @@ using static UnityEditor.PlayerSettings;
 
 public class PotionController : MonoBehaviour
 {
-    private GameObject player;
+    GameObject player;
     EnergySystem energy;
     HealthSystem health;
 
-    private GameObject potionSpawner;
+    GameObject potionSpawner;
     PotionSpawner potions;
 
     void Start()

@@ -8,7 +8,7 @@ using static UnityEngine.ParticleSystem;
 public class HealthSystem : MonoBehaviour
 {
     public int maxHealth;
-    private int currentHealth;
+    int currentHealth;
     public Slider health;
     Animator animator;
     public TMP_Text currentHealthText;
@@ -31,17 +31,24 @@ public class HealthSystem : MonoBehaviour
         if (currentHealth <= 0)
         {
             currentHealth = 0;
-            animator.SetBool("isDead", true);
+            if (gameObject.tag != "Player")
+            {
+                animator.SetBool("isDead", true);
+            }
+            else
+            {
+                Debug.Log("player died");
+            }
         }
         health.value = getPercentage();
 
         currentHealthText.text = currentHealth.ToString();
 
-        int x = Screen.width / 2;
-        int y = Screen.width / 2;
-
-        Vector3 indicatorPosition = gameObject.transform.position;
-        DamageIndicator(amount, indicatorPosition);
+        if (gameObject.tag != "Player")
+        {
+            Vector3 indicatorPosition = gameObject.transform.position;
+            DamageIndicator(amount, indicatorPosition);
+        }
     }
 
     public void healthGained(int amount)
@@ -78,7 +85,6 @@ public class HealthSystem : MonoBehaviour
 
         TM.text = "-" + Delta.ToString();
         TM.color = new Color(1f, 0f, 0f, 1f);
-
 
         NewHPP.GetComponent<Rigidbody>().AddForce(new Vector3(DefaultForce.x + Random.Range(-DefaultForceScatter, DefaultForceScatter), DefaultForce.y + Random.Range(-DefaultForceScatter, DefaultForceScatter), DefaultForce.z + Random.Range(-DefaultForceScatter, DefaultForceScatter)));
     }
