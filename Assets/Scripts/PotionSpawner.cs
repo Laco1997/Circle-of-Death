@@ -10,6 +10,13 @@ public class PotionSpawner : MonoBehaviour
     float time = 0f;
     bool healthPotionPickedUp = true;
     bool energyPotionPickedUp = true;
+    [SerializeField] private GameObject boss;
+    Follower bossFollower;
+
+    void Start()
+    {
+        bossFollower = boss.GetComponent<Follower>();
+    }
 
     public void resetTime()
     {
@@ -47,6 +54,10 @@ public class PotionSpawner : MonoBehaviour
     {
         healthPotionPickedUp = false;
         Vector3 healthRandPos = new Vector3(Random.Range(160, 240), 0.5f, Random.Range(150, 230));
+        if (bossFollower.stage == 3)
+        {
+            healthRandPos = new Vector3(Random.Range(50, 160), 0.5f, Random.Range(50, 140));
+        }
         Instantiate(healthPotion, healthRandPos, Quaternion.identity);
     }
 
@@ -54,6 +65,10 @@ public class PotionSpawner : MonoBehaviour
     {
         energyPotionPickedUp = false;
         Vector3 energyRandPos = new Vector3(Random.Range(160, 240), 0.5f, Random.Range(150, 230));
+        if (bossFollower.stage == 3)
+        {
+            energyRandPos = new Vector3(Random.Range(50, 160), 0.5f, Random.Range(50, 140));
+        }
         Instantiate(energyPotion, energyRandPos, Quaternion.identity);
     }
 

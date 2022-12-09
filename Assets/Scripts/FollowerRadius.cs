@@ -14,7 +14,7 @@ public class FollowerRadius : MonoBehaviour
 
     void OnTriggerEnter(Collider col)
     {
-        if (col.gameObject.tag == "Player")
+        if (col.gameObject.tag == "Player" && bossFollower.stage < 3)
         {
             bossFollower.checkPlayerEnter(true);
             FindObjectOfType<AudioManager>().Stop("PreFightMusic");
