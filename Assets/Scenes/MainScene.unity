@@ -1274,6 +1274,11 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 683867928}
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &689558916 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 854157485, guid: bd0a7aceaeb974da381c6296affce1be, type: 3}
+  m_PrefabInstance: {fileID: 2226425835860482972}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &831419522
 GameObject:
   m_ObjectHideFlags: 0
@@ -3986,6 +3991,38 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 162686682}
     m_Modifications:
+    - target: {fileID: 854157485, guid: bd0a7aceaeb974da381c6296affce1be, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 854157486, guid: bd0a7aceaeb974da381c6296affce1be, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.20337783
+      objectReference: {fileID: 0}
+    - target: {fileID: 854157486, guid: bd0a7aceaeb974da381c6296affce1be, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.20337783
+      objectReference: {fileID: 0}
+    - target: {fileID: 854157486, guid: bd0a7aceaeb974da381c6296affce1be, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.20337783
+      objectReference: {fileID: 0}
+    - target: {fileID: 854157486, guid: bd0a7aceaeb974da381c6296affce1be, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.5803
+      objectReference: {fileID: 0}
+    - target: {fileID: 854157487, guid: bd0a7aceaeb974da381c6296affce1be, type: 3}
+      propertyPath: m_Radius
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 854157487, guid: bd0a7aceaeb974da381c6296affce1be, type: 3}
+      propertyPath: m_Center.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 854157488, guid: bd0a7aceaeb974da381c6296affce1be, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2226425834464354560, guid: bd0a7aceaeb974da381c6296affce1be, type: 3}
       propertyPath: player
       value: 
@@ -3994,6 +4031,14 @@ PrefabInstance:
       propertyPath: middlePoint
       value: 
       objectReference: {fileID: 1568186327}
+    - target: {fileID: 2226425834464354560, guid: bd0a7aceaeb974da381c6296affce1be, type: 3}
+      propertyPath: swordHitRadius
+      value: 
+      objectReference: {fileID: 689558916}
+    - target: {fileID: 2226425834464354560, guid: bd0a7aceaeb974da381c6296affce1be, type: 3}
+      propertyPath: beamCooldownDefault
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 2226425834464354562, guid: bd0a7aceaeb974da381c6296affce1be, type: 3}
       propertyPath: health
       value: 

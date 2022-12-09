@@ -27,6 +27,8 @@ public class Follower : MonoBehaviour
     GameObject playerObject;
     HealthSystem health;
     public bool bossIsAttacking;
+    [SerializeField] GameObject swordHitRadius;
+    int groundDamage = 200;
 
     [Header("Stage 1")]
     [SerializeField] private bool beamPhase = false;
@@ -116,6 +118,7 @@ public class Follower : MonoBehaviour
         {
             if (inMiddle)
             {
+                swordHitRadius.SetActive(false);
                 npc.transform.LookAt(player.transform);
                 if (beamTargetPosition == Vector3.zero)
                 {
@@ -163,6 +166,7 @@ public class Follower : MonoBehaviour
                         beamPhase = false;
                         goingToMiddle = false;
                         inMiddle = false;
+                        swordHitRadius.SetActive(true);
                         beamCooldown = beamCooldownDefault;
                         beamCast = 0;
                         beamTargetPosition = Vector3.zero;
@@ -275,7 +279,7 @@ public class Follower : MonoBehaviour
                         if(Vector3.Distance(player.position, transform.position) < groundHitRange)
                         {
                             Debug.Log("Player hit with ground");
-                            health.damage(400);
+                            health.damage(groundDamage);
                         }
                         groundHitCounter++;
                         if (groundHitCounter >= 2)
@@ -369,7 +373,7 @@ public class Follower : MonoBehaviour
                         if (Vector3.Distance(player.position, transform.position) < groundBreakRange)
                         {
                             Debug.Log("Player hit ground break");
-                            health.damage(200);
+                            health.damage(groundDamage);
                         }
                     }
                 }
