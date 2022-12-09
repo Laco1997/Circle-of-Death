@@ -20,4 +20,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/LavaScene.unity
     guid: cb9e5cec1699d4fbbbfe95ab52683364
+  - enabled: 1
+    path: Assets/Scenes/Menu/GameOver.unity
+    guid: 7d0f44fd7cba440e2869b13dae0762d7
+  - enabled: 1
+    path: Assets/Scenes/Menu/Win.unity
+    guid: 54e25f682d1b3491589da68768df1a9d
   m_configObjects: {}

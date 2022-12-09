@@ -278,7 +278,6 @@ public class Follower : MonoBehaviour
                         groundHitParticles.SetActive(false);
                         if(Vector3.Distance(player.position, transform.position) < groundHitRange)
                         {
-                            Debug.Log("Player hit with ground");
                             health.damage(groundDamage);
                         }
                         groundHitCounter++;
@@ -372,7 +371,6 @@ public class Follower : MonoBehaviour
                         groundHitParticles.SetActive(false);
                         if (Vector3.Distance(player.position, transform.position) < groundBreakRange)
                         {
-                            Debug.Log("Player hit ground break");
                             health.damage(groundDamage);
                         }
                     }

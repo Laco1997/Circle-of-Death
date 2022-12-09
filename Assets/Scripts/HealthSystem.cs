@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using static UnityEngine.ParticleSystem;
 
@@ -34,10 +35,11 @@ public class HealthSystem : MonoBehaviour
             if (gameObject.tag != "Player")
             {
                 animator.SetBool("isDead", true);
+                SceneManager.LoadScene("Win");
             }
             else
             {
-                Debug.Log("player died");
+                SceneManager.LoadScene("GameOver");
             }
         }
         health.value = getPercentage();
