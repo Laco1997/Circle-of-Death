@@ -441,6 +441,8 @@ public class Follower : MonoBehaviour
                         {
                             bossIsAttacking = true;
                             animator.SetTrigger("attack");
+                            attackReady = false;
+                            attackCooldown = baseAttackCooldownP3Default;
                         }
                     }
                     else
@@ -454,29 +456,6 @@ public class Follower : MonoBehaviour
                             attackCooldown -= Time.deltaTime;
                         }
                     }
-
-                    //groundBreakCooldown -= Time.deltaTime;
-                    //if (attackReady)
-                    //{
-                    //    if (npc.remainingDistance <= 8f)
-                    //    {
-                    //        bossIsAttacking = true;
-                    //        animator.SetTrigger("attack");
-                    //        attackReady = false;
-                    //        attackCooldown = baseAttackCooldownP3Default;
-                    //    }
-                    //}
-                    //else
-                    //{
-                    //    if (attackCooldown <= 0)
-                    //    {
-                    //        attackReady = true;
-                    //    }
-                    //    else
-                    //    {
-                    //        attackCooldown -= Time.deltaTime;
-                    //    }
-                    //}
                 }
             }
         }

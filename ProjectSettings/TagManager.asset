@@ -13,6 +13,7 @@ TagManager:
   - ArrowSpawner
   - GroundPart
   - SwordRadius
+  - Lava
   layers:
   - Default
   - TransparentFX
