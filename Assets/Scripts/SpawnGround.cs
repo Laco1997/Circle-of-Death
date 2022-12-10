@@ -6,16 +6,21 @@ using UnityEngine;
 public class SpawnGround : MonoBehaviour
 {
     public GameObject groundPart;
-    public int prefabSize = 1;
     public int radius = 70;
-    public float y = -0.9f;
+    public float y = 0.5f;
+    public float randMin = 0.1f;
+    public float randMax = 0.4f;
 
     void Start()
     {
-        for (int r = 0; r < radius; r++)
+        int prefabRadius = 3;
+        int prefabDiameter = prefabRadius*2;
+        for (int r = 0; r < radius*2; r += prefabDiameter)
         {
-            float length = 2 * MathF.PI * r/2;
-            int prefabCount = (int)(Math.Ceiling(length / prefabSize)*1.2);
+            float rr = r / 2;
+            float length = 2 * MathF.PI * rr/2;
+            int prefabCount = (int)(Math.Ceiling(length / prefabRadius));
+            //prefabCount = 5;
             for (int i = 0; i < prefabCount; i++)
             {
 
@@ -23,18 +28,17 @@ public class SpawnGround : MonoBehaviour
                 var vertical = MathF.Sin(radians);
                 var horizontal = MathF.Cos(radians);
 
-                var pos = new Vector3(horizontal, 0, vertical) * r/2;
-                float randomSize = UnityEngine.Random.Range(0.1f, 1f);
-                pos.x += 104;
-                pos.y = y * randomSize;
-                pos.z += 91;
+                var pos = new Vector3(horizontal, 0, vertical) * rr/2;
+                float randomY = UnityEngine.Random.Range(randMin, randMax);
+                pos.x += transform.position.x;
+                pos.y = y - randomY; // randomSize
+                pos.z += transform.position.z;
                 var instance = Instantiate(groundPart, pos, Quaternion.identity);
                 instance.tag = "GroundPart";
                 instance.layer = LayerMask.NameToLayer("GroundPart");
 
-                BoxCollider collider = instance.AddComponent<BoxCollider>();
-                collider.center = new Vector3(0f, (y - randomSize), 0f);
-                collider.size = new Vector3(1f, 2.5f, 1f);
+                BoxCollider collider = instance.GetComponent<BoxCollider>();
+                collider.center = new Vector3(collider.center.x, collider.center.y + randomY, collider.center.z);
             }
         }
     }
