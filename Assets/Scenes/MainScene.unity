@@ -4013,6 +4013,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 162686682}
     m_Modifications:
+    - target: {fileID: 740459770, guid: bd0a7aceaeb974da381c6296affce1be, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 854157485, guid: bd0a7aceaeb974da381c6296affce1be, type: 3}
       propertyPath: m_IsActive
       value: 1
@@ -4045,6 +4049,10 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 944830115, guid: bd0a7aceaeb974da381c6296affce1be, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1565175540, guid: bd0a7aceaeb974da381c6296affce1be, type: 3}
       propertyPath: m_LocalScale.y
       value: 28
@@ -4057,6 +4065,30 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1609597584, guid: bd0a7aceaeb974da381c6296affce1be, type: 3}
+      propertyPath: m_Size.x
+      value: 203.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 1609597584, guid: bd0a7aceaeb974da381c6296affce1be, type: 3}
+      propertyPath: m_Size.y
+      value: 227.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 1609597584, guid: bd0a7aceaeb974da381c6296affce1be, type: 3}
+      propertyPath: m_Size.z
+      value: 204.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1609597584, guid: bd0a7aceaeb974da381c6296affce1be, type: 3}
+      propertyPath: m_Center.x
+      value: -40.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1609597584, guid: bd0a7aceaeb974da381c6296affce1be, type: 3}
+      propertyPath: m_Center.y
+      value: -13.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1609597584, guid: bd0a7aceaeb974da381c6296affce1be, type: 3}
+      propertyPath: m_Center.z
+      value: -10.6
+      objectReference: {fileID: 0}
     - target: {fileID: 2226425834464354560, guid: bd0a7aceaeb974da381c6296affce1be, type: 3}
       propertyPath: player
       value: 
@@ -4066,12 +4098,20 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1568186327}
     - target: {fileID: 2226425834464354560, guid: bd0a7aceaeb974da381c6296affce1be, type: 3}
+      propertyPath: attackDuration
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2226425834464354560, guid: bd0a7aceaeb974da381c6296affce1be, type: 3}
       propertyPath: swordHitRadius
       value: 
       objectReference: {fileID: 689558916}
     - target: {fileID: 2226425834464354560, guid: bd0a7aceaeb974da381c6296affce1be, type: 3}
+      propertyPath: bigAttackDuration
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2226425834464354560, guid: bd0a7aceaeb974da381c6296affce1be, type: 3}
       propertyPath: beamCooldownDefault
-      value: 5
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 2226425834464354562, guid: bd0a7aceaeb974da381c6296affce1be, type: 3}
       propertyPath: health

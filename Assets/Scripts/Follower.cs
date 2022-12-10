@@ -47,6 +47,7 @@ public class Follower : MonoBehaviour
 
     [Header("Stage 1 base attack")]
     public float attackCooldownDefault = 7f;
+    public float attackDuration = 1.5f;
 
 
     [Header("Stage 2")]
@@ -63,6 +64,7 @@ public class Follower : MonoBehaviour
 
     [Header("Stage 2 base attack")]
     public float bigAttackCooldownDefault = 7f;
+    public float bigAttackDuration = 1.5f;
 
     [Header("Stage 3")]
     public float groundBreakCooldownDefault = 10f;
@@ -208,26 +210,40 @@ public class Follower : MonoBehaviour
             }
             else
             {
-                beamCooldown -= Time.deltaTime;
-                if (attackReady)
+                if (bossIsAttacking)
                 {
-                    if (npc.remainingDistance <= 8f)
+                    npc.stoppingDistance = 9999f;
+                    // stop boss when attacking
+                    attackCooldown -= Time.deltaTime;
+                    if (attackCooldown*-1 > attackDuration)
                     {
-                        bossIsAttacking = true;
-                        animator.SetTrigger("attack");
+                        npc.stoppingDistance = 7f;
+                        bossIsAttacking = false;
                         attackReady = false;
                         attackCooldown = attackCooldownDefault;
                     }
                 }
                 else
                 {
-                    if (attackCooldown <= 0)
+                    beamCooldown -= Time.deltaTime;
+                    if (attackReady)
                     {
-                        attackReady = true;
+                        if (npc.remainingDistance <= 8f)
+                        {
+                            bossIsAttacking = true;
+                            animator.SetTrigger("attack");
+                        }
                     }
                     else
                     {
-                        attackCooldown -= Time.deltaTime;
+                        if (attackCooldown <= 0)
+                        {
+                            attackReady = true;
+                        }
+                        else
+                        {
+                            attackCooldown -= Time.deltaTime;
+                        }
                     }
                 }
             }
@@ -306,26 +322,40 @@ public class Follower : MonoBehaviour
             }
             else
             {
-                groundHitCooldown -= Time.deltaTime;
-                if (attackReady)
+                if (bossIsAttacking)
                 {
-                    if (npc.remainingDistance <= 8f)
+                    npc.stoppingDistance = 9999f;
+                    // stop boss when attacking
+                    attackCooldown -= Time.deltaTime;
+                    if (attackCooldown * -1 > bigAttackDuration)
                     {
-                        bossIsAttacking = true;
-                        animator.SetTrigger("attack");
+                        npc.stoppingDistance = 7f;
+                        bossIsAttacking = false;
                         attackReady = false;
-                        attackCooldown = bigAttackCooldownDefault;
+                        attackCooldown = attackCooldownDefault;
                     }
                 }
                 else
                 {
-                    if (attackCooldown <= 0)
+                    groundHitCooldown -= Time.deltaTime;
+                    if (attackReady)
                     {
-                        attackReady = true;
+                        if (npc.remainingDistance <= 8f)
+                        {
+                            bossIsAttacking = true;
+                            animator.SetTrigger("attack");
+                        }
                     }
                     else
                     {
-                        attackCooldown -= Time.deltaTime;
+                        if (attackCooldown <= 0)
+                        {
+                            attackReady = true;
+                        }
+                        else
+                        {
+                            attackCooldown -= Time.deltaTime;
+                        }
                     }
                 }
             }

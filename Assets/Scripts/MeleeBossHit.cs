@@ -7,27 +7,33 @@ public class MeleeBossHit : MonoBehaviour
     [SerializeField] private GameObject boss;
     GameObject player;
     HealthSystem health;
-    bool isTriggered;
+    public float attackHitDamageCooldownDefault = 5f;
+    public int attackHitDamage = 200;
+    public float attackHitDamageCooldown = 0;
 
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
         health = player.GetComponent<HealthSystem>();
-        isTriggered = false;
+        attackHitDamageCooldown = 0;
+    }
+    void Update()
+    {
+        if (attackHitDamageCooldown > 0)
+        {
+            attackHitDamageCooldown -= Time.deltaTime;
+        }
     }
 
     void OnTriggerEnter(Collider col)
     {
-        if (col.gameObject.tag == "Player" && !isTriggered && boss.GetComponent<Follower>().bossIsAttacking)
+        if (col.gameObject.tag == "Player")
         {
-            isTriggered = true;
-            health.damage(200);
-            boss.GetComponent<Follower>().bossIsAttacking = false;
+            if (attackHitDamageCooldown <= 0 && boss.GetComponent<Follower>().bossIsAttacking)
+            {
+                health.damage(attackHitDamage);
+                attackHitDamageCooldown = attackHitDamageCooldownDefault;
+            }
         }
-    }
-
-    void OnTriggerExit(Collider col)
-    {
-        isTriggered = false;
     }
 }
