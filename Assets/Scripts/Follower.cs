@@ -419,27 +419,64 @@ public class Follower : MonoBehaviour
             }
             else
             {
-                groundBreakCooldown -= Time.deltaTime;
-                if (attackReady)
+                if (bossIsAttacking)
                 {
-                    if (npc.remainingDistance <= 8f)
+                    npc.stoppingDistance = 9999f;
+                    // stop boss when attacking
+                    attackCooldown -= Time.deltaTime;
+                    if (attackCooldown * -1 > bigAttackDuration)
                     {
-                        bossIsAttacking = true;
-                        animator.SetTrigger("attack");
+                        npc.stoppingDistance = 7f;
+                        bossIsAttacking = false;
                         attackReady = false;
-                        attackCooldown = baseAttackCooldownP3Default;
+                        attackCooldown = attackCooldownDefault;
                     }
                 }
                 else
                 {
-                    if (attackCooldown <= 0)
+                    groundBreakCooldown -= Time.deltaTime;
+                    if (attackReady)
                     {
-                        attackReady = true;
+                        if (npc.remainingDistance <= 8f)
+                        {
+                            bossIsAttacking = true;
+                            animator.SetTrigger("attack");
+                        }
                     }
                     else
                     {
-                        attackCooldown -= Time.deltaTime;
+                        if (attackCooldown <= 0)
+                        {
+                            attackReady = true;
+                        }
+                        else
+                        {
+                            attackCooldown -= Time.deltaTime;
+                        }
                     }
+
+                    //groundBreakCooldown -= Time.deltaTime;
+                    //if (attackReady)
+                    //{
+                    //    if (npc.remainingDistance <= 8f)
+                    //    {
+                    //        bossIsAttacking = true;
+                    //        animator.SetTrigger("attack");
+                    //        attackReady = false;
+                    //        attackCooldown = baseAttackCooldownP3Default;
+                    //    }
+                    //}
+                    //else
+                    //{
+                    //    if (attackCooldown <= 0)
+                    //    {
+                    //        attackReady = true;
+                    //    }
+                    //    else
+                    //    {
+                    //        attackCooldown -= Time.deltaTime;
+                    //    }
+                    //}
                 }
             }
         }

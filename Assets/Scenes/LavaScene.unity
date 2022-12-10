@@ -7350,7 +7350,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1430856068598315614, guid: 22a7a6794f04d4433bcb0880ce098d33, type: 3}
       propertyPath: mouseSensitivity
-      value: 200
+      value: 1200
       objectReference: {fileID: 0}
     - target: {fileID: 1430856068658337715, guid: 22a7a6794f04d4433bcb0880ce098d33, type: 3}
       propertyPath: m_LocalPosition.x
@@ -7617,8 +7617,20 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 932200279}
     - target: {fileID: 2158829808209365827, guid: 22a7a6794f04d4433bcb0880ce098d33, type: 3}
+      propertyPath: walkSpeed
+      value: 5.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2158829808209365827, guid: 22a7a6794f04d4433bcb0880ce098d33, type: 3}
+      propertyPath: sprintSpeed
+      value: 3.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2158829808209365827, guid: 22a7a6794f04d4433bcb0880ce098d33, type: 3}
       propertyPath: dashDuration
-      value: 1.5
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 2158829808209365827, guid: 22a7a6794f04d4433bcb0880ce098d33, type: 3}
+      propertyPath: lavaMask.m_Bits
+      value: 128
       objectReference: {fileID: 0}
     - target: {fileID: 2158829808209365830, guid: 22a7a6794f04d4433bcb0880ce098d33, type: 3}
       propertyPath: playerEnergy

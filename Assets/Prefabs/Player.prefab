@@ -4251,6 +4251,9 @@ MonoBehaviour:
   groundMask:
     serializedVersion: 2
     m_Bits: 64
+  lavaMask:
+    serializedVersion: 2
+    m_Bits: 128
   sprintSpeed: 3.5
   dashSpeed: 4.5
   dashDistance: 4

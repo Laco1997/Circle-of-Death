@@ -36,8 +36,10 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private Transform groundCheck;
     [SerializeField] private float groundDistance = 0.4f;
     [SerializeField] private LayerMask groundMask;
+    [SerializeField] private LayerMask lavaMask;
     Vector3 velocity;
     bool onGround;
+    bool onGroundParticle;
 
     [Header("Sprint")]
     [SerializeField] private float sprintSpeed = 3.5f;
@@ -99,8 +101,9 @@ public class PlayerMovement : MonoBehaviour
     {
         // Ground check
         onGround = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
+        onGroundParticle = Physics.CheckSphere(groundCheck.position, groundDistance, lavaMask);
 
-        if (onGround && velocity.y < 0)
+        if ((onGround || onGroundParticle) && velocity.y < 0)
         {
             velocity.y = -2f;
         }
@@ -185,7 +188,7 @@ public class PlayerMovement : MonoBehaviour
         controller.Move(move * walkSpeed * Time.deltaTime);
 
         // Jump
-        if (Input.GetButtonDown("Jump") && onGround)
+        if (Input.GetButtonDown("Jump") && (onGround || onGroundParticle))
         {
             if (animator.GetBool("Equipped Sword") == false && animator.GetBool("Equipped Bow") == false)
             {
