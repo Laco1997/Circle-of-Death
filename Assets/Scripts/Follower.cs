@@ -93,7 +93,7 @@ public class Follower : MonoBehaviour
         groundHitCooldown = groundHitCooldownDefault;
         poles = GameObject.FindGameObjectsWithTag("Pole");
         playerObject = GameObject.FindGameObjectWithTag("Player");
-        health = player.GetComponent<HealthSystem>();
+        health = playerObject.GetComponent<HealthSystem>();
         bossIsAttacking = false;
     }
 
@@ -482,6 +482,9 @@ public class Follower : MonoBehaviour
 
     void Update()
     {
+        health.mainWorldData();
+        gameObject.GetComponent<HealthSystem>().mainWorldData();
+
         switch (stage)
         {
             case 1:
