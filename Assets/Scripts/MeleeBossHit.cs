@@ -31,6 +31,7 @@ public class MeleeBossHit : MonoBehaviour
         {
             if (attackHitDamageCooldown <= 0 && boss.GetComponent<Follower>().bossIsAttacking)
             {
+                health.TimedHitDamage(1.5f);
                 health.damage(attackHitDamage);
                 attackHitDamageCooldown = attackHitDamageCooldownDefault;
             }

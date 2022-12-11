@@ -19,6 +19,15 @@ public class LavaController : MonoBehaviour
         if (col.gameObject.tag == "Player")
         {
             health.damage(1);
+            health.ActivateDamageHUD();
+        }
+    }
+
+    void OnTriggerExit(Collider col)
+    {
+        if (col.gameObject.tag == "Player")
+        {
+            health.DeactivateDamageHUD();
         }
     }
 }

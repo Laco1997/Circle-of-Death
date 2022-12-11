@@ -4331,6 +4331,7 @@ MonoBehaviour:
   HPParticle: {fileID: 5383594632231660674, guid: 2b5c851db8eda4f75a64390e31281ad7, type: 3}
   DefaultForce: {x: 0, y: 1, z: 0}
   DefaultForceScatter: 0.5
+  hudDamage: {fileID: 3271225841163502082, guid: da32e5515194241f4a4af6446530383a, type: 3}
 --- !u!114 &1865315509
 MonoBehaviour:
   m_ObjectHideFlags: 0

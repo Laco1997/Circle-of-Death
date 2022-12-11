@@ -8,6 +8,7 @@ public class BeamCollision : MonoBehaviour
 {
     private HealthSystem hs;
     public int beamDamage = 10;
+
     void Start()
     {
         hs = GetComponent<HealthSystem>();
@@ -15,6 +16,7 @@ public class BeamCollision : MonoBehaviour
 
     void OnParticleCollision(GameObject other)
     {
+        hs.TimedHitDamage(3f);
         hs.damage(beamDamage);
     }
 }

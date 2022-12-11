@@ -292,6 +292,7 @@ public class Follower : MonoBehaviour
                         groundHitParticles.SetActive(false);
                         if(Vector3.Distance(player.position, transform.position) < groundHitRange)
                         {
+                            health.TimedHitDamage(1.5f);
                             health.damage(groundDamage);
                         }
                         groundHitCounter++;
@@ -399,6 +400,7 @@ public class Follower : MonoBehaviour
                         groundHitParticles.SetActive(false);
                         if (Vector3.Distance(player.position, transform.position) < groundBreakRange)
                         {
+                            health.TimedHitDamage(1.5f);
                             health.damage(groundDamage);
                         }
                     }
@@ -419,6 +421,8 @@ public class Follower : MonoBehaviour
             }
             else
             {
+
+                // TOTO SOM TU SKUSAL MENIT ALE ASI NIECO NEFICI (CHCEL SOM FIXNUT TEN SLIDE KED HITUJE HRACA)
                 if (bossIsAttacking)
                 {
                     npc.stoppingDistance = 9999f;
@@ -457,6 +461,7 @@ public class Follower : MonoBehaviour
                         }
                     }
                 }
+                // TUTO KONCI TA UPRAVA
             }
         }
 

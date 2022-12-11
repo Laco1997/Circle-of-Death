@@ -18,11 +18,14 @@ public class HealthSystem : MonoBehaviour
     public Vector3 DefaultForce = new Vector3(0f, 1f, 0f);
     public float DefaultForceScatter = 0.5f;
 
+    [SerializeField] private GameObject hudDamage;
+
     void Start()
     {
         currentHealth = maxHealth;
         health.value = getPercentage();
         animator = GetComponent<Animator>();
+        hudDamage.SetActive(false);
     }
 
     public void damage(int amount)
@@ -66,7 +69,7 @@ public class HealthSystem : MonoBehaviour
 
     public float getPercentage()
     {
-        return (float)currentHealth / (float)maxHealth * maxHealth;
+        return ((float)currentHealth / (float)maxHealth) * maxHealth;
 
     }
 
@@ -87,7 +90,31 @@ public class HealthSystem : MonoBehaviour
         TM.text = "-" + Delta.ToString();
         TM.color = new Color(1f, 0f, 0f, 1f);
 
-        NewHPP.GetComponent<Rigidbody>().AddForce(new Vector3(DefaultForce.x + Random.Range(-DefaultForceScatter, DefaultForceScatter), DefaultForce.y + Random.Range(-DefaultForceScatter, DefaultForceScatter), DefaultForce.z + Random.Range(-DefaultForceScatter, DefaultForceScatter)));
+        NewHPP.GetComponent<Rigidbody>().AddForce(new Vector3(DefaultForce.x + Random.Range(-DefaultForceScatter, DefaultForceScatter),
+            DefaultForce.y + Random.Range(-DefaultForceScatter, DefaultForceScatter),
+            DefaultForce.z + Random.Range(-DefaultForceScatter, DefaultForceScatter)));
+    }
+
+    public void TimedHitDamage(float duration)
+    {
+        StartCoroutine(DamageDuration(duration));
+    }
+
+    IEnumerator DamageDuration(float damageDuration)
+    {
+        ActivateDamageHUD();
+        yield return new WaitForSeconds(damageDuration);
+        DeactivateDamageHUD();
+    }
+
+    public void ActivateDamageHUD()
+    {
+        hudDamage.SetActive(true);
+    }
+
+    public void DeactivateDamageHUD()
+    {
+        hudDamage.SetActive(false);
     }
 
 }
