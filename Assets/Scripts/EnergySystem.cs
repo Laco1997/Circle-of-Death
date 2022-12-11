@@ -4,6 +4,10 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
+/*
+* Ovladac pre ovladanie energie hraca. Ovladac spravuje ziskanie a vyuzitie
+* energie hraca. Energia je prepojena s HUD.
+*/
 public class EnergySystem : MonoBehaviour
 {
     public Slider playerEnergy;
@@ -19,6 +23,10 @@ public class EnergySystem : MonoBehaviour
         playerEnergy.value = this.getPercentage();
     }
 
+    /*
+    * Ovladanie pre priebezne ziskanie energie. Energia sa automaticky 
+    * navysuje v malom mnozstve.
+    */
     void Update()
     {
         if(currentEnergy != maxEnergy && !energyGaining)
@@ -28,12 +36,18 @@ public class EnergySystem : MonoBehaviour
         }
     }
 
+    /*
+    * Prepocitanie energie pre HUD.
+    */
     public float getPercentage()
     {
         return (float)currentEnergy / (float)maxEnergy * maxEnergy;
 
     }
 
+    /*
+    * Funkcia pre vyuzitie energie.
+    */
     public void energyUsed(int amount)
     {
         currentEnergy -= amount;
@@ -46,6 +60,9 @@ public class EnergySystem : MonoBehaviour
         currentEnergyText.text = currentEnergy.ToString();
     }
 
+    /*
+    * Funkcia pre ziskanie energie.
+    */
     public void energyGained(int amount)
     {
         currentEnergy += amount;
@@ -58,6 +75,9 @@ public class EnergySystem : MonoBehaviour
         currentEnergyText.text = currentEnergy.ToString();
     }
 
+    /*
+    * Interval pre automaticke ziskanie energie.
+    */
     IEnumerator energyGainer(int amount)
     {
         energyGained(amount);
@@ -67,6 +87,9 @@ public class EnergySystem : MonoBehaviour
         energyGaining = false;
     }
 
+    /*
+    * Getter pre aktualnu hodnotu energie.
+    */
     public int CurrentEnergy
     {
         get { return currentEnergy; }

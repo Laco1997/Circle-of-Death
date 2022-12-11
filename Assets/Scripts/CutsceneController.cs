@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+/*
+* Ovladac pre cutscene medzi levelmi (padanie z lesa do lavovej jaskyni).
+*/
 public class CutsceneController : MonoBehaviour
 {
     float delayTime = 9.4f;
@@ -12,6 +15,9 @@ public class CutsceneController : MonoBehaviour
         StartCoroutine(LoadLevelAfterDelay(delayTime));
     }
 
+    /*
+    * Spustenie lavovej sceny po ukonceni cutscenu.
+    */
     IEnumerator LoadLevelAfterDelay(float delay)
     {
         yield return new WaitForSeconds(delay);

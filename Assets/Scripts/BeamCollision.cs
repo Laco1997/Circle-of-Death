@@ -4,6 +4,9 @@ using UnityEngine;
 using UnityEngine.SocialPlatforms.Impl;
 using UnityEngine.UIElements;
 
+/*
+* Ovladac pre damageovanie hraca s beamom pomocou kolizie.
+*/
 public class BeamCollision : MonoBehaviour
 {
     private HealthSystem hs;
@@ -14,6 +17,9 @@ public class BeamCollision : MonoBehaviour
         hs = GetComponent<HealthSystem>();
     }
 
+    /*
+    * Udelenie damageu hracovi a zobrazenie damage hit na HUD pri kolizii s beamom.
+    */
     void OnParticleCollision(GameObject other)
     {
         hs.TimedHitDamage(3f);

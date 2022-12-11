@@ -4,6 +4,9 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
+/*
+* System pre pocitanie sipov, ktore je prepojene s HUD.
+*/
 public class ArrowSystem : MonoBehaviour
 {
     public int maxArrowCount;
@@ -21,6 +24,9 @@ public class ArrowSystem : MonoBehaviour
 
     }
 
+    /*
+    * Funkcia ktora pocita pocet vystrelenych sipov.
+    */
     public void arrowsUsed(int amount)
     {
         currentArrowCount -= amount;
@@ -32,6 +38,9 @@ public class ArrowSystem : MonoBehaviour
         currentArrowCountText.text = currentArrowCount.ToString();
     }
 
+    /*
+    * Funkcia ktora pocita pocet pozbieranych sipov.
+    */
     public void arrowsCollected(int amount)
     {
         currentArrowCount += amount;
@@ -43,6 +52,9 @@ public class ArrowSystem : MonoBehaviour
         currentArrowCountText.text = currentArrowCount.ToString();
     }
 
+    /*
+    * Getter pre ziskanie aktualneho poctu sipov.
+    */
     public int CurrentArrows
     {
         get { return currentArrowCount; }
