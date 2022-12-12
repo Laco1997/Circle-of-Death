@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/*
+* Ovladac pre prepinanie sa medzi zbranami.
+*/
 public class WeaponInteraction : MonoBehaviour
 {
     [SerializeField] private GameObject sword;

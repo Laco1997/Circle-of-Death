@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
+/*
+* Ovladac pre zbieranie zivota a energie.
+*/
 public class PotionController : MonoBehaviour
 {
     GameObject player;
@@ -22,8 +25,15 @@ public class PotionController : MonoBehaviour
         health = player.GetComponent<HealthSystem>();
     }
 
+    /*
+    * Kolizia hraca s potion objektom.
+    */
     void OnTriggerEnter(Collider col)
     {
+        /*
+        * Ak hrac prejde cez health potion, tak sa mu prida maximalny zivot,
+        * resetne sa casovac pre spawnovanie healthu a objekt zmizne.
+        */
         if (col.gameObject.tag == "Player" && gameObject.name == "Bottle_Health(Clone)")
         {
             health.healthGained(500);
@@ -34,6 +44,10 @@ public class PotionController : MonoBehaviour
             Destroy(gameObject);
         }
 
+        /*
+        * Ak hrac prejde cez energy potion, tak sa mu prida maximalna energia,
+        * resetne sa casovac pre spawnovanie energy a objekt zmizne.
+        */
         if (col.gameObject.tag == "Player" && gameObject.name == "Bottle_Mana(Clone)")
         {
             energy.energyGained(500);

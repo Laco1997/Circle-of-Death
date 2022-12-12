@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/*
+* Ovladac pre spawnovanie zivota a energie.
+*/
 public class PotionSpawner : MonoBehaviour
 {
     [SerializeField] private GameObject healthPotion;
@@ -18,22 +21,34 @@ public class PotionSpawner : MonoBehaviour
         bossFollower = boss.GetComponent<Follower>();
     }
 
+    /*
+    * Volanie resetu, ked hrac zdvihne potion.
+    */
     public void resetTime()
     {
         time = 0f;
     }
 
+    /*
+    * Potvrdenie zdvihnutia healthu hracom.
+    */
     public void healthPicked()
     {
         healthPotionPickedUp = true;
     }
 
+    /*
+    * Potvrdenie zdvihnutia energie hracom.
+    */
     public void energyPicked()
     {
         energyPotionPickedUp = true;
 
     }
 
+    /*
+    * Casovac pre spawnovanie potions.
+    */
     void FixedUpdate()
     {
         time += Time.deltaTime;
@@ -50,6 +65,9 @@ public class PotionSpawner : MonoBehaviour
         }
     }
 
+    /*
+    * Spawnovanie healthu prostrednictvom vytvorenia instancie objektu health.
+    */
     void SpawnHealthPotion()
     {
         healthPotionPickedUp = false;
@@ -61,6 +79,9 @@ public class PotionSpawner : MonoBehaviour
         Instantiate(healthPotion, healthRandPos, Quaternion.identity);
     }
 
+    /*
+    * Spawnovanie energie prostrednictvom vytvorenia instancie objektu energy.
+    */
     void SpawnEnergyPotion()
     {
         energyPotionPickedUp = false;
@@ -72,11 +93,17 @@ public class PotionSpawner : MonoBehaviour
         Instantiate(energyPotion, energyRandPos, Quaternion.identity);
     }
 
+    /*
+    * Getter, ci bol health picked up.
+    */
     public bool HealthPotionStatus
     {
         get { return healthPotionPickedUp; }
     }
 
+    /*
+    * Getter, ci bol energy picked up.
+    */
     public bool EnergyPotionStatus
     {
         get { return energyPotionPickedUp; }

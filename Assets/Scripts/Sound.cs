@@ -1,6 +1,10 @@
 using UnityEngine.Audio;
 using UnityEngine;
 
+/*
+* Custom audio clip objekt s roznymi atributmi pre audio manager, 
+* ktory je embednuty v editore.
+*/
 [System.Serializable]
 public class Sound
 {

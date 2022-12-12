@@ -2,6 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/*
+* Ovladac pre pohyb pohladu hraca s mysou. Nastavenie sensitivity a zamedzenie 
+* moznej rotacie (aby sa hrac nepreklopil).
+*/
 public class PlayerLook : MonoBehaviour
 {
     [SerializeField] private float mouseSensitivity = 1000f;

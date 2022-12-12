@@ -7,6 +7,17 @@ using UnityEngine.EventSystems;
 using UnityEngine.XR;
 using static Cinemachine.CinemachineOrbitalTransposer;
 
+/*
+* Hlavny ovladac pre ovladanie pohybu hraca:
+* - walk
+* - jump
+* - sprint
+* - dash
+* - shoot
+* - swing
+* Ovladac spracuva aj volanie SFX a audio klipov podla jednotlivych aktivit 
+* hraca. Dalej su tu spracuvane aj animacie hraca.
+*/
 public class PlayerMovement : MonoBehaviour
 {
     [Header("General")]
@@ -99,7 +110,10 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
-        // Ground check
+        /*
+        * Overenie, ci je hrac na zemy, alebo na platforme v lavovej jaskyni kvoli
+        * umozneniu pohybu hraca.
+        */
         onGround = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
         onGroundParticle = Physics.CheckSphere(groundCheck.position, groundDistance, lavaMask);
 
@@ -122,12 +136,18 @@ public class PlayerMovement : MonoBehaviour
 
     }
 
+    /*
+    * Keyboard input pre pohyb.
+    */
     void PlayerInput()
     {
         horizontal = Input.GetAxis("Horizontal");
         vertical = Input.GetAxis("Vertical");
     }
 
+    /*
+    * Spustenie a zastavenie audio klipu (footsteps) podla toho, ci hrac chodi.
+    */
     void WalkAudio()
     {
         if (walking && !walkAudioPlaying)
@@ -142,6 +162,9 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
+    /*
+    * Spustenie a zastavenie audio klipu (breathing) podla toho, ci hrac bezi.
+    */
     void SprintAudio()
     {
         if (sprinting && !sprintAudioPlaying)
@@ -159,10 +182,16 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
+    /*
+    * Hlavna funkcia ktora spracuva pohyb hraca.
+    */
     void MovePlayer()
     {
         move = transform.right * horizontal + transform.forward * vertical;
 
+        /*
+        * Chodza hraca
+        */
         if (Mathf.Abs(horizontal) > 0 || Mathf.Abs(vertical) > 0)
         {
             animator.SetBool("Walk", true);
@@ -176,6 +205,10 @@ public class PlayerMovement : MonoBehaviour
             }
         }
 
+        /*
+        * Ak sa nemame keyboard input, tak nechceme aby sa hrac hybal (sprintoval 
+        * alebo chodil).
+        */
         if ((Mathf.Abs(horizontal) == 0) && (Mathf.Abs(vertical) == 0))
         {
             walking = false;
@@ -187,7 +220,9 @@ public class PlayerMovement : MonoBehaviour
 
         controller.Move(move * walkSpeed * Time.deltaTime);
 
-        // Jump
+        /*
+        * Skok hraca
+        */
         if (Input.GetButtonDown("Jump") && (onGround || onGroundParticle))
         {
             if (animator.GetBool("Equipped Sword") == false && animator.GetBool("Equipped Bow") == false)
@@ -201,7 +236,9 @@ public class PlayerMovement : MonoBehaviour
             velocity.y = Mathf.Sqrt(jumpHeight * -1 * gravity);
         }
 
-        // Sprint
+        /*
+        * Beh hraca
+        */
         if (Input.GetKey(KeyCode.LeftShift) && canSprintWithEnergy)
         {
             if (Mathf.Abs(horizontal) > 0 || Mathf.Abs(vertical) > 0)
@@ -214,10 +251,12 @@ public class PlayerMovement : MonoBehaviour
             controller.Move(move * sprintSpeed * Time.deltaTime);
         }
 
-        // Weapon equip
+        /*
+        * Ak je stlacene tlacidlo E, tak hrac UNequipne zbrane.
+        */
         if (Input.GetKeyDown(KeyCode.E))
         {
-            // Unequip
+            // Unequip sword
             if (animator.GetBool("Equipped Sword") == true)
             {
                 animator.SetTrigger("Unequip");
@@ -226,7 +265,7 @@ public class PlayerMovement : MonoBehaviour
                 swordIcon.SetActive(false);
             }
 
-            // Unequip
+            // Unequip bow
             if (animator.GetBool("Equipped Bow") == true)
             {
                 animator.SetTrigger("Unequip");
@@ -236,7 +275,8 @@ public class PlayerMovement : MonoBehaviour
 
             }
 
-            if(animator.GetBool("Equipped Sword") == false && animator.GetBool("Equipped Bow") == false)
+            // Nastavenie ikony ruk na HUD
+            if (animator.GetBool("Equipped Sword") == false && animator.GetBool("Equipped Bow") == false)
             {
                 handsIcon.SetActive(true);
             }
@@ -246,6 +286,9 @@ public class PlayerMovement : MonoBehaviour
             }
         }
 
+        /*
+        * Ak je stlacene tlacidlo 1, tak hrac equipne sword.
+        */
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
             // Equip sword
@@ -270,6 +313,9 @@ public class PlayerMovement : MonoBehaviour
             }
         }
 
+        /*
+        * Ak je stlacene tlacidlo 2, tak hrac equipne bow.
+        */
         if (Input.GetKeyDown(KeyCode.Alpha2) && hasArrows)
         {
             // Equip Bow
@@ -291,7 +337,10 @@ public class PlayerMovement : MonoBehaviour
             }
         }
 
-        // Attack
+        /*
+        * Ak je stlacene lave tlacidlo na mysi a hrac ma equipnuty sword, tak
+        * sa uskutocni rychly utok.
+        */
         if (Input.GetMouseButtonDown(0) && equippedSword && canAttack)
         {
             canAttack = false;
@@ -304,7 +353,10 @@ public class PlayerMovement : MonoBehaviour
             Invoke(nameof(ResetAttack), attackCooldownTime);
         }
 
-        // Strong Attack
+        /*
+        * Ak je stlacene prave tlacidlo na mysi a hrac ma equipnuty sword, tak
+        * sa uskutocni silny utok.
+        */
         if (Input.GetMouseButtonDown(1) && equippedSword && canAttack)
         {
             canAttack = false;
@@ -317,7 +369,11 @@ public class PlayerMovement : MonoBehaviour
             Invoke(nameof(ResetAttack), attackCooldownTime);
         }
 
-        // Long Shot
+        /*
+        * Ak je stlacene prave tlacidlo na mysi a hrac ma equipnuty bow, tak
+        * sa spusti animacia pre dlhy presny vystrel lukom a string na luku sa 
+        * napne.
+        */
         if (Input.GetMouseButton(1) && equippedBow && canShoot)
         {
             canShoot = false;
@@ -329,6 +385,10 @@ public class PlayerMovement : MonoBehaviour
             holding = true;
         }
 
+        /*
+        * Ak je string na luku napnuty, a je stlacene lave tlacidlo na mysi, tak
+        * sa vystreli sip s velkou silou.
+        */
         if (Input.GetMouseButtonDown(0) && holding)
         {
             holding = false;
@@ -338,6 +398,10 @@ public class PlayerMovement : MonoBehaviour
             LongShotAnimation();
         }
 
+        /*
+        * Ak je string na luku napnuty, a je znovu stlacene prave tlacidlo na mysi,
+        * tak sa string na luku releasne.
+        */
         if (Input.GetMouseButtonUp(1) && holding)
         {
             holding = false;
@@ -345,7 +409,10 @@ public class PlayerMovement : MonoBehaviour
             canShoot = true;
         }
 
-        // Shoot
+        /*
+        * Ak je stlacene lave tlacidlo na mysi a hrac ma equipnuty luk, tak
+        * sa uskutocni rychly vystrel lukom.
+        */
         if (Input.GetMouseButtonDown(0) && equippedBow && canShoot && !holding)
         {
             canShoot = false;
@@ -356,7 +423,10 @@ public class PlayerMovement : MonoBehaviour
             StartCoroutine(ShootAnimation());
         }
 
-        // Dash
+        /*
+        * Dashovanie hraca spolu s volanim cooldownu, aby bolo zabranene 
+        * spamovanie dashnu.
+        */
         if (Input.GetKeyDown(KeyCode.LeftControl) && canDash && canDashWithEnergy)
         {
             canDash = false;
@@ -367,6 +437,9 @@ public class PlayerMovement : MonoBehaviour
             dashCurrentTime = 0f;
         }
 
+        /*
+        * Casova dashu, kolko moze hrac dashovat.
+        */
         if (dashCurrentTime < dashDuration)
         {
             move *= dashDistance;
@@ -378,11 +451,14 @@ public class PlayerMovement : MonoBehaviour
             move = Vector3.zero;
         }
 
+        // Gravitacia ktora vplyva na hraca.
         velocity.y += gravity * Time.deltaTime;
-
         controller.Move(velocity * Time.deltaTime);
     }
 
+    /*
+    * Overenie stavu energie hraca, ci moze dashovat a sprintovat.
+    */
     void CheckEnergy()
     {
         currentEnergy = playerEnergy.CurrentEnergy;
@@ -404,6 +480,9 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
+    /*
+    * Overenie poctu sipov, ci moze hrac strielat z luku.
+    */
     void CheckArrows()
     {
         currentArrowCount = arrowSys.CurrentArrows;
@@ -418,26 +497,37 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
+    /*
+    * Reset dashu po cooldowne.
+    */
     void ResetDash()
     {
         canDash = true;
     }
 
+    /*
+    * Reset attacku so swordom po cooldowne.
+    */
     void ResetAttack()
     {
         isAttacking = false;
         canAttack = true;
     }
 
+    /*
+    * Reset attacku s lukom po cooldowne.
+    */
     void ResetShoot()
     {
         arms.GetComponent<WeaponInteraction>().AttachArrow();
         canShoot = true;
     }
 
+    /*
+    * Unequip luku a equipnutie swordu ak hrac nema dostatocny pocet sipov.
+    */
     void unequipBowWithNoArrows()
     {
-        // Equip sword
         if (animator.GetBool("Equipped Sword") == false)
         {
             if (animator.GetBool("Equipped Bow") == true)
@@ -456,6 +546,9 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
+    /*
+    * Strielanie sipu pri rychlom napnuti.
+    */
     IEnumerator ShootAnimation()
     {
         animator.SetTrigger("Quick Shoot");
@@ -492,6 +585,9 @@ public class PlayerMovement : MonoBehaviour
         Invoke(nameof(ResetShoot), shootCooldownTime);
     }
 
+    /*
+    * Strielanie sipu pri dlhom napnuti.
+    */
     void LongShotAnimation()
     {
         arrowSys.arrowsUsed(1);

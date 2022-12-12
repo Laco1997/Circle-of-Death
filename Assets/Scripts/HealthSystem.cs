@@ -6,6 +6,9 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
+/*
+* Ovladac pre spravu zivota hraca a bossa.
+*/
 public class HealthSystem : MonoBehaviour
 {
     public int maxHealth;
@@ -14,7 +17,10 @@ public class HealthSystem : MonoBehaviour
     Animator animator;
     public TMP_Text currentHealthText;
 
-    // HP Particle
+    /*
+    * HP Particles - prevzaty asset z unity store:
+    * https://assetstore.unity.com/packages/tools/particles-effects/hp-particles-21856
+    */
     public GameObject HPParticle;
     public Vector3 DefaultForce = new Vector3(0f, 1f, 0f);
     public float DefaultForceScatter = 0.5f;
@@ -22,6 +28,9 @@ public class HealthSystem : MonoBehaviour
     [SerializeField] private GameObject hudDamage;
     int currentStage = 1;
 
+    /*
+    * Vo funkcii Start() nacitavame zivot bossa a hraca z DataManager instancie.
+    */
     void Start()
     {
         if (gameObject.tag == "Enemy")
@@ -54,6 +63,10 @@ public class HealthSystem : MonoBehaviour
         hudDamage.SetActive(false);
     }
 
+    /*
+    * Funkcia ktora sa priebezne vola pocas Main World sceny, v ktorej sa 
+    * priebezne ukladaj zivot bossa a hraca pre Lavovu scenu.
+    */
     public void mainWorldData()
     {
         if (gameObject.tag == "Player")
@@ -66,6 +79,10 @@ public class HealthSystem : MonoBehaviour
         }
     }
 
+    /*
+    * Dealovanie damageu pre bossa alebo hraca. Funkcia spracuva aj vyhru 
+    * alebo prehru, ak je aktualne HP == 0.
+    */
     public void damage(int amount)
     {
         currentHealth -= amount;
@@ -93,6 +110,9 @@ public class HealthSystem : MonoBehaviour
         }
     }
 
+    /*
+    * Pridavanie zivota pre hraca, ked hrac zdivhne zivot zo zeme.
+    */
     public void healthGained(int amount)
     {
         currentHealth += amount;
@@ -105,6 +125,9 @@ public class HealthSystem : MonoBehaviour
         currentHealthText.text = currentHealth.ToString();
     }
 
+    /*
+    * Prepocitanie zivota pre zobrazenie v HUD.
+    */
     public float getPercentage()
     {
         return ((float)currentHealth / (float)maxHealth) * maxHealth;
@@ -116,6 +139,11 @@ public class HealthSystem : MonoBehaviour
         return currentHealth == 0;
     }
 
+    /*
+    * HP Particles - prevzaty asset z unity store:
+    * https://assetstore.unity.com/packages/tools/particles-effects/hp-particles-21856
+    * Zobrazenie damageu v hre, ked hrac hitne bossa.
+    */
     public void DamageIndicator(float Delta, Vector3 Position)
     {
         Position.y += 12;
@@ -133,11 +161,18 @@ public class HealthSystem : MonoBehaviour
             DefaultForce.z + Random.Range(-DefaultForceScatter, DefaultForceScatter)));
     }
 
+    /*
+    * Spustac zobrazenia damageu na HUD (cerveny pain pri hite hraca), ktory trva len 
+    * neja nejaku dobu.
+    */
     public void TimedHitDamage(float duration)
     {
         StartCoroutine(DamageDuration(duration));
     }
 
+    /*
+    * Aktivacia a dekativacia damageu na HUDe po danom case.
+    */
     IEnumerator DamageDuration(float damageDuration)
     {
         ActivateDamageHUD();
@@ -145,11 +180,17 @@ public class HealthSystem : MonoBehaviour
         DeactivateDamageHUD();
     }
 
+    /*
+    * Aktivacia damageu na HUDe.
+    */
     public void ActivateDamageHUD()
     {
         hudDamage.SetActive(true);
     }
 
+    /*
+    * Deaktivacia damageu na HUDe.
+    */
     public void DeactivateDamageHUD()
     {
         hudDamage.SetActive(false);

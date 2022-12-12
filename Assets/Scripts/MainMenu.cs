@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+/*
+* Ovladac umoznujuci prepinanie sa medzi scenarmi v Menu hry.
+*/
 public class MainMenu : MonoBehaviour
 {
     public void PlayGame()

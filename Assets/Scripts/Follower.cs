@@ -7,6 +7,9 @@ using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.SceneManagement;
 
+/*
+* Hlavny ovladac spravu AI bossa.
+*/
 public class Follower : MonoBehaviour
 {
     [Header("Boss skin")]
@@ -48,7 +51,6 @@ public class Follower : MonoBehaviour
     [Header("Stage 1 base attack")]
     public float attackCooldownDefault = 7f;
     public float attackDuration = 1.5f;
-
 
     [Header("Stage 2")]
     public GameObject groundHitParticles;
@@ -97,14 +99,16 @@ public class Follower : MonoBehaviour
         bossIsAttacking = false;
     }
 
+    /*
+    * Stage 1 hry, kedy boss followuje a vykonava swing attack voci hracovi.
+    */
     void stage1()
     {
         if (pickupPolePhase)
         {
             npc.stoppingDistance = 0f;
-            if (npc.remainingDistance < 5f) // todo fix
+            if (npc.remainingDistance < 5f)
             {
-                // todo dust particles
                 bossPole.SetActive(true);
                 lastPole.SetActive(false);
                 stage = 2;
@@ -148,7 +152,7 @@ public class Follower : MonoBehaviour
                         foreach (GameObject pole in poles.Where(p => p.activeSelf))
                         {
                             int hits = pole.GetComponent<PoleHit>().hits;
-                            if (hits > 0 && hits > max) // todo if hits > const
+                            if (hits > 0 && hits > max)
                             {
                                 max = hits;
                                 poleWithMax = pole;
@@ -178,7 +182,7 @@ public class Follower : MonoBehaviour
                 if (goingToMiddle)
                 {
                     npc.stoppingDistance = 0;
-                    if (npc.remainingDistance <= 2f) // todo fix
+                    if (npc.remainingDistance <= 2f)
                     {
                         npc.transform.position = new Vector3(middlePoint.position.x, npc.transform.position.y, middlePoint.position.z);
                         inMiddle = true;
@@ -511,6 +515,9 @@ public class Follower : MonoBehaviour
         }
     }
 
+    /*
+    * Zmena skinu bossa pri jednotlivych leveloch hry.
+    */
     void changeSkin()
     {
         if(!npcSkinChanged)
@@ -522,6 +529,9 @@ public class Follower : MonoBehaviour
         }
     }
 
+    /*
+    * Zmena hudby pri vstupe do lava sveta.
+    */
     void playStage3Music()
     {
         if (!stage3MusicPlaying)

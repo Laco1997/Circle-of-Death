@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/*
+* Ovladac pre hitovanie hraca pomocou swingu. Boss ma cooldown po kazdom hite.
+*/
 public class MeleeBossHit : MonoBehaviour
 {
     [SerializeField] private GameObject boss;
@@ -17,6 +20,10 @@ public class MeleeBossHit : MonoBehaviour
         health = player.GetComponent<HealthSystem>();
         attackHitDamageCooldown = 0;
     }
+
+    /*
+    * Cooldown casovac po uskutocneni attacku bossom.
+    */
     void Update()
     {
         if (attackHitDamageCooldown > 0)
@@ -25,6 +32,10 @@ public class MeleeBossHit : MonoBehaviour
         }
     }
 
+    /*
+    * Ak boss hitol hraca, tak sa hracovi zobrazi damage na HUDe a odrata sa
+    * mu zo zivota.
+    */
     void OnTriggerEnter(Collider col)
     {
         if (col.gameObject.tag == "Player")

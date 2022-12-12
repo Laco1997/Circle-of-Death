@@ -3,6 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/*
+* Ovladac pre vytvaranie kruhu v Lava World, ktori bude boss nicit.
+*/
 public class SpawnGround : MonoBehaviour
 {
     public GameObject groundPart;
@@ -20,7 +23,6 @@ public class SpawnGround : MonoBehaviour
             float rr = r / 2;
             float length = 2 * MathF.PI * rr/2;
             int prefabCount = (int)(Math.Ceiling(length / prefabRadius));
-            //prefabCount = 5;
             for (int i = 0; i < prefabCount; i++)
             {
 
@@ -31,7 +33,7 @@ public class SpawnGround : MonoBehaviour
                 var pos = new Vector3(horizontal, 0, vertical) * rr/2;
                 float randomY = UnityEngine.Random.Range(randMin, randMax);
                 pos.x += transform.position.x;
-                pos.y = y - randomY; // randomSize
+                pos.y = y - randomY;
                 pos.z += transform.position.z;
                 var instance = Instantiate(groundPart, pos, Quaternion.identity);
                 instance.tag = "GroundPart";
