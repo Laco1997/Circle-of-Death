@@ -12,11 +12,17 @@ public class PlayerLook : MonoBehaviour
     [SerializeField] private Transform playerBody;
     float xRotation = 0f;
 
+    /*
+     * Loknutie kurzora pre pohyb s mysou.
+     */
     void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
     }
 
+    /*
+     * Nastavenie pozicii pre rotaciu a jej limitaciu hraca pri pohybe mysou.
+     */
     void Update()
     {
         float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity * Time.deltaTime;

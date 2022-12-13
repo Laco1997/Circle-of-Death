@@ -14,6 +14,9 @@ public class ArrowController : MonoBehaviour
     int minArrowDamage = 20;
     int maxArrowDamage = 25;
 
+    /*
+    * Ziskanie skriptu HealthSystem.
+    */
     void Start()
     {
         bossHealth = boss.GetComponent<HealthSystem>();
@@ -24,6 +27,11 @@ public class ArrowController : MonoBehaviour
      */
     void OnTriggerEnter(Collider col)
     {
+        /*
+         * Ak je kolizia medzi bossom a vystrelenym sipom, tak sa v skripte HealthSystem
+         * zavola funkcia damage() a odoberie sa HP bossovi. Vystreleny sip po kolizii
+         * zmizne.
+         */
         if (col.gameObject.tag == "Enemy" && gameObject.name == "Shot Arrow")
         {
             arrowDamage = Random.Range(minArrowDamage, maxArrowDamage);

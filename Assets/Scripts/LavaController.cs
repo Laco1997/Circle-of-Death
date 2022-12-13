@@ -11,6 +11,9 @@ public class LavaController : MonoBehaviour
     GameObject player;
     HealthSystem health;
 
+    /*
+     * Ziskanie objektov hrac a skriptu HealthSystem.
+     */
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");

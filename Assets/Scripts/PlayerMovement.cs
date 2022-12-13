@@ -88,6 +88,10 @@ public class PlayerMovement : MonoBehaviour
     bool canDashWithEnergy = true;
     bool canSprintWithEnergy = true;
 
+    /*
+     * Ziskanie objektov audio clip pre PreFightMusic a animatora. Inicialne nastavenie
+     * animacii, ikoniek zbrani na HUDe. Ziskanie skriptov EnergyStstem a ArrowSystem.
+     */
     void Start()
     {
         FindObjectOfType<AudioManager>().Play("PreFightMusic");

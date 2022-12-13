@@ -17,6 +17,9 @@ public class EnergySystem : MonoBehaviour
     public TMP_Text currentEnergyText;
     int energy = 5;
 
+    /*
+     * Nastavenie aktulanej hodnoty energy a vypis hodnoty na HUD.
+     */
     void Start()
     {
         currentEnergy = maxEnergy;

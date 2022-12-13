@@ -15,6 +15,9 @@ public class SwordController : MonoBehaviour
     int minSwordDamage = 90;
     int maxSwordDamage = 110;
 
+    /*
+     * Ziskanie skriptu HealthSystem.
+     */
     void Start()
     {
         bossHealth = boss.GetComponent<HealthSystem>();

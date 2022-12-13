@@ -14,6 +14,10 @@ public class MeleeBossHit : MonoBehaviour
     public int attackHitDamage = 200;
     public float attackHitDamageCooldown = 0;
 
+    /*
+     * Ziskanie objektu hrac, skriptu HealthSystem a inicializacia cooldownu pre
+     * attack na hodnotu 0.
+     */
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");

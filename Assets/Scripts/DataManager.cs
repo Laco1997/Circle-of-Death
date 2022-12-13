@@ -13,6 +13,10 @@ public class DataManager : MonoBehaviour
     public int PlayerHealth = 500;
     public int BossHealth = 4000;
 
+    /*
+     * Ak nemame instanciu, tak sa dany objekt zmaze. V opacnom pripade
+     * ho ulozime a nastavime tak, aby sa po loadnuti sceny nezmazal.
+     */
     private void Awake()
     {
         if (Instance != null)

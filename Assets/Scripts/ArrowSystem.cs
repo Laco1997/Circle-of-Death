@@ -13,6 +13,9 @@ public class ArrowSystem : MonoBehaviour
     int currentArrowCount;
     public TMP_Text currentArrowCountText;
 
+    /*
+     * Nastavenie aktualneho poctu sipov.
+     */
     void Start()
     {
         currentArrowCount = maxArrowCount;

@@ -12,6 +12,9 @@ public class BeamCollision : MonoBehaviour
     private HealthSystem hs;
     public int beamDamage = 10;
 
+    /*
+     * Ziskanie skriptu HealthSystem.
+     */
     void Start()
     {
         hs = GetComponent<HealthSystem>();

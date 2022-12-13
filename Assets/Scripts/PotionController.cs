@@ -15,6 +15,10 @@ public class PotionController : MonoBehaviour
     GameObject potionSpawner;
     PotionSpawner potions;
 
+    /*
+     * Ziskanie objektov hraca a potion spawneru. Ziskanie skriptov PotionSpawner,
+     * EnergySystem a HealthSystem.
+     */
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");

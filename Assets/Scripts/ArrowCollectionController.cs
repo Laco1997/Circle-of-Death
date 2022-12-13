@@ -14,6 +14,9 @@ public class ArrowCollectionController : MonoBehaviour
     ArrowSpawner arrows;
     int arrowsCount = 10;
 
+    /*
+     * Ziskanie objektov a skriptov.
+     */
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
@@ -28,6 +31,11 @@ public class ArrowCollectionController : MonoBehaviour
      */
     void OnTriggerEnter(Collider col)
     {
+        /*
+         * Ak je kolizia medzi hracom a kolekciou sipov, tak sa v skripte ArrowSystem
+         * zavola funkcia arrowsCollected() a pridaju sa sipy. Nasledne sa potvrdi 
+         * pozbieranie sipov a resetne sa cas. Sipy po zbere zmiznu.
+         */
         if (col.gameObject.tag == "Player" && gameObject.name == "ArrowCollection(Clone)")
         {
             arrowSys.arrowsCollected(arrowsCount);

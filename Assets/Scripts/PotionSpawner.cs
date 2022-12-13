@@ -16,6 +16,9 @@ public class PotionSpawner : MonoBehaviour
     [SerializeField] private GameObject boss;
     Follower bossFollower;
 
+    /*
+     * Ziskanie skriptu Follower.
+     */
     void Start()
     {
         bossFollower = boss.GetComponent<Follower>();

@@ -10,6 +10,9 @@ public class CutsceneController : MonoBehaviour
 {
     float delayTime = 9.4f;
 
+    /*
+     * Spustenie casovanej funkcie pre delay po prehrati custscenu.
+     */
     void Start()
     {
         StartCoroutine(LoadLevelAfterDelay(delayTime));
