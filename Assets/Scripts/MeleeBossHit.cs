@@ -10,9 +10,11 @@ public class MeleeBossHit : MonoBehaviour
     [SerializeField] private GameObject boss;
     GameObject player;
     HealthSystem health;
-    public float attackHitDamageCooldownDefault = 5f;
+    public float attackHitDamageCooldownDefault = 3f;
     public int attackHitDamage = 200;
     public float attackHitDamageCooldown = 0;
+    int minAttackHitDamage = 80;
+    int maxAttackHitDamage = 120;
 
     /*
      * Ziskanie objektu hrac, skriptu HealthSystem a inicializacia cooldownu pre
@@ -47,7 +49,16 @@ public class MeleeBossHit : MonoBehaviour
             if (attackHitDamageCooldown <= 0 && boss.GetComponent<Follower>().bossIsAttacking)
             {
                 health.TimedHitDamage(1.5f);
-                health.damage(attackHitDamage);
+                attackHitDamage = UnityEngine.Random.Range(minAttackHitDamage, maxAttackHitDamage);
+
+                if (boss.GetComponent<Follower>().stage == 2)
+                {
+                    health.damage(attackHitDamage * 2);
+                }
+                else
+                {
+                    health.damage(attackHitDamage);
+                }
                 attackHitDamageCooldown = attackHitDamageCooldownDefault;
             }
         }

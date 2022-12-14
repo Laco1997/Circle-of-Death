@@ -16,6 +16,7 @@ public class Follower : MonoBehaviour
     public GameObject npcMesh;
     public Texture npcSkin;
     bool npcSkinChanged = false;
+    float stoppingDistance = 11f;
 
     [Header("General")]
     public Transform player;
@@ -29,7 +30,8 @@ public class Follower : MonoBehaviour
     HealthSystem health;
     public bool bossIsAttacking;
     [SerializeField] GameObject swordHitRadius;
-    int groundDamage = 200;
+    int minGroundDamage = 250;
+    int maxGroundDamage = 350;
 
     [Header("Stage 1")]
     [SerializeField] private bool beamPhase = false;
@@ -97,6 +99,11 @@ public class Follower : MonoBehaviour
         playerObject = GameObject.FindGameObjectWithTag("Player");
         health = playerObject.GetComponent<HealthSystem>();
         bossIsAttacking = false;
+
+        if(stage == 3)
+        {
+            playerInDistance = true;
+        }
     }
 
     /*
@@ -199,7 +206,7 @@ public class Follower : MonoBehaviour
         else
         {
             npc.SetDestination(player.position);
-            npc.stoppingDistance = 7f;
+            npc.stoppingDistance = stoppingDistance;
             if (beamCooldown <= 0)
             {
                 if (poles.Where(p => p.activeSelf).ToList().Count == 1)
@@ -221,7 +228,7 @@ public class Follower : MonoBehaviour
                     attackCooldown -= Time.deltaTime;
                     if (attackCooldown*-1 > attackDuration)
                     {
-                        npc.stoppingDistance = 7f;
+                        npc.stoppingDistance = stoppingDistance;
                         bossIsAttacking = false;
                         attackReady = false;
                         attackCooldown = attackCooldownDefault;
@@ -232,7 +239,7 @@ public class Follower : MonoBehaviour
                     beamCooldown -= Time.deltaTime;
                     if (attackReady)
                     {
-                        if (npc.remainingDistance <= 8f)
+                        if (npc.remainingDistance <= stoppingDistance)
                         {
                             bossIsAttacking = true;
                             animator.SetTrigger("attack");
@@ -297,6 +304,7 @@ public class Follower : MonoBehaviour
                         if(Vector3.Distance(player.position, transform.position) < groundHitRange)
                         {
                             health.TimedHitDamage(1.5f);
+                            int groundDamage = UnityEngine.Random.Range(minGroundDamage, maxGroundDamage);
                             health.damage(groundDamage);
                         }
                         groundHitCounter++;
@@ -319,7 +327,7 @@ public class Follower : MonoBehaviour
         }
         else
         {
-            npc.stoppingDistance = 7f;
+            npc.stoppingDistance = stoppingDistance;
             if (groundHitCooldown <= 0)
             {
                 groundHitPhase = true;
@@ -334,7 +342,7 @@ public class Follower : MonoBehaviour
                     attackCooldown -= Time.deltaTime;
                     if (attackCooldown * -1 > bigAttackDuration)
                     {
-                        npc.stoppingDistance = 7f;
+                        npc.stoppingDistance = stoppingDistance;
                         bossIsAttacking = false;
                         attackReady = false;
                         attackCooldown = attackCooldownDefault;
@@ -378,7 +386,7 @@ public class Follower : MonoBehaviour
 
     void stage3()
     {
-        npc.stoppingDistance = 7f;
+        npc.stoppingDistance = stoppingDistance;
         npc.SetDestination(player.position);
         npc.isStopped = false;
         if (groundBreakPhase)
@@ -405,6 +413,7 @@ public class Follower : MonoBehaviour
                         if (Vector3.Distance(player.position, transform.position) < groundBreakRange)
                         {
                             health.TimedHitDamage(1.5f);
+                            int groundDamage = UnityEngine.Random.Range(minGroundDamage, maxGroundDamage);
                             health.damage(groundDamage);
                         }
                     }
@@ -417,7 +426,7 @@ public class Follower : MonoBehaviour
         }
         else
         {
-            npc.stoppingDistance = 7f;
+            npc.stoppingDistance = stoppingDistance;
             if (groundBreakCooldown <= 0)
             {
                 groundBreakPhase = true;
@@ -425,8 +434,6 @@ public class Follower : MonoBehaviour
             }
             else
             {
-
-                // TOTO SOM TU SKUSAL MENIT ALE ASI NIECO NEFICI (CHCEL SOM FIXNUT TEN SLIDE KED HITUJE HRACA)
                 if (bossIsAttacking)
                 {
                     npc.stoppingDistance = 9999f;
@@ -434,7 +441,7 @@ public class Follower : MonoBehaviour
                     attackCooldown -= Time.deltaTime;
                     if (attackCooldown * -1 > bigAttackDuration)
                     {
-                        npc.stoppingDistance = 7f;
+                        npc.stoppingDistance = stoppingDistance;
                         bossIsAttacking = false;
                         attackReady = false;
                         attackCooldown = attackCooldownDefault;
@@ -465,7 +472,6 @@ public class Follower : MonoBehaviour
                         }
                     }
                 }
-                // TUTO KONCI TA UPRAVA
             }
         }
 
@@ -489,20 +495,22 @@ public class Follower : MonoBehaviour
         health.mainWorldData();
         gameObject.GetComponent<HealthSystem>().mainWorldData();
 
-        switch (stage)
+        if (playerInDistance)
         {
-            case 1:
-                stage1();
-                break;
-            case 2:
-                stage2();
-                break;
-            case 3:
-                playerInDistance = true;
-                changeSkin();
-                stage3();
-                playStage3Music();
-                break;
+            switch (stage)
+            {
+                case 1:
+                    stage1();
+                    break;
+                case 2:
+                    stage2();
+                    break;
+                case 3:
+                    changeSkin();
+                    stage3();
+                    playStage3Music();
+                    break;
+            }
         }
 
         if (playerInDistance)

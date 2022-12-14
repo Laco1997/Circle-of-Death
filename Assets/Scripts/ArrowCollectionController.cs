@@ -12,7 +12,7 @@ public class ArrowCollectionController : MonoBehaviour
     ArrowSystem arrowSys;
     GameObject arrowSpawner;
     ArrowSpawner arrows;
-    int arrowsCount = 10;
+    int arrowsCount = 3;
 
     /*
      * Ziskanie objektov a skriptov.

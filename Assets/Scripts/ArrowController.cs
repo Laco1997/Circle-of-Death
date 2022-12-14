@@ -11,8 +11,9 @@ public class ArrowController : MonoBehaviour
     [SerializeField] private GameObject boss;
     HealthSystem bossHealth;
     int arrowDamage;
-    int minArrowDamage = 20;
-    int maxArrowDamage = 25;
+    int minArrowDamage = 80;
+    int maxArrowDamage = 125;
+    float criticalChance = 0.4f;
 
     /*
     * Ziskanie skriptu HealthSystem.
@@ -34,7 +35,14 @@ public class ArrowController : MonoBehaviour
          */
         if (col.gameObject.tag == "Enemy" && gameObject.name == "Shot Arrow")
         {
+            float normChance = Random.Range(0f, 1f);
             arrowDamage = Random.Range(minArrowDamage, maxArrowDamage);
+
+            if (normChance <= criticalChance)
+            {
+                arrowDamage *= 2;
+            }
+
             bossHealth.damage(arrowDamage);
 
             Destroy(gameObject);

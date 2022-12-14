@@ -12,8 +12,9 @@ public class SwordController : MonoBehaviour
     [SerializeField] private GameObject boss;
     HealthSystem bossHealth;
     int swordDamage;
-    int minSwordDamage = 90;
-    int maxSwordDamage = 110;
+    int minSwordDamage = 110;
+    int maxSwordDamage = 180;
+    float criticalChance = 0.3f;
 
     /*
      * Ziskanie skriptu HealthSystem.
@@ -30,7 +31,14 @@ public class SwordController : MonoBehaviour
     {
         if (col.gameObject.tag == "SwordRadius" && player.GetComponent<PlayerMovement>().isAttacking)
         {
+            float normChance = Random.Range(0f, 1f);
             swordDamage = Random.Range(minSwordDamage, maxSwordDamage);
+
+            if (normChance <= criticalChance)
+            {
+                swordDamage *= 2;
+            }
+
             bossHealth.damage(swordDamage);
         }
     }
