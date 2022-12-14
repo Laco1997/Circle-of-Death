@@ -3955,6 +3955,10 @@ PrefabInstance:
       value: 204.1
       objectReference: {fileID: 0}
     - target: {fileID: 1609597584, guid: bd0a7aceaeb974da381c6296affce1be, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1609597584, guid: bd0a7aceaeb974da381c6296affce1be, type: 3}
       propertyPath: m_Center.x
       value: -40.5
       objectReference: {fileID: 0}
@@ -3988,7 +3992,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2226425834464354560, guid: bd0a7aceaeb974da381c6296affce1be, type: 3}
       propertyPath: beamCooldownDefault
-      value: 2
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 2226425834464354562, guid: bd0a7aceaeb974da381c6296affce1be, type: 3}
       propertyPath: health
