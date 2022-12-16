@@ -43,7 +43,7 @@ public class ArrowController : MonoBehaviour
             Debug.Log(col.gameObject.name);
             GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
         }
-        else if (col.gameObject.tag == "Pole" || col.gameObject.tag == "ProtectingShield")
+        else if (col.gameObject.tag == "Pole" || col.gameObject.tag == "ProtectingShield" || col.gameObject.tag == "WallAround")
         {
             Destroy(gameObject);
         }

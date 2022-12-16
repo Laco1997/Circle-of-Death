@@ -16,6 +16,7 @@ TagManager:
   - Lava
   - ProtectingShield
   - Ground
+  - WallAround
   layers:
   - Default
   - TransparentFX

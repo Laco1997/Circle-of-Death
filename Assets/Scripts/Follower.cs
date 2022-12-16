@@ -31,6 +31,7 @@ public class Follower : MonoBehaviour
     public bool bossIsAttacking;
     [SerializeField] GameObject swordHitRadius;
     [SerializeField] GameObject protectingShield;
+    [SerializeField] GameObject wallAround;
     int minGroundDamage = 250;
     int maxGroundDamage = 350;
 
@@ -490,6 +491,7 @@ public class Follower : MonoBehaviour
     {
         playerInDistance = playerEntered;
         protectingShield.SetActive(false);
+        wallAround.SetActive(true);
     }
 
     void Update()
