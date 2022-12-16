@@ -1592,7 +1592,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PlayerHealth: 500
-  BossHealth: 4000
+  BossHealth: 10000
 --- !u!4 &1204468889
 Transform:
   m_ObjectHideFlags: 0
@@ -3794,6 +3794,10 @@ PrefabInstance:
     - target: {fileID: 1396704633, guid: 22a7a6794f04d4433bcb0880ce098d33, type: 3}
       propertyPath: m_RootOrder
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1865315509, guid: 22a7a6794f04d4433bcb0880ce098d33, type: 3}
+      propertyPath: maxArrowCount
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 1865315509, guid: 22a7a6794f04d4433bcb0880ce098d33, type: 3}
       propertyPath: currentArrowCountText
