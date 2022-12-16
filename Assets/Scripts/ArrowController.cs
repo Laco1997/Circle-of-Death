@@ -10,6 +10,8 @@ public class ArrowController : MonoBehaviour
 {
     [SerializeField] private GameObject boss;
     HealthSystem bossHealth;
+    GameObject player;
+    PlayerMovement playerController;
     int arrowDamage;
     int minArrowDamage = 80;
     int maxArrowDamage = 125;
@@ -21,6 +23,8 @@ public class ArrowController : MonoBehaviour
     void Start()
     {
         bossHealth = boss.GetComponent<HealthSystem>();
+        player = GameObject.FindGameObjectWithTag("Player");
+        playerController = player.GetComponent<PlayerMovement>();
     }
 
     /*
@@ -39,6 +43,11 @@ public class ArrowController : MonoBehaviour
             arrowDamage = Random.Range(minArrowDamage, maxArrowDamage);
 
             if (normChance <= criticalChance)
+            {
+                arrowDamage = Mathf.RoundToInt(arrowDamage * 1.2f); ;
+            }
+
+            if(playerController.hardBowShot)
             {
                 arrowDamage *= 2;
             }

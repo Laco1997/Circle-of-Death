@@ -10,6 +10,7 @@ public class SwordController : MonoBehaviour
 {
     [SerializeField] private GameObject player;
     [SerializeField] private GameObject boss;
+    PlayerMovement playerController;
     HealthSystem bossHealth;
     int swordDamage;
     int minSwordDamage = 110;
@@ -22,6 +23,8 @@ public class SwordController : MonoBehaviour
     void Start()
     {
         bossHealth = boss.GetComponent<HealthSystem>();
+        player = GameObject.FindGameObjectWithTag("Player");
+        playerController = player.GetComponent<PlayerMovement>();
     }
 
     /*
@@ -29,12 +32,17 @@ public class SwordController : MonoBehaviour
     */
     void OnTriggerEnter(Collider col)
     {
-        if (col.gameObject.tag == "SwordRadius" && player.GetComponent<PlayerMovement>().isAttacking)
+        if (col.gameObject.tag == "SwordRadius" && playerController.isAttacking)
         {
             float normChance = Random.Range(0f, 1f);
             swordDamage = Random.Range(minSwordDamage, maxSwordDamage);
 
             if (normChance <= criticalChance)
+            {
+                swordDamage = Mathf.RoundToInt(swordDamage * 1.2f);
+            }
+
+            if (playerController.hardSwing)
             {
                 swordDamage *= 2;
             }

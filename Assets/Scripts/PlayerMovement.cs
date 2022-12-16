@@ -34,6 +34,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private CharacterController controller;
     float horizontal;
     float vertical;
+    public bool hardSwing = false;
 
     [Header("Walk")]
     [SerializeField] private float walkSpeed = 3.2f;
@@ -76,6 +77,7 @@ public class PlayerMovement : MonoBehaviour
     bool hasArrows = true;
     ArrowSystem arrowSys;
     int currentArrowCount;
+    public bool hardBowShot = false;
 
     [Header("Weapons")]
     [SerializeField] private GameObject swordIcon;
@@ -363,6 +365,7 @@ public class PlayerMovement : MonoBehaviour
         */
         if (Input.GetMouseButtonDown(1) && equippedSword && canAttack)
         {
+            hardSwing = true;
             canAttack = false;
             isAttacking = true;
             animator.SetTrigger("Strong Attack");
@@ -516,6 +519,7 @@ public class PlayerMovement : MonoBehaviour
     {
         isAttacking = false;
         canAttack = true;
+        hardSwing = false;
     }
 
     /*
@@ -525,6 +529,7 @@ public class PlayerMovement : MonoBehaviour
     {
         arms.GetComponent<WeaponInteraction>().AttachArrow();
         canShoot = true;
+        hardBowShot = false;
     }
 
     /*
@@ -547,6 +552,11 @@ public class PlayerMovement : MonoBehaviour
             animator.SetBool("Equipped Sword", true);
             equippedSword = true;
             swordIcon.SetActive(true);
+        }
+
+        if(currentArrowCount <= 0)
+        {
+            arrow.SetActive(false);
         }
     }
 
@@ -594,6 +604,7 @@ public class PlayerMovement : MonoBehaviour
     */
     void LongShotAnimation()
     {
+        hardBowShot = true;
         arrowSys.arrowsUsed(1);
         animator.SetTrigger("Arrow Shot");
         arms.GetComponent<WeaponInteraction>().DeattachArrow();

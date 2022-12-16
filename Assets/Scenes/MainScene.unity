@@ -3807,6 +3807,10 @@ PrefabInstance:
       propertyPath: boss
       value: 
       objectReference: {fileID: 174378367}
+    - target: {fileID: 1430856067469103710, guid: 22a7a6794f04d4433bcb0880ce098d33, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1430856067703512002, guid: 22a7a6794f04d4433bcb0880ce098d33, type: 3}
       propertyPath: boss
       value: 
