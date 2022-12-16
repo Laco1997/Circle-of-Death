@@ -37,24 +37,36 @@ public class ArrowController : MonoBehaviour
          * zavola funkcia damage() a odoberie sa HP bossovi. Vystreleny sip po kolizii
          * zmizne.
          */
-        if (col.gameObject.tag == "Enemy" && gameObject.name == "Shot Arrow")
+        if (col.gameObject.tag == "Ground")
         {
-            float normChance = Random.Range(0f, 1f);
-            arrowDamage = Random.Range(minArrowDamage, maxArrowDamage);
-
-            if (normChance <= criticalChance)
-            {
-                arrowDamage = Mathf.RoundToInt(arrowDamage * 1.2f); ;
-            }
-
-            if(playerController.hardBowShot)
-            {
-                arrowDamage *= 2;
-            }
-
-            bossHealth.damage(arrowDamage);
-
+            Debug.Log(col.gameObject.tag);
+            Debug.Log(col.gameObject.name);
+            GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
+        }
+        else if (col.gameObject.tag == "Pole" || col.gameObject.tag == "ProtectingShield")
+        {
             Destroy(gameObject);
+        }
+        else
+        {
+            if (col.gameObject.tag == "Enemy" && gameObject.name == "Shot Arrow")
+            {
+                float normChance = Random.Range(0f, 1f);
+                arrowDamage = Random.Range(minArrowDamage, maxArrowDamage);
+
+                if (normChance <= criticalChance)
+                {
+                    arrowDamage = Mathf.RoundToInt(arrowDamage * 1.2f); ;
+                }
+
+                if (playerController.hardBowShot)
+                {
+                    arrowDamage *= 2;
+                }
+
+                bossHealth.damage(arrowDamage);
+                Destroy(gameObject);
+            }
         }
     }
 }
