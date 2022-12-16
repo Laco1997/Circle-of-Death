@@ -882,7 +882,7 @@ CapsuleCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 446475921}
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 0.5000001
   m_Height: 2
@@ -1569,7 +1569,7 @@ CapsuleCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1029057813}
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 0.5000001
   m_Height: 2
@@ -2306,7 +2306,7 @@ CapsuleCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1367588682}
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 0.5000001
   m_Height: 2
@@ -2733,7 +2733,7 @@ CapsuleCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1516133668}
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 0.5000001
   m_Height: 2
@@ -3990,7 +3990,7 @@ PrefabInstance:
       objectReference: {fileID: 1351840862}
     - target: {fileID: 2158829808209365827, guid: 22a7a6794f04d4433bcb0880ce098d33, type: 3}
       propertyPath: shootForce
-      value: 30
+      value: 60
       objectReference: {fileID: 0}
     - target: {fileID: 2158829808209365830, guid: 22a7a6794f04d4433bcb0880ce098d33, type: 3}
       propertyPath: playerEnergy
