@@ -375,7 +375,7 @@ MonoBehaviour:
   m_MinValue: 0
   m_MaxValue: 15000
   m_WholeNumbers: 0
-  m_Value: 4000
+  m_Value: 15000
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []

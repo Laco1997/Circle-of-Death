@@ -12,11 +12,18 @@ public class ArrowSpawner : MonoBehaviour
     int spawnTime = 12;
     float time = 0f;
     bool arrowsPickedUp = true;
-    int minX = 160;
-    int maxX = 240;
     float y = 3f;
-    int minZ = 150;
-    int maxZ = 230;
+    GameObject boss;
+    Follower bossFollower;
+
+    /*
+     * Ziskanie skriptu Follower.
+     */
+    void Start()
+    {
+        boss = GameObject.FindGameObjectWithTag("Enemy");
+        bossFollower = boss.GetComponent<Follower>();
+    }
 
     /*
      * Reset casovaca spawnu sipov po tom, ako hrac pozbieral sipy.
@@ -56,7 +63,11 @@ public class ArrowSpawner : MonoBehaviour
     void SpawnArrows()
     {
         arrowsPickedUp = false;
-        Vector3 arrowsRandPos = new Vector3(Random.Range(minX, maxX), y, Random.Range(minZ, maxZ));
+        Vector3 arrowsRandPos = new Vector3(Random.Range(180, 240), y, Random.Range(165, 225));
+        if (bossFollower.stage == 3)
+        {
+            arrowsRandPos = new Vector3(Random.Range(50, 160), y, Random.Range(50, 140));
+        }
         Instantiate(arrows, arrowsRandPos, Quaternion.identity);
     }
 

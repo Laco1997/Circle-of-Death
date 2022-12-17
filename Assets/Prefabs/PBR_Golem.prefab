@@ -5217,8 +5217,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 278.54935, y: 170.10422, z: 201.39156}
-  m_Center: {x: -100.38866, y: -40.908028, z: 40.236866}
+  m_Size: {x: 203.70003, y: 227.70006, z: 224.2186}
+  m_Center: {x: -40.499477, y: -13.499953, z: 46.13443}
 --- !u!54 &7553540939967353988
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -5248,6 +5248,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   boss: {fileID: 2226486607313500313}
+  attackHitDamageCooldownDefault: 3
+  attackHitDamage: 200
+  attackHitDamageCooldown: 0
 --- !u!1 &2225327859737138513
 GameObject:
   m_ObjectHideFlags: 0
@@ -5618,7 +5621,10 @@ Animator:
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
-  m_WarningMessage: 
+  m_WarningMessage: "\nBinding warning: Some generic clip(s) animate transforms that
+    are already bound by a Humanoid avatar. These transforms can only be changed
+    by Humanoid clips.\n\tTransform 'Spine'\n\tTransform 'Upper_Arm_L'\n\tTransform
+    'Spine'\n\tTransform 'Upper_Arm_L'\n\tFrom animation clip 'Attack02'"
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
@@ -5670,30 +5676,34 @@ MonoBehaviour:
   stage: 1
   bossIsAttacking: 0
   swordHitRadius: {fileID: 854157485}
+  protectingShield: {fileID: 0}
+  wallAround: {fileID: 0}
   beamPhase: 0
   goingToMiddle: 0
   inMiddle: 0
   pickupPolePhase: 0
   middlePoint: {fileID: 8526546054076879322, guid: bb6a97bb8c2ef424fba61c7750fd757a, type: 3}
-  beamCooldownDefault: 60
+  beamCooldownDefault: 20
   beamCooldown: 0
-  beamCastTime: 2
-  beamDuration: 2
+  beamCastTime: 3
+  beamDuration: 3
   beamCast: -1
   beamParticles: {fileID: 5962997238291072080}
   bossPole: {fileID: 5907412741452295943}
-  attackCooldownDefault: 7
+  attackCooldownDefault: 2
+  attackDuration: 1.3
   groundHitParticles: {fileID: 887039313}
   groundHitCooldownDefault: 10
   groundHitCooldown: 0
   groundHitEffectTime: 0.1
-  groundHitCastTime: 5
+  groundHitCastTime: 0
   groundHitCast: -1
-  groundHitDuration: 2
+  groundHitDuration: 3
   groundHitPhase: 0
   groundHitCounter: 0
   groundHitRange: 20
-  bigAttackCooldownDefault: 7
+  bigAttackCooldownDefault: 4
+  bigAttackDuration: 1.3
   groundBreakCooldownDefault: 10
   groundBreakCooldown: 0
   groundBreakEffectTime: 0.2
@@ -5715,10 +5725,10 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
-  m_Speed: 4
+  m_Speed: 8
   m_Acceleration: 8
   avoidancePriority: 50
-  m_AngularSpeed: 300
+  m_AngularSpeed: 500
   m_StoppingDistance: 0
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
@@ -5739,12 +5749,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a85090ce93a4814faeb2897c2212ec2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 4000
+  maxHealth: 15000
   health: {fileID: 2481788067914810592, guid: 01421c6953e134c128f608900c526155, type: 3}
   currentHealthText: {fileID: 4839291411510056639, guid: 4032ff4269d8d41ac9f9eebf48eda78c, type: 3}
   HPParticle: {fileID: 5383594632231660674, guid: 2b5c851db8eda4f75a64390e31281ad7, type: 3}
   DefaultForce: {x: 0, y: 255, z: 0}
   DefaultForceScatter: 50
+  hudDamage: {fileID: 3271225841163502082, guid: da32e5515194241f4a4af6446530383a, type: 3}
 --- !u!1 &2226506994475285019
 GameObject:
   m_ObjectHideFlags: 0
@@ -5892,7 +5903,7 @@ BoxCollider:
   m_GameObject: {fileID: 2226583859268693981}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Size: {x: 140.31447, y: 84.40521, z: 107.147}
   m_Center: {x: -31.273483, y: -10.32694, z: 6.418771}
@@ -6082,14 +6093,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5962997238291072080}
-  m_LocalRotation: {x: 0.043548685, y: -0.04354864, z: 0.70576453, w: 0.7057645}
-  m_LocalPosition: {x: -0.038, y: 2.251, z: 1.427}
+  m_LocalRotation: {x: 0.0413698, y: -0.04136989, z: 0.7058956, w: 0.7058956}
+  m_LocalPosition: {x: -0.039998263, y: 2.1699998, z: 1.6200011}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2227720314750534011}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: -34.713, y: -90, z: 90}
+  m_LocalEulerAnglesHint: {x: 6.708, y: 0, z: 90}
 --- !u!198 &6301130551331772768
 ParticleSystem:
   m_ObjectHideFlags: 0
@@ -6805,7 +6816,7 @@ ParticleSystem:
     sphericalDirectionAmount: 0
     randomPositionAmount: 0
     radius:
-      value: 5
+      value: 8
       mode: 0
       spread: 0
       speed:
@@ -10955,18 +10966,6 @@ PrefabInstance:
       value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 7598847599976465989, guid: f40f625ab60bf4603bc01d082e8c2754, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 0.20337783
-      objectReference: {fileID: 0}
-    - target: {fileID: 7598847599976465989, guid: f40f625ab60bf4603bc01d082e8c2754, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 0.20337783
-      objectReference: {fileID: 0}
-    - target: {fileID: 7598847599976465989, guid: f40f625ab60bf4603bc01d082e8c2754, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 0.20337783
-      objectReference: {fileID: 0}
-    - target: {fileID: 7598847599976465989, guid: f40f625ab60bf4603bc01d082e8c2754, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
@@ -10976,7 +10975,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7598847599976465989, guid: f40f625ab60bf4603bc01d082e8c2754, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.14
+      value: 0.54
       objectReference: {fileID: 0}
     - target: {fileID: 7598847599976465989, guid: f40f625ab60bf4603bc01d082e8c2754, type: 3}
       propertyPath: m_LocalRotation.w

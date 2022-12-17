@@ -1882,7 +1882,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 2158829808209365831}
-  boss: {fileID: 0}
+  boss: {fileID: 2226486607313500313, guid: bd0a7aceaeb974da381c6296affce1be, type: 3}
 --- !u!1 &1430856067722670301
 GameObject:
   m_ObjectHideFlags: 0
@@ -4262,7 +4262,7 @@ MonoBehaviour:
   dashDuration: 3
   dashCurrentTime: 0
   dashCooldownTime: 1.5
-  shootForce: 56.64
+  shootForce: 60
   upwardForce: 0
   cam: {fileID: 1430856068598315615}
   attackPoint: {fileID: 1430856068121751556}
@@ -4347,7 +4347,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ecc6e903b18c4ce9a869f95508e769c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxArrowCount: 20
+  maxArrowCount: 10
   currentArrowCountText: {fileID: 4718099094309199067, guid: 380cba08915f048ffbaa6d251b0d76e2, type: 3}
 --- !u!114 &2843910923722702362
 MonoBehaviour:
