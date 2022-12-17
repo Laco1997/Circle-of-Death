@@ -2,9 +2,6 @@
 
 Unity version: 2021.3.11f1
 
-## !!! IMPORTANT !!!
-Build has some issues caused by external prefabs. For now, you have to run the game from the Unity Editor.
-
 ## Third party assets
 - 3D models
     - arrow and bow (https://assetstore.unity.com/packages/3d/props/weapons/free-pack-of-medieval-weapons-136607)
