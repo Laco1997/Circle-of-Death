@@ -4180,6 +4180,7 @@ GameObject:
   - component: {fileID: 2158829808209365830}
   - component: {fileID: 2158829808209365825}
   - component: {fileID: 1865315509}
+  - component: {fileID: 2843910923722702362}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -4243,6 +4244,7 @@ MonoBehaviour:
   isAttacking: 0
   attackCooldownTime: 1.1
   controller: {fileID: 2158829808209365826}
+  hardSwing: 0
   walkSpeed: 3.2
   gravity: -20
   jumpHeight: 3
@@ -4265,6 +4267,7 @@ MonoBehaviour:
   cam: {fileID: 1430856068598315615}
   attackPoint: {fileID: 1430856068121751556}
   shootCooldownTime: 1
+  hardBowShot: 0
   swordIcon: {fileID: 626191534172189377, guid: 4bc29c5c74bbc4d83a942c66201e31c3, type: 3}
   bowIcon: {fileID: 6974424398752502592, guid: c511684a3396c4f5a9f0ea67f201ee87, type: 3}
   handsIcon: {fileID: 7220014110388356567, guid: ba27190621e764ab5a7467a410064af2, type: 3}
@@ -4344,5 +4347,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ecc6e903b18c4ce9a869f95508e769c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxArrowCount: 40
+  maxArrowCount: 20
   currentArrowCountText: {fileID: 4718099094309199067, guid: 380cba08915f048ffbaa6d251b0d76e2, type: 3}
+--- !u!114 &2843910923722702362
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2158829808209365831}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f3982be4032637443b5afb983000da85, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  beamDamage: 10
