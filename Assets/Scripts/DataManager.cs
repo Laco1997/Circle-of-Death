@@ -11,7 +11,7 @@ public class DataManager : MonoBehaviour
 {
     public static DataManager Instance;
     public int PlayerHealth = 500;
-    public int BossHealth = 4000;
+    public int BossHealth = 15000;
 
     /*
      * Ak nemame instanciu, tak sa dany objekt zmaze. V opacnom pripade

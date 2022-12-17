@@ -1948,7 +1948,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: / 10000
+  m_text: / 15000
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 115d5bcc661894d089292a399acd788d, type: 2}
   m_sharedMaterial: {fileID: 2248629379068105319, guid: 115d5bcc661894d089292a399acd788d, type: 2}
@@ -2341,9 +2341,9 @@ MonoBehaviour:
   m_HandleRect: {fileID: 0}
   m_Direction: 0
   m_MinValue: 0
-  m_MaxValue: 10000
+  m_MaxValue: 15000
   m_WholeNumbers: 0
-  m_Value: 10000
+  m_Value: 15000
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -10361,7 +10361,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 10000
+  m_text: 15000
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 115d5bcc661894d089292a399acd788d, type: 2}
   m_sharedMaterial: {fileID: 2248629379068105319, guid: 115d5bcc661894d089292a399acd788d, type: 2}
@@ -10721,7 +10721,7 @@ PrefabInstance:
       objectReference: {fileID: 1850844476}
     - target: {fileID: 2226425834464354562, guid: bd0a7aceaeb974da381c6296affce1be, type: 3}
       propertyPath: maxHealth
-      value: 4000
+      value: 15000
       objectReference: {fileID: 0}
     - target: {fileID: 2226425834464354562, guid: bd0a7aceaeb974da381c6296affce1be, type: 3}
       propertyPath: HPParticle
