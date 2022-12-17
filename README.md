@@ -2,7 +2,7 @@
 
 Unity version: 2021.3.11f1
 
-**!!! IMPORTANT !!!**
+## !!! IMPORTANT !!!
 Build has some issues caused by external prefabs. For now, you need to run the from the Unity Editor.
 
 ## Third party assets
