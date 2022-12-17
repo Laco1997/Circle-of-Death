@@ -74,7 +74,7 @@ public class PotionSpawner : MonoBehaviour
     void SpawnHealthPotion()
     {
         healthPotionPickedUp = false;
-        Vector3 healthRandPos = new Vector3(Random.Range(160, 240), 0.5f, Random.Range(150, 230));
+        Vector3 healthRandPos = new Vector3(Random.Range(180, 240), 0.5f, Random.Range(165, 225));
         if (bossFollower.stage == 3)
         {
             healthRandPos = new Vector3(Random.Range(50, 160), 0.5f, Random.Range(50, 140));
@@ -88,7 +88,7 @@ public class PotionSpawner : MonoBehaviour
     void SpawnEnergyPotion()
     {
         energyPotionPickedUp = false;
-        Vector3 energyRandPos = new Vector3(Random.Range(160, 240), 0.5f, Random.Range(150, 230));
+        Vector3 energyRandPos = new Vector3(Random.Range(180, 240), 0.5f, Random.Range(165, 225));
         if (bossFollower.stage == 3)
         {
             energyRandPos = new Vector3(Random.Range(50, 160), 0.5f, Random.Range(50, 140));

@@ -10701,11 +10701,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2226425834464354561, guid: bd0a7aceaeb974da381c6296affce1be, type: 3}
       propertyPath: m_Speed
-      value: 4
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 2226425834464354561, guid: bd0a7aceaeb974da381c6296affce1be, type: 3}
       propertyPath: m_Enabled
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2226425834464354561, guid: bd0a7aceaeb974da381c6296affce1be, type: 3}
+      propertyPath: m_AngularSpeed
+      value: 500
       objectReference: {fileID: 0}
     - target: {fileID: 2226425834464354562, guid: bd0a7aceaeb974da381c6296affce1be, type: 3}
       propertyPath: health
