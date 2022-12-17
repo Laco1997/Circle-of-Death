@@ -148,7 +148,7 @@ public class Follower : MonoBehaviour
                         beamCast += Time.deltaTime;
                         if (beamCast >= beamCastTime)
                         {
-                            // docastil som beam a mierim na hraca
+                            // docastil som beam a mierim na hraca (tento vektor sa pouzival ked boss nebol locknuty na hraca to sa zmenilo neskor)
                             beamTargetPosition = new Vector3(player.transform.position.x, 1.9f, player.transform.position.z);
                         }
                     }
