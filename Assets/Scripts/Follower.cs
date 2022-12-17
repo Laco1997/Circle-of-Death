@@ -113,9 +113,11 @@ public class Follower : MonoBehaviour
     */
     void stage1()
     {
+        // ak idem pre posledny stlp
         if (pickupPolePhase)
         {
             npc.stoppingDistance = 0f;
+            // ak som pri nom (5  kvoli tomu  ze ak bolo 0 nikdy neprisiel)
             if (npc.remainingDistance < 5f)
             {
                 bossPole.SetActive(true);
@@ -133,6 +135,7 @@ public class Follower : MonoBehaviour
             {
                 swordHitRadius.SetActive(false);
                 npc.transform.LookAt(player.transform);
+                // ak este necastim beam je cooldown
                 if (beamTargetPosition == Vector3.zero)
                 {
                     // cast beam
@@ -145,6 +148,7 @@ public class Follower : MonoBehaviour
                         beamCast += Time.deltaTime;
                         if (beamCast >= beamCastTime)
                         {
+                            // docastil som beam a mierim na hraca
                             beamTargetPosition = new Vector3(player.transform.position.x, 1.9f, player.transform.position.z);
                         }
                     }
@@ -154,8 +158,12 @@ public class Follower : MonoBehaviour
                     // beam casting animation
                     beamParticles.SetActive(true);
                     beamCast += Time.deltaTime;
+                    // ak som docastil
                     if (beamCast - beamCastTime >= beamDuration)
                     {
+                        /*
+                         * najdem stlp s najvacsim poskodenim od beamu
+                         */
                         int max = -1;
                         GameObject poleWithMax = null;
                         foreach (GameObject pole in poles.Where(p => p.activeSelf))
@@ -167,15 +175,14 @@ public class Follower : MonoBehaviour
                                 poleWithMax = pole;
                             }
                         }
+                        // odstranim stlp 
                         if (poleWithMax)
                         {
                             poleWithMax.SetActive(false);
                         }
                         beamParticles.SetActive(false);
                         // stop cast
-                        // destroy pole if targetted
-
-                        //continue normally
+                        // vyresetujem premenne na normalny stav
                         beamPhase = false;
                         goingToMiddle = false;
                         inMiddle = false;
@@ -191,8 +198,10 @@ public class Follower : MonoBehaviour
                 if (goingToMiddle)
                 {
                     npc.stoppingDistance = 0;
+                    // ak je vzdialenost skoro v cieli (ak by bola 0 tak boss nikdy nedosiel k cielu)
                     if (npc.remainingDistance <= 2f)
                     {
+                        // preistotu nastavim poziciu na stred 
                         npc.transform.position = new Vector3(middlePoint.position.x, npc.transform.position.y, middlePoint.position.z);
                         inMiddle = true;
                         animator.SetBool("isFollowing", false);
@@ -211,6 +220,7 @@ public class Follower : MonoBehaviour
             npc.stoppingDistance = stoppingDistance;
             if (beamCooldown <= 0)
             {
+                // ak ostal posledny stlp idem ho zobrat
                 if (poles.Where(p => p.activeSelf).ToList().Count == 1)
                 {
                     pickupPolePhase = true;
@@ -239,8 +249,10 @@ public class Follower : MonoBehaviour
                 else
                 {
                     beamCooldown -= Time.deltaTime;
+                    // ak moze pouzit melee utok
                     if (attackReady)
                     {
+                        // ak je boss v blizkosti hraca
                         if (npc.remainingDistance <= stoppingDistance)
                         {
                             bossIsAttacking = true;
@@ -249,6 +261,7 @@ public class Follower : MonoBehaviour
                     }
                     else
                     {
+                        // nacitanie utoku
                         if (attackCooldown <= 0)
                         {
                             attackReady = true;
@@ -261,7 +274,7 @@ public class Follower : MonoBehaviour
                 }
             }
             
-
+            // ak boss ide rychlejsie zmenim animaciu na pohyb
             if (npc.velocity.magnitude > 0.95)
             {
                 animator.SetBool("isFollowing", true);
@@ -281,6 +294,7 @@ public class Follower : MonoBehaviour
         inMiddle = false;
         if (!bossPole.activeSelf)
         {
+            // pre testovanie stage 2 aby bol stlp v ruke vzdy aktivny v S2
             bossPole.SetActive(true);
         }
         npc.SetDestination(player.position);
@@ -288,23 +302,28 @@ public class Follower : MonoBehaviour
 
         if (groundHitPhase)
         {
+            // zastavim bossa na mieste
             npc.stoppingDistance = 9999f;
             groundHitCast += Time.deltaTime;
             if (groundHitCast > groundHitCastTime)
             {
+                // ak sa dokoncil cast ground hitu
                 if (groundHitCast - groundHitCastTime >= groundHitDuration)
                 {
+                    // ak sa dokoncil cast a aj animacia hitu
                     groundHitParticles.SetActive(true);
                     var sh = groundHitParticles.GetComponent<ParticleSystem>().shape;
                     sh.radius = groundHitRange;
 
                     if (groundHitCast - groundHitCastTime - groundHitEffectTime >= groundHitDuration)
                     {
+                        // ak sa dokoncil cast aj animacia hitu aj particle effekt
                         groundHitCooldown = groundHitCooldownDefault;
                         groundHitPhase = false;
                         groundHitParticles.SetActive(false);
                         if(Vector3.Distance(player.position, transform.position) < groundHitRange)
                         {
+                            // ak bol hrac v dosahu dostane damage
                             health.TimedHitDamage(1.5f);
                             int groundDamage = UnityEngine.Random.Range(minGroundDamage, maxGroundDamage);
                             health.damage(groundDamage);
@@ -312,6 +331,7 @@ public class Follower : MonoBehaviour
                         groundHitCounter++;
                         if (groundHitCounter >= 2)
                         {
+                            // po dvoch hitoch do zeme sa zem znici a prejde sa do novej sceny
                             groundHitPhase = false;
                             groundBreakCooldown = groundBreakCooldownDefault;
                             attackCooldown = baseAttackCooldownP3Default;
@@ -329,6 +349,7 @@ public class Follower : MonoBehaviour
         }
         else
         {
+            // rovnaka mechanika ako v stage 1 len iny spell
             npc.stoppingDistance = stoppingDistance;
             if (groundHitCooldown <= 0)
             {
@@ -391,6 +412,7 @@ public class Follower : MonoBehaviour
         npc.stoppingDistance = stoppingDistance;
         npc.SetDestination(player.position);
         npc.isStopped = false;
+        // rovnaka logika ako v stage 2
         if (groundBreakPhase)
         {
             npc.stoppingDistance = 9999f;
@@ -404,6 +426,7 @@ public class Follower : MonoBehaviour
                     sh.radius = groundBreakRange;
                     if (groundBreakCast - groundBreakCastTime - groundBreakEffectTime >= groundBreakDuration)
                     {
+                        // najdem casti podlahy v dosahu a znicim ich
                         Collider[] hitColliders = Physics.OverlapSphere(transform.position, groundBreakRange, LayerMask.GetMask("GroundPart"));
                         foreach (var hitCollider in hitColliders)
                         {
@@ -414,6 +437,7 @@ public class Follower : MonoBehaviour
                         groundHitParticles.SetActive(false);
                         if (Vector3.Distance(player.position, transform.position) < groundBreakRange)
                         {
+                            // ak je v dosahu aj hrac dostane damage
                             health.TimedHitDamage(1.5f);
                             int groundDamage = UnityEngine.Random.Range(minGroundDamage, maxGroundDamage);
                             health.damage(groundDamage);
