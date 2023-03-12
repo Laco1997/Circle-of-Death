@@ -92,10 +92,14 @@ public class HealthSystem : MonoBehaviour
             if (gameObject.tag != "Player")
             {
                 animator.SetBool("isDead", true);
+                DataManager.Instance.PlayerHealth = 500;
+                DataManager.Instance.BossHealth = 15000;
                 SceneManager.LoadScene("Win");
             }
             else
             {
+                DataManager.Instance.PlayerHealth = 500;
+                DataManager.Instance.BossHealth = 15000;
                 SceneManager.LoadScene("GameOver");
             }
         }

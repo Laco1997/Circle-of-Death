@@ -6,8 +6,12 @@ using UnityEngine.SceneManagement;
 /*
 * Ovladac umoznujuci prepinanie sa medzi scenarmi v Menu hry.
 */
-public class MainMenu : MonoBehaviour
-{
+public class MainMenu : MonoBehaviour { 
+    void Start () {
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
+    }
+
     /*
      * Spustenie outdoor sveta (hlavna scena).
      */
