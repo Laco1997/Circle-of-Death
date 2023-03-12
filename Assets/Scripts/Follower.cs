@@ -460,17 +460,18 @@ public class Follower : MonoBehaviour
             }
             else
             {
+                //groundBreakCooldown -= Time.deltaTime;
                 if (bossIsAttacking)
                 {
                     npc.stoppingDistance = 9999f;
                     // stop boss when attacking
                     attackCooldown -= Time.deltaTime;
-                    if (attackCooldown * -1 > bigAttackDuration)
+                    if (attackCooldown * -1 > attackDuration)
                     {
                         npc.stoppingDistance = stoppingDistance;
                         bossIsAttacking = false;
                         attackReady = false;
-                        attackCooldown = attackCooldownDefault;
+                        attackCooldown = baseAttackCooldownP3Default;
                     }
                 }
                 else
@@ -483,7 +484,6 @@ public class Follower : MonoBehaviour
                             bossIsAttacking = true;
                             animator.SetTrigger("attack");
                             attackReady = false;
-                            attackCooldown = baseAttackCooldownP3Default;
                         }
                     }
                     else
